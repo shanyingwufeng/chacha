@@ -27,6 +27,7 @@ function RouteScrollTop() {
 const App: React.FC = () => {
     const location = useLocation();
     const isHomePage = location.pathname === "/";
+    const demoUserName = "admin";
 
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
@@ -52,6 +53,12 @@ const App: React.FC = () => {
                             >
                                 企业标签管理
                             </Link>
+                            <Link
+                                to="/industry-analysis"
+                                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
+                            >
+                                产业分析
+                            </Link>
                         </nav>
                     </div>
                     <div className="flex items-center gap-4">
@@ -69,7 +76,7 @@ const App: React.FC = () => {
                             type="button"
                             className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 shadow-md shadow-blue-100"
                         >
-                            登录系统
+                            {demoUserName}
                         </button>
                     </div>
                 </div>
@@ -97,7 +104,7 @@ const App: React.FC = () => {
                     />
                 </Routes>
             </main>
-
+            {/* 
             <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-12">
@@ -249,7 +256,7 @@ const App: React.FC = () => {
                         </p>
                     </div>
                 </div>
-            </footer>
+            </footer> */}
         </div>
     );
 };

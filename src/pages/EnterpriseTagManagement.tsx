@@ -24,6 +24,7 @@ type CompanyRecord = {
   regCapitalWan: number;
   paidInCapitalWan: number;
   employeeScale: string;
+  patentCount: number;
   phone: string;
   email: string;
   website: string;
@@ -52,6 +53,7 @@ const MOCK_COMPANIES: CompanyRecord[] = [
     regCapitalWan: 1000,
     paidInCapitalWan: 380,
     employeeScale: '100-499人',
+    patentCount: 18,
     phone: '010-82345678',
     email: 'contact@zhiche.com',
     website: 'https://www.zhiche.example',
@@ -76,6 +78,7 @@ const MOCK_COMPANIES: CompanyRecord[] = [
     regCapitalWan: 8000,
     paidInCapitalWan: 8000,
     employeeScale: '500-999人',
+    patentCount: 66,
     phone: '0571-88881234',
     email: 'bd@yunlian-mfg.example',
     website: 'https://www.yunlian.example',
@@ -100,6 +103,7 @@ const MOCK_COMPANIES: CompanyRecord[] = [
     regCapitalWan: 2500,
     paidInCapitalWan: 900,
     employeeScale: '100-499人',
+    patentCount: 9,
     phone: '',
     email: 'hello@xinyuan-semi.example',
     website: '',
@@ -124,6 +128,7 @@ const MOCK_COMPANIES: CompanyRecord[] = [
     regCapitalWan: 200,
     paidInCapitalWan: 50,
     employeeScale: '1-49人',
+    patentCount: 3,
     phone: '021-66000000',
     email: '',
     website: 'https://lantu-data.example',
@@ -148,6 +153,7 @@ const MOCK_COMPANIES: CompanyRecord[] = [
     regCapitalWan: 12000,
     paidInCapitalWan: 4500,
     employeeScale: '1000人以上',
+    patentCount: 120,
     phone: '020-33334444',
     email: 'pr@lvneng.example',
     website: 'https://www.lvneng.example',
@@ -172,6 +178,7 @@ const MOCK_COMPANIES: CompanyRecord[] = [
     regCapitalWan: 500,
     paidInCapitalWan: 120,
     employeeScale: '50-99人',
+    patentCount: 14,
     phone: '028-61234567',
     email: 'service@hui-nong.example',
     website: '',
@@ -196,6 +203,7 @@ const MOCK_COMPANIES: CompanyRecord[] = [
     regCapitalWan: 3200,
     paidInCapitalWan: 2100,
     employeeScale: '100-499人',
+    patentCount: 22,
     phone: '',
     email: '',
     website: '',
@@ -220,6 +228,7 @@ const MOCK_COMPANIES: CompanyRecord[] = [
     regCapitalWan: 25000,
     paidInCapitalWan: 10000,
     employeeScale: '1000人以上',
+    patentCount: 45,
     phone: '022-23338888',
     email: 'group@yuanhang-log.example',
     website: 'https://yuanhang.example',
@@ -244,6 +253,7 @@ const MOCK_COMPANIES: CompanyRecord[] = [
     regCapitalWan: 1600,
     paidInCapitalWan: 400,
     employeeScale: '100-499人',
+    patentCount: 31,
     phone: '029-88990011',
     email: 'security@gudun.example',
     website: '',
@@ -268,6 +278,7 @@ const MOCK_COMPANIES: CompanyRecord[] = [
     regCapitalWan: 8800,
     paidInCapitalWan: 8200,
     employeeScale: '500-999人',
+    patentCount: 78,
     phone: '',
     email: 'ir@haisheng-mat.example',
     website: 'https://haisheng-mat.example',
@@ -312,6 +323,7 @@ const INITIAL_FILTERS = {
   regCapitalMin: '',
   paidInMin: '',
   employeeScale: '',
+  patentMin: '',
   phoneKeyword: '',
   emailKeyword: '',
   websiteKeyword: '',
@@ -361,6 +373,7 @@ function companyMatches(
   if (f.regCapitalMin && c.regCapitalWan < Number(f.regCapitalMin)) return false;
   if (f.paidInMin && c.paidInCapitalWan < Number(f.paidInMin)) return false;
   if (f.employeeScale && c.employeeScale !== f.employeeScale) return false;
+  if (f.patentMin && c.patentCount < Number(f.patentMin)) return false;
   if (f.phoneKeyword && !c.phone.includes(f.phoneKeyword)) return false;
   if (f.emailKeyword && !c.email.includes(f.emailKeyword)) return false;
   if (f.websiteKeyword && !c.website.includes(f.websiteKeyword)) return false;
@@ -386,6 +399,7 @@ function labelForFilter(f: typeof INITIAL_FILTERS): { key: string; label: string
   if (f.regCapitalMin) out.push({ key: 'regCapitalMin', label: `注册资本≥${f.regCapitalMin}万` });
   if (f.paidInMin) out.push({ key: 'paidInMin', label: `实缴资本≥${f.paidInMin}万` });
   if (f.employeeScale) out.push({ key: 'employeeScale', label: `企业规模（人员）：${f.employeeScale}` });
+  if (f.patentMin) out.push({ key: 'patentMin', label: `知识产权数≥${f.patentMin}` });
   if (f.phoneKeyword) out.push({ key: 'phoneKeyword', label: `联系电话：${f.phoneKeyword}` });
   if (f.emailKeyword) out.push({ key: 'emailKeyword', label: `电子邮件：${f.emailKeyword}` });
   if (f.websiteKeyword) out.push({ key: 'websiteKeyword', label: `公司官网：${f.websiteKeyword}` });
@@ -562,6 +576,21 @@ const EnterpriseTagManagement: React.FC = () => {
                 </select>
               </div>
               <div>
+                <label className="block text-xs font-medium text-slate-500 mb-1">国标行业</label>
+                <select
+                  className={selectClass}
+                  value={draft.nationalIndustry}
+                  onChange={(e) => setDraft((d) => ({ ...d, nationalIndustry: e.target.value }))}
+                >
+                  <option value="">全部</option>
+                  {[...new Set(MOCK_COMPANIES.map((c) => c.nationalIndustry))].map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
                 <label className="block text-xs font-medium text-slate-500 mb-1">战略新兴产业</label>
                 <select
                   className={selectClass}
@@ -677,12 +706,44 @@ const EnterpriseTagManagement: React.FC = () => {
                 </select>
               </div>
               <div>
+                <label className="block text-xs font-medium text-slate-500 mb-1">专利/知识产权数 ≥</label>
+                <input
+                  className={selectClass}
+                  value={draft.patentMin}
+                  onChange={(e) =>
+                    setDraft((d) => ({
+                      ...d,
+                      patentMin: e.target.value.replace(/[^\d]/g, ''),
+                    }))
+                  }
+                  placeholder="如：10"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-slate-500 mb-1">联系电话</label>
+                <input
+                  className={selectClass}
+                  value={draft.phoneKeyword}
+                  onChange={(e) => setDraft((d) => ({ ...d, phoneKeyword: e.target.value }))}
+                  placeholder="电话片段"
+                />
+              </div>
+              <div>
                 <label className="block text-xs font-medium text-slate-500 mb-1">电子邮件</label>
                 <input
                   className={selectClass}
                   value={draft.emailKeyword}
                   onChange={(e) => setDraft((d) => ({ ...d, emailKeyword: e.target.value }))}
                   placeholder="邮箱片段"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-slate-500 mb-1">公司官网</label>
+                <input
+                  className={selectClass}
+                  value={draft.websiteKeyword}
+                  onChange={(e) => setDraft((d) => ({ ...d, websiteKeyword: e.target.value }))}
+                  placeholder="网址片段（如：.com / company）"
                 />
               </div>
             </div>

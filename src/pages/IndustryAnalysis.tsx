@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef } from "react";
 import * as echarts from "echarts";
 import { Card } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
 import {
     Network,
     MapPinned,
@@ -9,7 +10,10 @@ import {
     TrendingUp,
     UserSquare2,
     Building2,
+    ChevronLeft,
+    ChevronRight,
 } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export type IndustrySectionId =
     | "overview"
@@ -254,7 +258,7 @@ const RelationshipGraph: React.FC = () => {
     );
 };
 
-const IndustryAnalysis: React.FC<IndustryAnalysisProps> = ({
+export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
     section,
     hideHeader = false,
 }) => {
@@ -696,6 +700,484 @@ const IndustryAnalysis: React.FC<IndustryAnalysisProps> = ({
                 </div>
                 <EChartPanel option={heatmapOption} className="h-96 w-full" />
             </Card>}
+        </div>
+    );
+};
+
+type IndustryModule = {
+    id: string;
+    name: string;
+    submodules: Array<{
+        id: string;
+        name: string;
+        icon: React.ComponentType<{ className?: string }>;
+        metricLabel: string;
+        metricValue: string;
+    }>;
+};
+
+const INDUSTRY_MODULES: IndustryModule[] = [
+    {
+        id: "new-energy-vehicle",
+        name: "新能源汽车",
+        submodules: [
+            {
+                id: "battery-industry",
+                name: "电池产业",
+                icon: Box,
+                metricLabel: "产业链企业",
+                metricValue: "1,052家",
+            },
+            {
+                id: "new-energy-vehicle",
+                name: "新能源汽车",
+                icon: Building2,
+                metricLabel: "重点企业",
+                metricValue: "231家",
+            },
+        ],
+    },
+    {
+        id: "next-gen-it",
+        name: "新一代信息技术",
+        submodules: [
+            {
+                id: "cloud-computing",
+                name: "云计算",
+                icon: Network,
+                metricLabel: "产业链企业",
+                metricValue: "2,028家",
+            },
+            {
+                id: "big-data",
+                name: "大数据",
+                icon: TrendingUp,
+                metricLabel: "近三年增速",
+                metricValue: "18%",
+            },
+            {
+                id: "smart-terminal",
+                name: "智能终端",
+                icon: Building2,
+                metricLabel: "重点企业",
+                metricValue: "96家",
+            },
+            {
+                id: "info-software",
+                name: "软件和信息技术服务",
+                icon: Box,
+                metricLabel: "产业链企业",
+                metricValue: "3,412家",
+            },
+        ],
+    },
+    {
+        id: "ai",
+        name: "人工智能",
+        submodules: [
+            {
+                id: "ai",
+                name: "人工智能",
+                icon: UserSquare2,
+                metricLabel: "产业链企业",
+                metricValue: "1,197家",
+            },
+        ],
+    },
+    {
+        id: "high-end-equipment",
+        name: "高端装备制造",
+        submodules: [
+            {
+                id: "rail-transport-equipment",
+                name: "轨道交通装备",
+                icon: Box,
+                metricLabel: "重点企业",
+                metricValue: "31家",
+            },
+            {
+                id: "smart-manufacturing-equipment",
+                name: "智能制造装备",
+                icon: Network,
+                metricLabel: "产业链企业",
+                metricValue: "1,744家",
+            },
+        ],
+    },
+    {
+        id: "green-low-carbon",
+        name: "新能源及绿色低碳",
+        submodules: [
+            {
+                id: "wind",
+                name: "风电",
+                icon: TrendingUp,
+                metricLabel: "产业链企业",
+                metricValue: "928家",
+            },
+            {
+                id: "pv",
+                name: "光伏",
+                icon: Box,
+                metricLabel: "产业链企业",
+                metricValue: "1,367家",
+            },
+            {
+                id: "energy-saving",
+                name: "节能环保",
+                icon: UserSquare2,
+                metricLabel: "产业链企业",
+                metricValue: "1,105家",
+            },
+            {
+                id: "green-hydrogen",
+                name: "氢能",
+                icon: Network,
+                metricLabel: "产业链企业",
+                metricValue: "516家",
+            },
+            {
+                id: "clean-energy",
+                name: "清洁能源",
+                icon: MapPinned,
+                metricLabel: "活跃区域",
+                metricValue: "19个",
+            },
+        ],
+    },
+    {
+        id: "new-material",
+        name: "新材料",
+        submodules: [
+            {
+                id: "new-materials",
+                name: "新材料",
+                icon: Box,
+                metricLabel: "产业链企业",
+                metricValue: "2,479家",
+            },
+        ],
+    },
+    {
+        id: "low-altitude-aerospace",
+        name: "低空经济和商业航天",
+        submodules: [
+            {
+                id: "uav",
+                name: "低空经济",
+                icon: MapPinned,
+                metricLabel: "产业链企业",
+                metricValue: "684家",
+            },
+            {
+                id: "commercial-space",
+                name: "商业航天",
+                icon: Network,
+                metricLabel: "重点企业",
+                metricValue: "41家",
+            },
+            {
+                id: "low-altitude-flight",
+                name: "低空飞行",
+                icon: TrendingUp,
+                metricLabel: "活跃区域",
+                metricValue: "17个",
+            },
+            {
+                id: "aerospace-manufacturing",
+                name: "航天制造",
+                icon: Box,
+                metricLabel: "产业链企业",
+                metricValue: "236家",
+            },
+        ],
+    },
+    {
+        id: "smart-home",
+        name: "智能家居",
+        submodules: [
+            {
+                id: "smart-home",
+                name: "智能家居",
+                icon: Building2,
+                metricLabel: "产业链企业",
+                metricValue: "1,007家",
+            },
+        ],
+    },
+    {
+        id: "biomedicine",
+        name: "生物医药",
+        submodules: [
+            {
+                id: "biopharma",
+                name: "医疗器械",
+                icon: UserSquare2,
+                metricLabel: "产业链企业",
+                metricValue: "1,370家",
+            },
+            {
+                id: "biotech",
+                name: "生物科技",
+                icon: Network,
+                metricLabel: "重点企业",
+                metricValue: "91家",
+            },
+        ],
+    },
+    {
+        id: "future-industry",
+        name: "未来产业",
+        submodules: [
+            {
+                id: "quantum",
+                name: "量子科技",
+                icon: Network,
+                metricLabel: "重点企业",
+                metricValue: "27家",
+            },
+            {
+                id: "life-science",
+                name: "生命科学",
+                icon: UserSquare2,
+                metricLabel: "产业链企业",
+                metricValue: "1,126家",
+            },
+            {
+                id: "future-network",
+                name: "未来网络",
+                icon: Box,
+                metricLabel: "产业链企业",
+                metricValue: "812家",
+            },
+        ],
+    },
+    {
+        id: "featured-industry",
+        name: "特色产业",
+        submodules: [
+            {
+                id: "regional-feature",
+                name: "特色产业",
+                icon: MapPinned,
+                metricLabel: "重点企业",
+                metricValue: "68家",
+            },
+        ],
+    },
+];
+
+function sectionLabel(id: IndustrySectionId): string {
+    switch (id) {
+        case "overview":
+            return "产业概览";
+        case "portrait":
+            return "产业画像";
+        case "chain-enterprises":
+            return "链上企业";
+        case "key-companies":
+            return "重点企业";
+        case "chain-map":
+            return "产业链图谱";
+        case "heatmap":
+            return "区域产业热力图";
+        default:
+            return "产业概览";
+    }
+}
+
+function normalizeSection(s: string | null): IndustrySectionId {
+    const v = (s ?? "").trim();
+    const allowed: IndustrySectionId[] = [
+        "overview",
+        "portrait",
+        "chain-enterprises",
+        "key-companies",
+        "chain-map",
+        "heatmap",
+    ];
+    return (allowed.includes(v as IndustrySectionId)
+        ? (v as IndustrySectionId)
+        : "overview");
+}
+
+const IndustryAnalysis: React.FC = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const sp = useMemo(
+        () => new URLSearchParams(location.search),
+        [location.search]
+    );
+    const moduleId = sp.get("module") || "";
+    const subId = sp.get("sub") || "";
+    const section = normalizeSection(sp.get("section"));
+
+    const selectedModule = useMemo(
+        () => INDUSTRY_MODULES.find((m) => m.id === moduleId),
+        [moduleId]
+    );
+    const selectedSub = useMemo(
+        () => selectedModule?.submodules.find((s) => s.id === subId),
+        [selectedModule, subId]
+    );
+
+    const go = (next: Record<string, string | undefined>) => {
+        const nextSp = new URLSearchParams(location.search);
+        Object.entries(next).forEach(([k, v]) => {
+            if (!v) nextSp.delete(k);
+            else nextSp.set(k, v);
+        });
+        navigate({
+            pathname: location.pathname,
+            search: `?${nextSp.toString()}`,
+        });
+    };
+
+    const inDetail = Boolean(selectedModule && selectedSub);
+
+    if (!selectedModule) {
+        return (
+            <div className="container mx-auto px-4 py-8 max-w-7xl">
+                <div className="mb-6">
+                    <h1 className="text-3xl font-bold text-slate-900">产业分析</h1>
+                    <p className="text-slate-500 mt-2">
+                        先选择一个产业模块，再进入子模块查看六大分析页签。
+                    </p>
+                </div>
+
+                <Card className="p-5 border-slate-200 shadow-sm">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+                        {INDUSTRY_MODULES.map((m) => (
+                            <button
+                                key={m.id}
+                                type="button"
+                                className="flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-4 text-left hover:bg-slate-50"
+                                onClick={() => go({ module: m.id, sub: undefined, section: undefined })}
+                            >
+                                <div className="font-semibold text-slate-900">{m.name}</div>
+                                <ChevronRight className="w-4 h-4 text-slate-400" />
+                            </button>
+                        ))}
+                    </div>
+                </Card>
+            </div>
+        );
+    }
+
+    if (!inDetail) {
+        return (
+            <div className="container mx-auto px-4 py-8 max-w-7xl space-y-6">
+                <div className="flex items-center gap-3">
+                    <Button
+                        type="button"
+                        variant="outline"
+                        className="gap-2"
+                        onClick={() => go({ module: undefined, sub: undefined, section: undefined })}
+                    >
+                        <ChevronLeft className="w-4 h-4" />
+                        返回模块列表
+                    </Button>
+                    <div>
+                        <h1 className="text-2xl font-bold text-slate-900">{selectedModule.name}</h1>
+                        <p className="text-slate-500 text-sm mt-1">
+                            点击子模块进入详情（产业概览/画像/链上企业/重点企业/图谱/热力图）。
+                        </p>
+                    </div>
+                </div>
+
+                <Card className="p-5 border-slate-200 shadow-sm">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {selectedModule.submodules.map((s) => {
+                            const Icon = s.icon;
+                            return (
+                                <button
+                                    key={s.id}
+                                    type="button"
+                                    className="group rounded-xl border border-slate-200 bg-white p-4 text-left hover:shadow-md transition-shadow"
+                                    onClick={() => go({ sub: s.id, section: "overview" })}
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div className="h-10 w-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                                            <Icon className="w-5 h-5 text-blue-600" />
+                                        </div>
+                                        <div className="font-semibold text-slate-900">{s.name}</div>
+                                    </div>
+                                    <div className="mt-3 text-xs text-slate-500">
+                                        {s.metricLabel}
+                                    </div>
+                                    <div className="mt-1 text-sm font-semibold text-slate-900">
+                                        {s.metricValue}
+                                    </div>
+                                </button>
+                            );
+                        })}
+                    </div>
+                </Card>
+            </div>
+        );
+    }
+
+    return (
+        <div className="container mx-auto px-4 py-8 max-w-7xl space-y-6">
+            <div className="flex items-start justify-between gap-4 flex-wrap">
+                <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-sm text-slate-500">
+                        <button
+                            type="button"
+                            className="hover:text-blue-600"
+                            onClick={() => go({ sub: undefined, section: undefined })}
+                        >
+                            {selectedModule.name}
+                        </button>
+                        <span>/</span>
+                        <span className="text-slate-900 font-semibold">{selectedSub?.name}</span>
+                    </div>
+                    <h1 className="text-2xl font-bold text-slate-900">
+                        {selectedSub?.name} · {sectionLabel(section)}
+                    </h1>
+                </div>
+                <Button
+                    type="button"
+                    variant="outline"
+                    className="gap-2"
+                    onClick={() => go({ sub: undefined, section: undefined })}
+                >
+                    <ChevronLeft className="w-4 h-4" />
+                    返回子模块
+                </Button>
+            </div>
+
+            <Card className="p-3 border-slate-200 shadow-sm">
+                <div className="flex flex-wrap gap-2">
+                    {(
+                        [
+                            "overview",
+                            "portrait",
+                            "chain-enterprises",
+                            "key-companies",
+                            "chain-map",
+                            "heatmap",
+                        ] as IndustrySectionId[]
+                    ).map((id) => (
+                        <Button
+                            key={id}
+                            type="button"
+                            variant={section === id ? "default" : "outline"}
+                            className={
+                                section === id
+                                    ? "bg-blue-600 hover:bg-blue-700 text-white"
+                                    : ""
+                            }
+                            onClick={() => go({ section: id })}
+                        >
+                            {sectionLabel(id)}
+                        </Button>
+                    ))}
+                </div>
+            </Card>
+
+            <IndustryAnalysisContent section={section} hideHeader />
         </div>
     );
 };

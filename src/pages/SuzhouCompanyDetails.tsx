@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import * as echarts from "echarts";
-import IndustryAnalysis, { IndustrySectionId } from "./IndustryAnalysis";
+import { Badge } from "../components/ui/badge";
+import { IndustryAnalysisContent as IndustryAnalysis, IndustrySectionId } from "./IndustryAnalysis";
 import {
     MapPin,
     Building2,
@@ -31,7 +32,7 @@ type KnowledgeModuleId =
     | "bidding"
     | "tags";
 
-type MainDetailTab = "knowledge" | "industry" | "patent";
+type MainDetailTab = "knowledge" | "industry" | "growth" | "patent" | "risk";
 
 const INDUSTRY_TABS: { id: IndustrySectionId; label: string }[] = [
     { id: "overview", label: "产业概览" },
@@ -1148,7 +1149,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                 />
                                 企业知识管理
                             </button>
-                            <button
+                            {/* <button
                                 type="button"
                                 aria-expanded={mainDetailTab === "industry"}
                                 onClick={() =>
@@ -1167,13 +1168,23 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     aria-hidden
                                 />
                                 产业分析
-                            </button>
+                            </button> */}
                             <button
                                 type="button"
-                                className="inline-flex items-center gap-2 rounded-full border border-transparent px-3.5 py-2 text-sm font-bold text-slate-900 transition-all sm:px-4 hover:bg-slate-50"
+                                aria-expanded={mainDetailTab === "growth"}
+                                onClick={() =>
+                                    setMainDetailTab((prev) =>
+                                        prev === "growth" ? null : "growth"
+                                    )
+                                }
+                                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-bold transition-all sm:px-4 ${
+                                    mainDetailTab === "growth"
+                                        ? "border-fuchsia-200 bg-fuchsia-50 text-fuchsia-950 shadow-sm"
+                                        : "border-transparent text-slate-900 hover:bg-slate-50"
+                                }`}
                             >
                                 <PieChart
-                                    className="h-4 w-4 text-violet-600 shrink-0"
+                                    className="h-4 w-4 text-fuchsia-600 shrink-0"
                                     aria-hidden
                                 />
                                 企业发展
@@ -1197,6 +1208,26 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     aria-hidden
                                 />
                                 专利
+                            </button>
+                            <button
+                                type="button"
+                                aria-expanded={mainDetailTab === "risk"}
+                                onClick={() =>
+                                    setMainDetailTab((prev) =>
+                                        prev === "risk" ? null : "risk"
+                                    )
+                                }
+                                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-bold transition-all sm:px-4 ${
+                                    mainDetailTab === "risk"
+                                        ? "border-rose-200 bg-rose-50 text-rose-950 shadow-sm"
+                                        : "border-transparent text-slate-900 hover:bg-slate-50"
+                                }`}
+                            >
+                                <Flame
+                                    className="h-4 w-4 text-rose-600 shrink-0"
+                                    aria-hidden
+                                />
+                                风险画像
                             </button>
                         </div>
                     </div>
@@ -1297,6 +1328,109 @@ const SuzhouCompanyDetails: React.FC = () => {
                                 section={activeIndustrySection}
                                 hideHeader
                             />
+                        </div>
+                    </div>
+                )}
+
+                {mainDetailTab === "growth" && (
+                    <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
+                        <div className="flex items-center gap-2 mb-5">
+                            <PieChart className="h-5 w-5 text-fuchsia-600" aria-hidden />
+                            <h2 className="font-semibold text-slate-900">企业发展</h2>
+                            <Badge variant="secondary" className="ml-2">
+                                成长趋势与经营概览
+                            </Badge>
+                        </div>
+                        <div className="grid sm:grid-cols-3 gap-4">
+                            {[
+                                { label: "成立年限", value: "6年", tone: "bg-white" },
+                                { label: "招投标次数", value: "23次", tone: "bg-white" },
+                                { label: "知识产权", value: "22件", tone: "bg-white" },
+                            ].map((x) => (
+                                <div
+                                    key={x.label}
+                                    className={`rounded-2xl border border-slate-200 p-4 ${x.tone}`}
+                                >
+                                    <div className="text-xs font-bold text-slate-400">
+                                        {x.label}
+                                    </div>
+                                    <div className="mt-2 text-2xl font-black text-slate-900">
+                                        {x.value}
+                                    </div>
+                                    <div className="mt-1 text-[11px] text-slate-500">
+                                        可扩展为营收/融资/团队规模等指标
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {mainDetailTab === "patent" && (
+                    <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
+                        <div className="flex items-center gap-2 mb-5">
+                            <FileText className="h-5 w-5 text-violet-600" aria-hidden />
+                            <h2 className="font-semibold text-slate-900">专利</h2>
+                            <Badge variant="secondary" className="ml-2">
+                                近期开源示例
+                            </Badge>
+                        </div>
+                        <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0">
+                                {[
+                                    { name: "车载系统数据同步方法", type: "发明", year: "2024" },
+                                    { name: "座舱交互异常检测装置", type: "实用新型", year: "2023" },
+                                    { name: "多屏联动渲染优化方案", type: "发明", year: "2022" },
+                                ].map((p) => (
+                                    <div
+                                        key={p.name}
+                                        className="p-4 border-t border-slate-200 sm:border-t-0 sm:border-l first:border-l-0"
+                                    >
+                                        <div className="text-sm font-semibold text-slate-900">
+                                            {p.name}
+                                        </div>
+                                        <div className="mt-2 flex items-center gap-2 text-xs text-slate-500">
+                                            <Badge variant="secondary">{p.type}</Badge>
+                                            <span>{p.year}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {mainDetailTab === "risk" && (
+                    <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
+                        <div className="flex items-center gap-2 mb-5">
+                            <Flame className="h-5 w-5 text-rose-600" aria-hidden />
+                            <h2 className="font-semibold text-slate-900">风险画像</h2>
+                            <Badge variant="secondary" className="ml-2">
+                                风险概览与预警
+                            </Badge>
+                        </div>
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            {[
+                                { label: "司法风险", value: "低", color: "text-emerald-700 bg-emerald-50 border-emerald-100" },
+                                { label: "经营异常", value: "无", color: "text-emerald-700 bg-emerald-50 border-emerald-100" },
+                                { label: "行政处罚", value: "0", color: "text-slate-700 bg-slate-50 border-slate-200" },
+                                { label: "舆情预警", value: "关注", color: "text-amber-800 bg-amber-50 border-amber-100" },
+                            ].map((x) => (
+                                <div
+                                    key={x.label}
+                                    className={`rounded-2xl border p-4 ${x.color}`}
+                                >
+                                    <div className="text-xs font-bold opacity-80">
+                                        {x.label}
+                                    </div>
+                                    <div className="mt-2 text-2xl font-black">
+                                        {x.value}
+                                    </div>
+                                    <div className="mt-1 text-[11px] opacity-80">
+                                        后续可接入实时监控数据源
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 )}
