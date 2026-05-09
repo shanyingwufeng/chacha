@@ -1,0 +1,54 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "src": "src/pages/Home.tsx"
+    },
+    {
+      "path": "/results",
+      "src": "src/pages/SearchResults.tsx"
+    },
+    {
+      "path": "/details",
+      "src": "src/pages/CompanyDetails.tsx"
+    },
+    {
+      "path": "/risk",
+      "src": "src/pages/RiskMonitoring.tsx"
+    },
+    {
+      "path": "/financials",
+      "src": "src/pages/FinancialAnalysis.tsx"
+    },
+    {
+      "path": "/deep-data",
+      "src": "src/pages/DeepData.tsx"
+    }
+  ],
+  "components": [
+    {
+      "name": "Button",
+      "src": "src/components/ui/button.tsx"
+    },
+    {
+      "name": "Card",
+      "src": "src/components/ui/card.tsx"
+    },
+    {
+      "name": "Input",
+      "src": "src/components/ui/input.tsx"
+    },
+    {
+      "name": "Badge",
+      "src": "src/components/ui/badge.tsx"
+    },
+    {
+      "name": "Avatar",
+      "src": "src/components/ui/avatar.tsx"
+    },
+    {
+      "name": "Tabs",
+      "src": "src/components/ui/tabs.tsx"
+    }
+  ]
+}
