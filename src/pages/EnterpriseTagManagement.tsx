@@ -425,6 +425,8 @@ const EnterpriseTagManagement: React.FC = () => {
   );
 
   const ruleTags = useMemo(() => labelForFilter(applied), [applied]);
+  const hasAppliedFilters = ruleTags.length > 0;
+  const displayCompanies = hasAppliedFilters ? filtered : [];
 
   const apply = () => setApplied({ ...draft });
   const reset = () => {
@@ -460,11 +462,10 @@ const EnterpriseTagManagement: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-12 gap-8">
-        <aside className="lg:col-span-4 space-y-6">
-          <Card className="p-5 border-slate-200 shadow-sm">
-            <h2 className="text-sm font-bold text-slate-900 mb-4">筛选维度</h2>
-            <div className="grid md:grid-cols-2 gap-4 text-sm">
+      <div className="space-y-6">
+        <Card className="p-5 border-slate-200 shadow-sm">
+          <h2 className="text-sm font-bold text-slate-900 mb-4">筛选维度</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
               <div>
                 <label className="block text-xs font-medium text-slate-500 mb-1">招投标活跃档</label>
                 <select
@@ -685,10 +686,9 @@ const EnterpriseTagManagement: React.FC = () => {
                 />
               </div>
             </div>
-          </Card>
-        </aside>
+        </Card>
 
-        <section className="lg:col-span-8 space-y-6">
+        <section className="space-y-6">
           <Card className="p-5 border-slate-200 shadow-sm">
             <div className="flex items-center justify-between gap-4 flex-wrap">
               <h2 className="text-sm font-bold text-slate-900 flex items-center gap-2">
@@ -696,12 +696,12 @@ const EnterpriseTagManagement: React.FC = () => {
                 标准化标签（当前规则）
               </h2>
               <span className="text-xs text-slate-500">
-                共 {filtered.length} 家企业符合条件
+                共 {displayCompanies.length} 家企业符合条件
               </span>
             </div>
             <div className="mt-3 flex flex-wrap gap-2 min-h-[2rem]">
               {ruleTags.length === 0 ? (
-                <span className="text-sm text-slate-400">未选择条件时展示全部示例企业；选择后点击「生成企业列表」应用规则。</span>
+                <span className="text-sm text-slate-400">请先在上方选择至少一个筛选条件，再点击「生成企业列表」。</span>
               ) : (
                 ruleTags.map((t) => (
                   <Badge
@@ -717,7 +717,7 @@ const EnterpriseTagManagement: React.FC = () => {
           </Card>
 
           <div className="space-y-4">
-            {filtered.map((c) => (
+            {displayCompanies.map((c) => (
               <Card
                 key={c.id}
                 className="p-5 border-slate-200 shadow-sm hover:shadow-md transition-shadow"
@@ -762,7 +762,12 @@ const EnterpriseTagManagement: React.FC = () => {
                 </div>
               </Card>
             ))}
-            {filtered.length === 0 && (
+            {!hasAppliedFilters && (
+              <Card className="p-12 text-center border-dashed border-slate-300 text-slate-500 text-sm">
+                当前未生成企业列表。请在上方选择筛选条件后点击「生成企业列表」。
+              </Card>
+            )}
+            {hasAppliedFilters && displayCompanies.length === 0 && (
               <Card className="p-12 text-center border-dashed border-slate-300 text-slate-500 text-sm">
                 没有符合当前规则的企业，请放宽条件后重试。
               </Card>

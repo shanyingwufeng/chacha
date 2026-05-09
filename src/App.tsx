@@ -1,9 +1,6 @@
 import React from "react";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
-import {
-    Search,
-    ShieldCheck,
-} from "lucide-react";
+import { Search, ShieldCheck } from "lucide-react";
 import Home from "./pages/Home";
 import SearchResults from "./pages/SearchResults";
 import CompanyDetails from "./pages/CompanyDetails";
@@ -15,34 +12,25 @@ import FinancialAnalysis from "./pages/FinancialAnalysis";
 import IndustryAnalysis from "./pages/IndustryAnalysis";
 import EnterpriseTagManagement from "./pages/EnterpriseTagManagement";
 
-function RouteScrollMemory() {
+function RouteScrollTop() {
     const location = useLocation();
-    const previousRouteRef = React.useRef<string | null>(null);
-    const scrollMapRef = React.useRef<Record<string, number>>({});
 
     React.useEffect(() => {
-        const currentRouteKey = `${location.pathname}${location.search}`;
-        const previousRouteKey = previousRouteRef.current;
-
-        if (previousRouteKey) {
-            scrollMapRef.current[previousRouteKey] = window.scrollY;
-        }
-
-        const savedY = scrollMapRef.current[currentRouteKey];
         window.requestAnimationFrame(() => {
-            window.scrollTo(0, typeof savedY === "number" ? savedY : 0);
+            window.scrollTo(0, 0);
         });
-
-        previousRouteRef.current = currentRouteKey;
     }, [location.pathname, location.search]);
 
     return null;
 }
 
 const App: React.FC = () => {
+    const location = useLocation();
+    const isHomePage = location.pathname === "/";
+
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
-            <RouteScrollMemory />
+            <RouteScrollTop />
             <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
                 <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-6">
                     <div className="flex items-center gap-8">
@@ -67,14 +55,16 @@ const App: React.FC = () => {
                         </nav>
                     </div>
                     <div className="flex items-center gap-4">
-                        <div className="relative hidden sm:block">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                            <input
-                                className="bg-slate-100 border-none rounded-full pl-10 pr-4 py-2 text-sm w-64 focus:ring-2 focus:ring-blue-500 transition-all"
-                                placeholder="搜企业、搜品牌、搜老板..."
-                                type="text"
-                            />
-                        </div>
+                        {!isHomePage && (
+                            <div className="relative hidden sm:block">
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                <input
+                                    className="bg-slate-100 border-none rounded-full pl-10 pr-4 py-2 text-sm w-64 focus:ring-2 focus:ring-blue-500 transition-all"
+                                    placeholder="搜企业、搜品牌、搜老板..."
+                                    type="text"
+                                />
+                            </div>
+                        )}
                         <button
                             type="button"
                             className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 shadow-md shadow-blue-100"
