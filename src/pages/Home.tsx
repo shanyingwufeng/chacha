@@ -28,9 +28,9 @@ const Home: React.FC = () => {
             {/* Hero Section */}
             <section className="relative flex-1 pt-20 pb-32 overflow-hidden bg-gradient-to-b from-indigo-50 to-white">
                 <div className="container mx-auto px-4 relative z-10 text-center">
-                    <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
-                        查企业，上
-                        <span className="text-indigo-600">企查查</span>
+                    <h1 className="text-3xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
+                        AI EASY
+                        <span className="text-indigo-600"> 数据智能平台</span>
                     </h1>
 
                     <div className="max-w-3xl mx-auto mb-12">

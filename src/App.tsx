@@ -43,7 +43,7 @@ const App: React.FC = () => {
                                 />
                             </div>
                             <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-                                智车睿控大数据
+                                AI EASY 数据智能平台
                             </span>
                         </Link>
                         <nav className="hidden md:flex items-center gap-6">
@@ -58,6 +58,30 @@ const App: React.FC = () => {
                                 className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
                             >
                                 产业分析
+                            </Link>
+                            <Link
+                                to=""
+                                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
+                            >
+                                信用大数据
+                            </Link>
+                            <Link
+                                to=""
+                                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
+                            >
+                                查商标
+                            </Link>
+                            <Link
+                                to=""
+                                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
+                            >
+                                风险排查
+                            </Link>
+                            <Link
+                                to=""
+                                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
+                            >
+                                招投标查询
                             </Link>
                         </nav>
                     </div>
