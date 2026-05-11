@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import {
     Search,
     Building2,
@@ -13,14 +13,44 @@ import {
 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+/** 演示用：输入「北京」「苏州」分别联想对应企业；北京走无参数详情，苏州走 id=2549 */
+const DEMO_COMPANIES = [
+    { keyword: "北京", name: "北京智车睿控" },
+    { keyword: "苏州", name: "苏州海鑫" },
+] as const;
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
+    const [query, setQuery] = useState("");
+    const [suggestOpen, setSuggestOpen] = useState(false);
+
+    const suggestions = useMemo(() => {
+        const q = query;
+        const list: { name: string }[] = [];
+        if (q.includes(DEMO_COMPANIES[0].keyword)) {
+            list.push({ name: DEMO_COMPANIES[0].name });
+        }
+        if (q.includes(DEMO_COMPANIES[1].keyword)) {
+            list.push({ name: DEMO_COMPANIES[1].name });
+        }
+        return list;
+    }, [query]);
+
+    const pickCompany = (name: string) => {
+        setQuery(name);
+        setSuggestOpen(false);
+        if (name === "苏州海鑫") {
+            navigate("/details?id=2549");
+            return;
+        }
+        navigate("/details");
+    };
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        navigate("/results");
+        // 演示：不从「查一下」跳转结果页，仅通过下拉选择进入详情
     };
 
     return (
@@ -39,14 +69,47 @@ const Home: React.FC = () => {
                             className="flex items-center gap-3"
                         >
                             <div className="relative group flex-1">
-                                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                                <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none z-10">
                                     <Search className="h-6 w-6 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
                                 </div>
                                 <input
                                     type="text"
+                                    autoComplete="off"
                                     placeholder="请输入企业名称"
+                                    value={query}
+                                    onChange={(e) => {
+                                        setQuery(e.target.value);
+                                        setSuggestOpen(true);
+                                    }}
+                                    onFocus={() => setSuggestOpen(true)}
+                                    onBlur={() => {
+                                        window.setTimeout(() => setSuggestOpen(false), 150);
+                                    }}
                                     className="block w-full pl-16 pr-32 py-5 rounded-2xl border-2 border-slate-200 bg-white text-lg focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all shadow-xl shadow-indigo-500/5"
                                 />
+                                {suggestOpen && suggestions.length > 0 && (
+                                    <ul
+                                        className="absolute left-0 right-0 top-full mt-2 z-20 rounded-xl border border-slate-200 bg-white py-1 shadow-xl shadow-slate-200/80 text-left overflow-hidden"
+                                        role="listbox"
+                                    >
+                                        {suggestions.map((c) => (
+                                            <li key={c.name}>
+                                                <button
+                                                    type="button"
+                                                    className="w-full px-5 py-3 text-left text-slate-800 hover:bg-indigo-50 hover:text-indigo-700 text-base transition-colors"
+                                                    onMouseDown={(e) =>
+                                                        e.preventDefault()
+                                                    }
+                                                    onClick={() =>
+                                                        pickCompany(c.name)
+                                                    }
+                                                >
+                                                    {c.name}
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
                                 <div className="absolute inset-y-2 right-2 flex items-center">
                                     <Button
                                         type="submit"
@@ -68,13 +131,15 @@ const Home: React.FC = () => {
                         <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm text-slate-500">
                             <span>热搜：</span>
                             <button
-                                onClick={() => navigate("/details?id=1001")}
+                                onClick={() => navigate("/details")}
                                 className="hover:text-indigo-600"
                             >
                                 北京智车睿控
                             </button>
                             <button
-                                onClick={() => navigate("/details?id=2549")}
+                                onClick={() =>
+                                    navigate("/details?id=2549")
+                                }
                                 className="hover:text-indigo-600"
                             >
                                 苏州海鑫
