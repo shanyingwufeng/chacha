@@ -1,19 +1,15 @@
 import React, { useMemo, useState } from "react";
 import {
     Search,
-    Building2,
-    UserCircle,
-    Briefcase,
-    FileText,
-    Globe,
-    ArrowRight,
-    ShieldCheck,
-    Zap,
+    Tag,
+    TrendingUp,
     Database,
+    Stamp,
+    ShieldAlert,
+    ScrollText,
 } from "lucide-react";
 import { Button } from "../components/ui/button";
-import { Card } from "../components/ui/card";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 /** 演示用：输入「北京」「苏州」分别联想对应企业；北京走无参数详情，苏州走 id=2549 */
 const DEMO_COMPANIES = [
@@ -171,42 +167,49 @@ const Home: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
                         {[
                             {
-                                icon: Building2,
-                                label: "查企业",
+                                to: "/enterprise-tags",
+                                label: "企业标签管理",
+                                icon: Tag,
                                 color: "bg-blue-50 text-blue-600",
                             },
                             {
-                                icon: UserCircle,
-                                label: "查老板",
-                                color: "bg-orange-50 text-orange-600",
-                            },
-                            {
-                                icon: ShieldCheck,
-                                label: "查风险",
-                                color: "bg-rose-50 text-rose-600",
-                            },
-                            {
-                                icon: Briefcase,
-                                label: "查招聘",
-                                color: "bg-emerald-50 text-emerald-600",
-                            },
-                            {
-                                icon: FileText,
-                                label: "查年报",
+                                to: "/industry-analysis",
+                                label: "产业分析",
+                                icon: TrendingUp,
                                 color: "bg-indigo-50 text-indigo-600",
                             },
                             {
-                                icon: Globe,
-                                label: "查海外",
+                                to: "",
+                                label: "信用大数据",
+                                icon: Database,
                                 color: "bg-cyan-50 text-cyan-600",
                             },
-                        ].map((item, idx) => (
-                            <button
-                                key={idx}
-                                className="flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-white hover:shadow-md transition-all group"
+                            {
+                                to: "",
+                                label: "查商标",
+                                icon: Stamp,
+                                color: "bg-orange-50 text-orange-600",
+                            },
+                            {
+                                to: "",
+                                label: "风险排查",
+                                icon: ShieldAlert,
+                                color: "bg-rose-50 text-rose-600",
+                            },
+                            {
+                                to: "",
+                                label: "招投标查询",
+                                icon: ScrollText,
+                                color: "bg-emerald-50 text-emerald-600",
+                            },
+                        ].map((item) => (
+                            <Link
+                                key={item.label}
+                                to={item.to}
+                                className="flex flex-col items-center gap-2 p-4 rounded-xl hover:bg-white hover:shadow-md transition-all group text-center"
                             >
                                 <div
                                     className={`p-3 rounded-xl ${item.color} group-hover:scale-110 transition-transform`}
@@ -216,7 +219,7 @@ const Home: React.FC = () => {
                                 <span className="text-sm font-medium text-slate-700">
                                     {item.label}
                                 </span>
-                            </button>
+                            </Link>
                         ))}
                     </div>
                 </div>
