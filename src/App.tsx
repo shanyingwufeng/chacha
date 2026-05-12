@@ -35,13 +35,16 @@ const App: React.FC = () => {
             <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
                 <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-6">
                     <div className="flex min-w-0 flex-1 items-center gap-6 md:gap-8">
-                        <Link to="/" className="flex shrink-0 items-center gap-2">
+                        <Link
+                            to="/"
+                            className="flex shrink-0 items-center gap-2"
+                        >
                             <img
-                                src={`${import.meta.env.BASE_URL}icon.png`}
+                                src={`${
+                                    import.meta.env.BASE_URL
+                                }header-logo.jpg`}
                                 alt=""
-                                width={36}
-                                height={36}
-                                className="h-9 w-9 shrink-0 rounded-lg object-contain"
+                                className="h-6 w-6 shrink-0 rounded-lg object-contain"
                             />
                             <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
                                 AI EASY 数据智能平台
