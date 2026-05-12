@@ -11,6 +11,7 @@ import FinancialAnalysis from "./pages/FinancialAnalysis";
 // @ts-ignore - IDE occasionally reports stale module resolution here
 import IndustryAnalysis from "./pages/IndustryAnalysis";
 import EnterpriseTagManagement from "./pages/EnterpriseTagManagement";
+import headerLogo from "./assets/header-logo.jpg";
 
 function RouteScrollTop() {
     const location = useLocation();
@@ -40,9 +41,7 @@ const App: React.FC = () => {
                             className="flex shrink-0 items-center gap-2"
                         >
                             <img
-                                src={`${
-                                    import.meta.env.BASE_URL
-                                }header-logo.jpg`}
+                                src={headerLogo}
                                 alt=""
                                 className="h-6 w-6 shrink-0 rounded-lg object-contain"
                             />
