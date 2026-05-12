@@ -23,6 +23,7 @@ import {
     Eye,
     FileText,
     Tags,
+    CircleDollarSign,
 } from "lucide-react";
 
 type KnowledgeModuleId =
@@ -30,6 +31,8 @@ type KnowledgeModuleId =
     | "relation"
     | "monitoring"
     | "bidding"
+    | "creditPortrait"
+    | "investmentTrace"
     | "tags";
 
 type MainDetailTab = "knowledge" | "industry" | "growth" | "patent" | "risk";
@@ -51,27 +54,39 @@ const KNOWLEDGE_NAV: {
 }[] = [
     {
         id: "judicial",
-        sidebarLabel: "司法风险监控",
-        chipLabel: "司法风险",
+        sidebarLabel: "司法风险全景视图",
+        chipLabel: "司法风险全景视图",
         Icon: Gavel,
     },
     {
         id: "relation",
-        sidebarLabel: "关联关系穿透",
-        chipLabel: "关联关系穿透",
+        sidebarLabel: "关联关系穿透图谱",
+        chipLabel: "关联关系穿透图谱",
         Icon: Network,
     },
     {
         id: "monitoring",
-        sidebarLabel: "经营动态监控",
-        chipLabel: "经营动态监控",
+        sidebarLabel: "经营动态监控看板",
+        chipLabel: "经营动态监控看板",
         Icon: Eye,
     },
     {
         id: "bidding",
-        sidebarLabel: "招投标追踪",
-        chipLabel: "招投标追踪",
+        sidebarLabel: "招投标智能追踪",
+        chipLabel: "招投标智能追踪",
         Icon: FileText,
+    },
+    {
+        id: "creditPortrait",
+        sidebarLabel: "信用评分动态画像",
+        chipLabel: "信用评分动态画像",
+        Icon: PieChart,
+    },
+    {
+        id: "investmentTrace",
+        sidebarLabel: "投融资关系溯源",
+        chipLabel: "投融资关系溯源",
+        Icon: CircleDollarSign,
     },
 ];
 

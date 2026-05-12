@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
-import { Search, ShieldCheck } from "lucide-react";
+import { Search } from "lucide-react";
 import Home from "./pages/Home";
 import SearchResults from "./pages/SearchResults";
 import CompanyDetails from "./pages/CompanyDetails";
@@ -36,12 +36,13 @@ const App: React.FC = () => {
                 <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-6">
                     <div className="flex min-w-0 flex-1 items-center gap-6 md:gap-8">
                         <Link to="/" className="flex shrink-0 items-center gap-2">
-                            <div className="bg-blue-600 p-1.5 rounded-lg shadow-lg shadow-blue-200">
-                                <ShieldCheck
-                                    className="w-5 h-5 text-white"
-                                    strokeWidth={2}
-                                />
-                            </div>
+                            <img
+                                src={`${import.meta.env.BASE_URL}icon.png`}
+                                alt=""
+                                width={36}
+                                height={36}
+                                className="h-9 w-9 shrink-0 rounded-lg object-contain"
+                            />
                             <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
                                 AI EASY 数据智能平台
                             </span>
