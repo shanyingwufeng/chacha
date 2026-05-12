@@ -263,7 +263,7 @@ function BiddingTrackingModule() {
             <div className="p-6 border-b border-slate-100 flex flex-wrap justify-between items-center gap-4">
                 <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
                     <FileText className="w-5 h-5 text-blue-600 shrink-0" />
-                    招投标追踪
+                    招投标智能追踪
                 </h3>
                 <span className="px-2 py-1 bg-red-100 text-red-600 rounded text-[10px] font-bold shrink-0">
                     累计招投标 23 次
@@ -396,7 +396,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                     <div className="px-6 pt-6 pb-4">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
                             <Gavel className="w-5 h-5 text-blue-600 shrink-0" />
-                            司法风险
+                            司法风险全景视图
                         </h3>
                         <div className="mt-4 border-b border-slate-200" />
                     </div>
@@ -654,7 +654,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                     <div className="p-6 border-b border-slate-100 flex justify-between items-center gap-4">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
                             <Network className="w-5 h-5 text-blue-600 shrink-0" />
-                            关联关系穿透
+                            关联关系穿透图谱
                         </h3>
                         <button
                             type="button"
@@ -679,7 +679,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                     <div className="p-6 border-b border-slate-100 flex justify-between items-center gap-4">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
                             <Eye className="w-5 h-5 text-blue-600 shrink-0" />
-                            经营动态监控
+                            经营动态监控看板
                         </h3>
                         <span className="text-xs text-slate-400 shrink-0">
                             监控周期：近 12 个月
@@ -848,6 +848,58 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
             );
         case "bidding":
             return <BiddingTrackingModule />;
+        case "creditPortrait":
+            return (
+                <section className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
+                    <div className="p-6 border-b border-slate-100">
+                        <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
+                            <PieChart className="w-5 h-5 text-blue-600 shrink-0" />
+                            信用评分动态画像
+                        </h3>
+                        <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                            将公开披露与经营类指标按模型归一后形成评分曲线，用于观察主体信用走势与分项贡献变化。
+                        </p>
+                    </div>
+                    <div className="px-6 pb-6 pt-2">
+                        <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-5 text-sm text-slate-700">
+                            <p className="font-semibold text-slate-800 mb-2">
+                                当前画像摘要
+                            </p>
+                            <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
+                                <li>综合评分区间：稳健（示意）</li>
+                                <li>履约与负债维度权重已纳入模型，可按监管口径调整</li>
+                                <li>支持对接内部风控策略，输出预警与复核清单</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            );
+        case "investmentTrace":
+            return (
+                <section className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
+                    <div className="p-6 border-b border-slate-100">
+                        <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
+                            <CircleDollarSign className="w-5 h-5 text-blue-600 shrink-0" />
+                            投融资关系溯源
+                        </h3>
+                        <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                            沿融资轮次、基金主体与股权变更链路回溯资金来源与去向，识别关键出资方与重复博弈结构。
+                        </p>
+                    </div>
+                    <div className="px-6 pb-6 pt-2">
+                        <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-5 text-sm text-slate-700">
+                            <p className="font-semibold text-slate-800 mb-2">
+                                溯源维度
+                            </p>
+                            <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
+                                <li>股权融资与增资扩股事件时间轴</li>
+                                <li>对外投资与参股路径并列展示</li>
+                                <li>可与关联图谱联动，定位共同投资方与一致行动线索</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            );
         case "tags":
             return (
                 <section className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
