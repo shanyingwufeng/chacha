@@ -34,8 +34,8 @@ const App: React.FC = () => {
             <RouteScrollTop />
             <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
                 <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-6">
-                    <div className="flex items-center gap-8">
-                        <Link to="/" className="flex items-center gap-2">
+                    <div className="flex min-w-0 flex-1 items-center gap-6 md:gap-8">
+                        <Link to="/" className="flex shrink-0 items-center gap-2">
                             <div className="bg-blue-600 p-1.5 rounded-lg shadow-lg shadow-blue-200">
                                 <ShieldCheck
                                     className="w-5 h-5 text-white"
@@ -46,46 +46,13 @@ const App: React.FC = () => {
                                 AI EASY 数据智能平台
                             </span>
                         </Link>
-                        <nav className="hidden md:flex items-center gap-6">
-                            <Link
-                                to="/enterprise-tags"
-                                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
-                            >
-                                企业标签管理
-                            </Link>
-                            <Link
-                                to="/industry-analysis"
-                                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
-                            >
-                                产业分析
-                            </Link>
-                            <Link
-                                to=""
-                                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
-                            >
-                                信用大数据
-                            </Link>
-                            <Link
-                                to=""
-                                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
-                            >
-                                查商标
-                            </Link>
-                            <Link
-                                to=""
-                                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
-                            >
-                                风险排查
-                            </Link>
-                            <Link
-                                to=""
-                                className="flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors py-2"
-                            >
-                                招投标查询
-                            </Link>
+                        <nav className="hidden md:flex min-w-0 flex-1 flex-row-reverse flex-wrap items-center gap-x-4 gap-y-1">
+                            <span className="mr-6 text-sm font-medium text-slate-600 py-2 cursor-default select-none">
+                                全景企业画像
+                            </span>
                         </nav>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex shrink-0 items-center gap-4">
                         {!isHomePage && (
                             <div className="relative hidden sm:block">
                                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />

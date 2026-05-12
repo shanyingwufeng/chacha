@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from "react";
 import {
     Search,
-    Tag,
-    TrendingUp,
-    Database,
-    Stamp,
-    ShieldAlert,
-    ScrollText,
+    LayoutGrid,
+    Radar,
+    Share2,
+    Activity,
+    MessagesSquare,
+    Gauge,
     type LucideIcon,
 } from "lucide-react";
 import { Button } from "../components/ui/button";
@@ -22,38 +22,36 @@ type ServiceItem = {
 /** 服务入口：左图标 + 右标题/描述 */
 const SERVICE_GRID_ITEMS: ServiceItem[] = [
     {
-        title: "企业标签管理",
-        desc: "为企业档案维护分级标签体系，支撑客群分层与定向检索。",
+        title: "全景企业画像",
+        desc: "贯通工商、股权与资质等维度，形成可检索、可对比的企业主体视图。",
         to: "/enterprise-tags",
-        icon: Tag,
+        icon: LayoutGrid,
     },
     {
-        title: "产业分析",
-        desc: "梳理产业链上下游与区域分布，辅助研判赛道结构与景气变化。",
+        title: "风险雷达扫描",
+        desc: "对司法、处罚与经营异常等信号进行持续扫描，支持按主体聚合预警。",
+        icon: Radar,
+    },
+    {
+        title: "产业拓扑洞察",
+        desc: "刻画产业链节点与关联强度，辅助识别关键环节与结构性机会。",
         to: "/industry-analysis",
-        icon: TrendingUp,
+        icon: Share2,
     },
     {
-        title: "信用大数据",
-        desc: "整合授信、履约与公示等多维信号，勾勒经营主体信用轮廓。",
-        to: "/financials",
-        icon: Database,
+        title: "经营健康指数",
+        desc: "将营收、现金流与负债等经营指标标准化，输出可追踪的健康度评估。",
+        icon: Activity,
     },
     {
-        title: "查商标",
-        desc: "按名称与类别开展近似比对，辅助评估注册可行性与冲突风险。",
-        icon: Stamp,
+        title: "舆情情感引擎",
+        desc: "对公开报道与社交声量做情感与主题抽取，辅助把握品牌与声誉走势。",
+        icon: MessagesSquare,
     },
     {
-        title: "风险排查",
-        desc: "穿透股权关联与行政处罚等线索，及早识别潜在经营合规隐患。",
-        to: "/risk",
-        icon: ShieldAlert,
-    },
-    {
-        title: "招投标查询",
-        desc: "汇集招标公告与中标结果，便于跟踪采购动态与项目机会。",
-        icon: ScrollText,
+        title: "决策驾驶舱",
+        desc: "将核心指标与预警信息集中呈现，支撑管理层快速把握态势与优先级。",
+        icon: Gauge,
     },
 ];
 

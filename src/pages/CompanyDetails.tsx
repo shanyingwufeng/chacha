@@ -76,12 +76,6 @@ const KNOWLEDGE_NAV: {
         chipLabel: "招投标追踪",
         Icon: FileText,
     },
-    {
-        id: "tags",
-        sidebarLabel: "企业标签",
-        chipLabel: "企业标签",
-        Icon: Tags,
-    },
 ];
 
 const RELATION_TARGET_LABEL = "智车睿控 (目标企业)";

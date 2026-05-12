@@ -73,12 +73,6 @@ const KNOWLEDGE_NAV: {
         chipLabel: "招投标追踪",
         Icon: FileText,
     },
-    {
-        id: "tags",
-        sidebarLabel: "企业标签",
-        chipLabel: "企业标签",
-        Icon: Tags,
-    },
 ];
 
 const RELATION_TARGET_LABEL = "苏州海鑫 (目标企业)";
