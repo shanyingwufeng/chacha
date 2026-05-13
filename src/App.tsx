@@ -51,7 +51,8 @@ const App: React.FC = () => {
                         </Link>
                         <nav className="hidden md:flex min-w-0 flex-1 flex-row-reverse flex-wrap items-center gap-x-4 gap-y-1">
                             <span className="mr-6 text-sm font-medium text-slate-600 py-2 cursor-default select-none">
-                                全景企业画像
+                                企业知识管理
+                                {/* 全景企业画像 */}
                             </span>
                         </nav>
                     </div>
