@@ -57,7 +57,7 @@ const SERVICE_GRID_ITEMS: ServiceItem[] = [
 
 /** 首页联想：输入「北京」「苏州」匹配对应企业 */
 const DEMO_COMPANIES = [
-    { keyword: "北京", name: "北京智车睿控" },
+    { keyword: "北京", name: "北京智慧易" },
     { keyword: "苏州", name: "苏州海鑫" },
 ] as const;
 
@@ -183,7 +183,7 @@ const Home: React.FC = () => {
                                     onClick={() => navigate("/details")}
                                     className="hover:text-indigo-600"
                                 >
-                                    北京智车睿控
+                                    北京智慧易
                                 </button>
                                 <button
                                     onClick={() => navigate("/details?id=2549")}

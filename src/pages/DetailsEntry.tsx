@@ -11,7 +11,7 @@ const DetailsEntry: React.FC = () => {
         return <SuzhouCompanyDetails />;
     }
 
-    // 默认：北京智车睿控（包括 id=1001 或未传 id 的情况）
+    // 北京智慧易 id=1001 或未传 id 的情况）
     return <CompanyDetails />;
 };
 

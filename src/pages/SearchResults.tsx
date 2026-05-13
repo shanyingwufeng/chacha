@@ -18,13 +18,13 @@ const SearchResults: React.FC = () => {
   const companies = [
     {
       id: 1,
-      name: '北京智车睿控信息技术有限公司',
-      rep: '李志强',
-      capital: '1000万人民币',
-      date: '2021-08-23',
+      name: '北京智慧易科技有限公司',
+      rep: '关涛',
+      capital: '5000万人民币',
+      date: '2020-06-18',
       status: '存续',
-      address: '北京市海淀区北四环西路67号1号楼7层701-08',
-      tags: ['高新企业', '科技型中小企业', '智能驾驶'],
+      address: '北京市顺义区军营南街10号院1幢1-6层3104室（科技创新功能区）',
+      tags: ['科学研究和技术服务业', '软件开发', '人工智能应用', '信息系统集成'],
       riskCount: 1
     },
     {
@@ -68,8 +68,8 @@ const SearchResults: React.FC = () => {
       <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-            搜索结果: <span className="text-indigo-600">"智车睿控"</span>
-            <span className="text-sm font-normal text-slate-500 ml-2">找到约 128 条相关企业</span>
+            搜索结果: <span className="text-indigo-600">"智慧易"</span>
+            <span className="text-sm font-normal text-slate-500 ml-2">找到约 36 条相关企业</span>
           </h1>
         </div>
         <div className="flex items-center gap-2">

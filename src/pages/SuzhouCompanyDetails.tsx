@@ -381,7 +381,7 @@ function BiddingTrackingModule() {
                     </table>
                 </div>
                 <p className="mt-3 text-center text-xs text-slate-400">
-                    共 {filteredRows.length} 条（数据依据《苏州海鑫博智科技发展有限公司.docx》）
+                    共 {filteredRows.length} 条
                 </p>
             </div>
         </section>

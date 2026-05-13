@@ -55,16 +55,16 @@ const RelationshipGraph: React.FC = () => {
     const nodes = [
         {
             id: "core",
-            label: "北京智车睿控",
+            label: "北京智慧易科技",
             x: 350,
             y: 160,
-            r: 36,
+            r: 38,
             color: "#2563eb",
         },
 
         {
             id: "upChip",
-            label: "芯片/半导体",
+            label: "云与基础设施",
             x: 120,
             y: 55,
             r: 18,
@@ -72,7 +72,7 @@ const RelationshipGraph: React.FC = () => {
         },
         {
             id: "upSensor",
-            label: "传感器",
+            label: "数据与内容",
             x: 120,
             y: 120,
             r: 18,
@@ -80,7 +80,7 @@ const RelationshipGraph: React.FC = () => {
         },
         {
             id: "upDisplay",
-            label: "显示面板",
+            label: "营销渠道",
             x: 120,
             y: 185,
             r: 18,
@@ -88,7 +88,7 @@ const RelationshipGraph: React.FC = () => {
         },
         {
             id: "upAlgo",
-            label: "软件/算法",
+            label: "模型与风控",
             x: 120,
             y: 250,
             r: 18,
@@ -97,7 +97,7 @@ const RelationshipGraph: React.FC = () => {
 
         {
             id: "midDomain",
-            label: "域控制器集成",
+            label: "行业解决方案",
             x: 350,
             y: 55,
             r: 18,
@@ -105,7 +105,7 @@ const RelationshipGraph: React.FC = () => {
         },
         {
             id: "midCockpit",
-            label: "智能座舱方案",
+            label: "数字化运营中台",
             x: 350,
             y: 250,
             r: 18,
@@ -114,7 +114,7 @@ const RelationshipGraph: React.FC = () => {
 
         {
             id: "downCar",
-            label: "整车制造",
+            label: "银行保险客户",
             x: 580,
             y: 95,
             r: 18,
@@ -122,7 +122,7 @@ const RelationshipGraph: React.FC = () => {
         },
         {
             id: "downAfter",
-            label: "后市场服务",
+            label: "政企与互联网平台",
             x: 580,
             y: 220,
             r: 18,
@@ -181,7 +181,7 @@ const RelationshipGraph: React.FC = () => {
             })}
             <rect x={58} y={8} width={188} height={20} rx={10} fill="#e0f2fe" />
             <text x={70} y={22} fontSize={11} fill="#0369a1" fontWeight={700}>
-                上游：核心零部件与技术层
+                上游：数据与技术供给
             </text>
             <rect
                 x={288}
@@ -192,7 +192,7 @@ const RelationshipGraph: React.FC = () => {
                 fill="#e0e7ff"
             />
             <text x={300} y={22} fontSize={11} fill="#4338ca" fontWeight={700}>
-                中游：系统集成与解决方案层
+                中游：软件集成与解决方案
             </text>
             <rect
                 x={512}
@@ -203,7 +203,7 @@ const RelationshipGraph: React.FC = () => {
                 fill="#ccfbf1"
             />
             <text x={525} y={22} fontSize={11} fill="#0f766e" fontWeight={700}>
-                下游：应用与消费层
+                下游：金融与政企应用
             </text>
             {nodes.map((n) => (
                 <g key={n.id}>
@@ -220,7 +220,7 @@ const RelationshipGraph: React.FC = () => {
                             x={n.x}
                             y={n.y + 4}
                             textAnchor="middle"
-                            fontSize={12}
+                            fontSize={11}
                             fill="#fff"
                             fontWeight={700}
                         >
@@ -344,9 +344,9 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                     radius: "65%",
                     label: { formatter: "{b} {c}亿元" },
                     data: [
-                        { value: 680, name: "智能座舱" },
-                        { value: 420, name: "智能驾驶" },
-                        { value: 180, name: "车联网" },
+                        { value: 520, name: "技术服务与咨询" },
+                        { value: 380, name: "软件开发" },
+                        { value: 260, name: "系统集成与运营" },
                     ],
                 },
             ],
@@ -357,13 +357,13 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
     const chainEnterprisesOption = useMemo<echarts.EChartsOption>(
         () => ({
             tooltip: { trigger: "axis" },
-            legend: { top: 0, data: ["代表企业数量", "与智车睿控关联度"] },
+            legend: { top: 0, data: ["代表企业数量", "与智慧易科技关联度"] },
             xAxis: {
                 type: "category",
                 data: [
-                    "上游核心零部件",
-                    "中游系统集成",
-                    "下游整车应用",
+                    "上游数据与云",
+                    "中游软件与集成",
+                    "下游金融与政企",
                     "产业支撑体系",
                 ],
                 axisLabel: { interval: 0 },
@@ -377,7 +377,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                     itemStyle: { color: "#7c3aed" },
                 },
                 {
-                    name: "与智车睿控关联度",
+                    name: "与智慧易科技关联度",
                     type: "line",
                     smooth: true,
                     data: [72, 95, 68, 60],
@@ -402,11 +402,11 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
             yAxis: {
                 type: "category",
                 data: [
-                    "智能座舱",
-                    "智能驾驶",
-                    "车联网",
-                    "软件算法",
-                    "芯片半导体",
+                    "技术服务",
+                    "软件开发",
+                    "系统集成",
+                    "数据与营销",
+                    "安全合规",
                 ],
                 splitArea: { show: true },
             },
@@ -486,41 +486,41 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
             tag: "2024营收 52.8亿",
         },
         {
-            name: "北京智车睿控信息技术有限公司",
-            stage: "细分市场",
-            score: 82,
-            tag: "预估营收 <5亿",
+            name: "北京智慧易科技有限公司",
+            stage: "软件与数据服务",
+            score: 84,
+            tag: "招投标 52 次（docx）",
         },
     ];
 
     const overviewRows = [
         {
-            company: "北京智车睿控信息技术有限公司",
-            summary: "智能座舱/智驾定制化方案商",
+            company: "北京智慧易科技有限公司",
+            summary: "技术服务、软件开发、信息系统集成与数字化运营",
             chain: "中游",
-            data: "招投标 41次 / 对外投资 1家 / 知识产权申请 22件",
-            remark: "细分市场与区域市场定位",
+            data: "招投标 52次 / 对外投资 2家 / 专利 33件（docx 快照）",
+            remark: "顺义注册，小型企业（S），法人股东持股 97%",
         },
         {
-            company: "智能座舱赛道",
-            summary: "车载信息娱乐、数字仪表、HUD、多屏交互",
-            chain: "上游",
-            data: "2024年市场规模约 680 亿元",
-            remark: "智能汽车电子核心赛道之一",
-        },
-        {
-            company: "智能驾驶赛道",
-            summary: "ADAS、L2+/L3级自动驾驶、泊车辅助",
-            chain: "中游",
-            data: "2024年市场规模约 420 亿元",
-            remark: "受算法与芯片驱动增速快",
-        },
-        {
-            company: "车联网赛道",
-            summary: "T-Box、V2X通信、OTA升级、云平台",
+            company: "金融数字化服务",
+            summary: "银行保险营销、权益发放、支付与渠道对接",
             chain: "下游",
-            data: "2024年市场规模约 180 亿元",
-            remark: "车路云一体化持续推进",
+            data: "公开招投标中金融类项目占比较高（示意）",
+            remark: "与智慧易公开客户结构相契合",
+        },
+        {
+            company: "政企与互联网服务",
+            summary: "系统集成、数据服务、活动运营与咨询",
+            chain: "中游",
+            data: "2024年政企云与软件服务市场持续增长（行业口径）",
+            remark: "技术服务与软件交付为主",
+        },
+        {
+            company: "数据智能与风控",
+            summary: "模型、标注、风控策略与运营工具",
+            chain: "上游",
+            data: "数据要素与算法投入持续上升（行业口径）",
+            remark: "与招投标中的数据/标注类需求相关",
         },
     ];
 
@@ -612,7 +612,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                     </div>
                     <div className="rounded-xl border border-slate-200 p-3">
                         <div className="text-sm text-slate-500 px-2 pt-1">
-                            2. 智能汽车电子细分赛道规模（亿元）
+                            2. 软件与数据服务细分结构（亿元，示意）
                         </div>
                         <EChartPanel
                             option={portraitScalePieOption}
@@ -633,7 +633,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                     </Badge>
                 </div>
                 <p className="text-xs text-slate-500 mb-3">
-                    基于第三章“链上企业”提取：上游（高通/英伟达/地平线/华为海思/瑞萨/恩智浦）、中游（德赛西威/均胜电子/经纬恒润/华为车BU/Momenta/中科创达）、下游（一汽/东风/上汽/广汽/长安）及产业支撑体系（中汽研/测试区/产业基金/云服务/政策监管）。
+                    基于公开招投标与客户类型归纳（示意）：上游（云厂商/数据标注/安全与风控）、中游（行业解决方案商、系统集成商，含北京智慧易科技有限公司等）、下游（银行保险、互联网平台与政企客户）及产业支撑体系（测评认证、云服务、政策与监管科技）。
                 </p>
                 <EChartPanel option={chainEnterprisesOption} />
             </Card>}

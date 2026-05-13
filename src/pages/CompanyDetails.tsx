@@ -28,6 +28,9 @@ import {
     Tags,
     CircleDollarSign,
 } from "lucide-react";
+import equityPenetrationMap from "../assets/北京智慧易科技有限公司-股权穿透图谱.png";
+import enterpriseMapPng from "../assets/北京智慧易科技有限公司-企业图谱.png";
+import relatedPartyMapPng from "../assets/北京智慧易科技有限公司-关联方认定图.png";
 
 type KnowledgeModuleId =
     | "judicial"
@@ -93,8 +96,6 @@ const KNOWLEDGE_NAV: {
     },
 ];
 
-const RELATION_TARGET_LABEL = "智车睿控 (目标企业)";
-
 function RelationGraphSurface({ children }: { children: React.ReactNode }) {
     return (
         <div className="relative bg-slate-50 rounded-2xl border border-dashed border-slate-200 min-h-[260px] sm:min-h-[300px] flex items-center justify-center overflow-hidden py-10 px-3 sm:px-4">
@@ -113,107 +114,15 @@ function RelationGraphSurface({ children }: { children: React.ReactNode }) {
     );
 }
 
-function RelationNodeCard({
-    title,
-    subtitle,
-    compact,
-}: {
-    title: string;
-    subtitle: string;
-    compact?: boolean;
-}) {
-    return (
-        <div
-            className={
-                compact
-                    ? "bg-white border border-slate-200 p-2 rounded-lg shadow-sm text-[10px] text-center max-w-[92px] leading-tight"
-                    : "bg-white border border-slate-200 p-3 rounded-xl shadow-sm text-xs text-center max-w-[140px]"
-            }
-        >
-            <p className="font-bold text-slate-900">{title}</p>
-            <p className="text-slate-400 mt-0.5">{subtitle}</p>
-        </div>
-    );
-}
-
-/** 两层：目标企业 → 两个并行节点 */
+/** 演示数据：股权穿透以报告附图为准（见 assets） */
 function SimpleEquityPenetrationGraph() {
     return (
         <RelationGraphSurface>
-            <div className="flex flex-col items-center gap-10 sm:gap-12">
-                <div className="bg-blue-600 text-white px-5 sm:px-6 py-3 rounded-2xl shadow-xl font-bold text-sm sm:text-base text-center">
-                    {RELATION_TARGET_LABEL}
-                </div>
-                <div className="flex flex-wrap justify-center gap-8 sm:gap-16">
-                    <div className="flex flex-col items-center gap-2">
-                        <div className="w-1.5 h-12 bg-slate-200 -mt-10 sm:-mt-12" />
-                        <RelationNodeCard
-                            title="于素华"
-                            subtitle="大股东 (90%)"
-                        />
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
-                        <div className="w-1.5 h-12 bg-slate-200 -mt-10 sm:-mt-12" />
-                        <RelationNodeCard
-                            title="北京车替达科技"
-                            subtitle="参股 12%"
-                        />
-                    </div>
-                </div>
-            </div>
-        </RelationGraphSurface>
-    );
-}
-
-/** 三层：一侧单节点，一侧节点下再挂多个子节点（一致行动 / 董监高 / SPV 等复用） */
-function DeepPenetrationGraph({
-    midLabels = ["SPV-A", "SPV-B", "SPV-C"],
-    midSubtitles = ["持股平台", "有限合伙", "信托架构"],
-}: {
-    midLabels?: [string, string, string];
-    midSubtitles?: [string, string, string];
-}) {
-    return (
-        <RelationGraphSurface>
-            <div className="flex flex-col items-center gap-8 sm:gap-10 max-w-full">
-                <div className="bg-blue-600 text-white px-5 sm:px-6 py-3 rounded-2xl shadow-xl font-bold text-sm sm:text-base text-center">
-                    {RELATION_TARGET_LABEL}
-                </div>
-                <div className="flex flex-wrap justify-center gap-8 sm:gap-12 lg:gap-16 items-start">
-                    <div className="flex flex-col items-center gap-2">
-                        <div className="w-1.5 h-10 bg-slate-200 -mt-8 sm:-mt-10" />
-                        <RelationNodeCard
-                            title="于素华"
-                            subtitle="关键自然人"
-                        />
-                    </div>
-                    <div className="flex flex-col items-center gap-2">
-                        <div className="w-1.5 h-10 bg-slate-200 -mt-8 sm:-mt-10" />
-                        <RelationNodeCard
-                            title="北京车替达科技"
-                            subtitle="关联交易方"
-                        />
-                        <div className="w-1.5 h-6 bg-slate-200 shrink-0" />
-                        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-[340px]">
-                            <RelationNodeCard
-                                title={midLabels[0]}
-                                subtitle={midSubtitles[0]}
-                                compact
-                            />
-                            <RelationNodeCard
-                                title={midLabels[1]}
-                                subtitle={midSubtitles[1]}
-                                compact
-                            />
-                            <RelationNodeCard
-                                title={midLabels[2]}
-                                subtitle={midSubtitles[2]}
-                                compact
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <img
+                src={equityPenetrationMap}
+                alt="北京智慧易科技有限公司股权穿透图谱（演示）"
+                className="max-w-full max-h-[min(520px,70vh)] w-auto h-auto object-contain rounded-xl border border-slate-200 shadow-sm bg-white"
+            />
         </RelationGraphSurface>
     );
 }
@@ -244,92 +153,93 @@ type BiddingTableRow = {
 
 const BIDDING_TABLE_MOCK: BiddingTableRow[] = [
     {
-        projectName:
-            "太平财险2026年疑似高风险车辆（新能源车）识别数据服务采购项目中标候选人公示",
-        publishDate: "2026-04-23",
-        tenderOrg: "太平财产保险有限公司",
-        winnerOrg: "未披露",
+        projectName: "2026年度虚拟权益采购中标公示",
+        publishDate: "2026-04-22",
+        tenderOrg: "上海星图金融服务集团有限公司",
+        winnerOrg: "北京智慧易科技有限公司（联合中标之一）",
         amount: "未披露",
-        roles: ["bidder"],
-    },
-    {
-        projectName: "中煤财产保险股份有限公司家用车里程评分项目中标结果公告",
-        publishDate: "2026-03-24",
-        tenderOrg: "中煤财产保险股份有限公司",
-        winnerOrg: "北京智车睿控信息技术有限公司",
-        amount: "51万元",
-        roles: ["bidder"],
-    },
-    {
-        projectName:
-            "中国大地财产保险股份有限公司2025年新能源动态数据服务项目（增补项目）中标结果公告",
-        publishDate: "2026-01-12",
-        tenderOrg: "中国大地财产保险股份有限公司",
-        winnerOrg: "北京智车睿控信息技术有限公司",
-        amount: "0.2元",
-        roles: ["tender"],
-    },
-    {
-        projectName:
-            "中国大地财产保险股份有限公司营业客车动态数据服务项目中标结果公告",
-        publishDate: "2025-12-29",
-        tenderOrg: "中国大地财产保险股份有限公司",
-        winnerOrg: "北京智车睿控信息技术有限公司",
-        amount: "0.64元",
         roles: ["winner"],
     },
     {
         projectName:
-            "中国人寿财产保险股份有限公司外部车辆动态网联数据及风险评分服务项目中标结果公示",
-        publishDate: "2024-05-27",
-        tenderOrg: "中国人寿财产保险股份有限公司",
-        winnerOrg: "北京智车睿控信息技术有限公司",
+            "青岛澳柯玛智慧冷链有限公司关于图像标注的询价项目中标公告",
+        publishDate: "2026-04-08",
+        tenderOrg: "青岛澳柯玛智慧冷链有限公司",
+        winnerOrg: "北京智慧易科技有限公司",
+        amount: "未披露",
+        roles: ["winner"],
+    },
+    {
+        projectName:
+            "兴业银行石家庄分行2026年借记卡客户线上权益采购项目中标候选人公示",
+        publishDate: "2026-03-27",
+        tenderOrg: "兴业银行股份有限公司石家庄分行",
+        winnerOrg: "南京飞翰网络科技有限公司",
+        amount: "283.0605万元",
+        roles: ["bidder"],
+    },
+    {
+        projectName:
+            "江西明台项目咨询管理有限公司关于丰城农商银行2026年度信用卡营销活动服务商采购项目（JXMT20260203B-02）竞争性磋商成交公告",
+        publishDate: "2026-03-11",
+        tenderOrg: "丰城农商银行",
+        winnerOrg: "北京智慧易科技有限公司",
+        amount: "未披露",
+        roles: ["winner"],
+    },
+    {
+        projectName:
+            "广发银行昆明分行2026年零售条线市场活动第三方渠道支付券配置服务项目-结果公示",
+        publishDate: "2025-12-31",
+        tenderOrg: "广发银行股份有限公司昆明分行",
+        winnerOrg: "深圳赛迪文信息科技有限公司",
         amount: "未披露",
         roles: ["mentioned"],
     },
     {
         projectName:
-            "中国大地财产保险股份有限公司家用车使用性质识别服务项目中标候选人公示",
-        publishDate: "2026-04-01",
-        tenderOrg: "中国大地财产保险股份有限公司",
-        winnerOrg: "北京车慧达科技有限公司",
-        amount: "0.25",
+            "关于招商银行南京分行2025年快捷支付平台立减金项目采购结果公告",
+        publishDate: "2025-11-20",
+        tenderOrg: "招商银行股份有限公司南京分行",
+        winnerOrg: "北京环球永佳电信科技有限公司",
+        amount: "未披露",
         roles: ["bidder"],
     },
     {
         projectName:
-            "中国大地财产保险股份有限公司2025年新能源动态数据服务项目（增补项目）中标候选人公示",
-        publishDate: "2026-01-07",
-        tenderOrg: "中国大地财产保险股份有限公司",
-        winnerOrg: "北京智车睿控信息技术有限公司",
-        amount: "未披露",
+            "中国医学科学院医学信息研究所人口健康科学数据标准注册和共享系统（二期）开发服务采购项目成交公告",
+        publishDate: "2025-09-08",
+        tenderOrg: "中国医学科学院医学信息研究所",
+        winnerOrg: "北京智慧易科技有限公司",
+        amount: "30万元",
         roles: ["winner"],
     },
     {
         projectName:
-            "大家财险过户车风险评级和高风险车辆识别数据服务采购项目中标公示",
-        publishDate: "2025-09-01",
-        tenderOrg: "大家财产保险有限责任公司",
-        winnerOrg: "北京智车睿控信息技术有限公司",
+            "数字人民币移动支付营销服务选型入围项目中标候选人公示",
+        publishDate: "2025-07-18",
+        tenderOrg: "中国银行股份有限公司陕西省分行",
+        winnerOrg: "北京六一六信息技术有限公司",
         amount: "未披露",
+        roles: ["bidder"],
+    },
+    {
+        projectName:
+            "2025-2026年联通（山东）产业互联网有限公司AI眼镜产品服务询比采购项目中选候选人公示",
+        publishDate: "2025-07-08",
+        tenderOrg: "联通（山东）产业互联网有限公司",
+        winnerOrg: "北京智慧易科技有限公司",
+        amount: "62.54万元",
         roles: ["winner"],
     },
     {
         projectName:
-            "浙江省交通投资集团有限公司高危车辆识别、家用车改变使用性质识别（浙商保险）直接采购项目成交公告",
-        publishDate: "2025-08-11",
-        tenderOrg: "浙江省交通投资集团有限公司",
-        winnerOrg: "北京智车睿控信息技术有限公司",
-        amount: "32万元",
-        roles: ["winner", "tender"],
-    },
-    {
-        projectName: "高风险车辆识别项目三次中标结果公告",
-        publishDate: "2025-07-22",
-        tenderOrg: "中路财产保险股份有限公司",
-        winnerOrg: "北京智车睿控信息技术有限公司",
-        amount: "13.68万元",
-        roles: ["winner", "mentioned"],
+            "广发银行昆明分行二至四季度借记卡市场活动第三方渠道支付券配置服务项目中选结果公示",
+        publishDate: "2025-06-25",
+        tenderOrg: "广发银行股份有限公司昆明分行",
+        winnerOrg: "北京智慧易科技有限公司",
+        amount: "未披露",
+        roles: ["winner"],
     },
 ];
 
@@ -352,7 +262,7 @@ function BiddingTrackingModule() {
                     招投标智能追踪
                 </h3>
                 <span className="px-2 py-1 bg-red-100 text-red-600 rounded text-[10px] font-bold shrink-0">
-                    累计招投标 42 次
+                    累计招投标 52 次
                 </span>
             </div>
 
@@ -468,7 +378,7 @@ function BiddingTrackingModule() {
                 </div>
                 <p className="mt-3 text-center text-xs text-slate-400">
                     共 {filteredRows.length}{" "}
-                    条（数据依据《北京智车睿控信息技术有限公司.docx》）
+                    条
                 </p>
             </div>
         </section>
@@ -493,8 +403,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             <h4 className="text-sm font-bold text-slate-800 mb-3">
                                 司法案件
                             </h4>
-                            <p className="text-sm text-slate-600">
-                                文档披露：无司法案件、无被执行人记录，司法风险极低。
+                            <p className="text-sm text-slate-600 leading-relaxed">
+                                文档披露：截至报告快照，无在办或未结民事案件登记；无处于公示状态的「被执行人」在办记录。历史信息维度中存在
+                                1 条被执行人记录（已归档至「历史被执行人」），执行标的合计
+                                4.90 万元，整体司法风险可控，但建议结合执行结案情况及后续公示复核。
                             </p>
                             <div className="mt-4 overflow-x-auto rounded-xl border border-slate-200">
                                 <table className="w-full min-w-[980px] border-collapse text-sm text-slate-700 table-fixed">
@@ -579,13 +491,19 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                     </tbody>
                                 </table>
                             </div>
+                            <p className="mt-3 text-xs text-slate-500">
+                                其他历史司法维度请以各主管部门及官方网站公示为准。
+                            </p>
                         </div>
                         <div className="border-b border-slate-100" />
 
                         <div className="py-5">
-                            <h4 className="text-sm font-bold text-slate-800 mb-3">
-                                被执行人
+                            <h4 className="text-sm font-bold text-slate-800 mb-2">
+                                被执行人（当前公示）
                             </h4>
+                            <p className="text-sm text-slate-600 mb-3">
+                                当前公示口径下无在办被执行人条目；下列为与主体关联的历史被执行人摘录，便于与「司法案件」空白状态对照理解。
+                            </p>
                             <div className="overflow-x-auto rounded-xl border border-slate-200">
                                 <table className="w-full min-w-[520px] border-collapse text-sm text-slate-700">
                                     <thead>
@@ -627,16 +545,84 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums w-16">
                                                 1
                                             </td>
-                                            <td className="px-4 py-3">无</td>
+                                            <td className="px-4 py-3">—</td>
                                             <td className="px-4 py-3">
-                                                北京智车睿控信息技术有限公司
+                                                北京智慧易科技有限公司
                                             </td>
-                                            <td className="px-4 py-3">无</td>
-                                            <td className="px-4 py-3">无</td>
+                                            <td className="px-4 py-3">无在办</td>
+                                            <td className="px-4 py-3">—</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
+
+                            <h4 className="text-sm font-bold text-slate-800 mt-8 mb-2">
+                                历史被执行人 (1)
+                            </h4>
+                            <p className="text-sm text-slate-600 mb-3">
+                                文档 8.6：被执行人信息共 1 条，被执行总金额为 4.90
+                                万元（金额与案号以公示快照为准）。
+                            </p>
+                            <div className="overflow-x-auto rounded-xl border border-slate-200">
+                                <table className="w-full min-w-[720px] border-collapse text-sm text-slate-700">
+                                    <thead>
+                                        <tr className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold text-slate-600">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3 w-16 whitespace-nowrap"
+                                            >
+                                                序号
+                                            </th>
+                                            <th scope="col" className="px-4 py-3">
+                                                案号
+                                            </th>
+                                            <th scope="col" className="px-4 py-3">
+                                                被执行人
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                执行标的(元)
+                                            </th>
+                                            <th scope="col" className="px-4 py-3">
+                                                执行法院
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3 whitespace-nowrap"
+                                            >
+                                                立案日期
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-slate-100">
+                                        <tr className="bg-white hover:bg-slate-50/80">
+                                            <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums w-16">
+                                                1
+                                            </td>
+                                            <td className="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">
+                                                （2023）京0105执23000号
+                                            </td>
+                                            <td className="px-4 py-3">
+                                                北京智慧易科技有限公司
+                                            </td>
+                                            <td className="px-4 py-3 tabular-nums">
+                                                49,020
+                                            </td>
+                                            <td className="px-4 py-3">
+                                                北京市朝阳区人民法院
+                                            </td>
+                                            <td className="px-4 py-3 whitespace-nowrap">
+                                                2023-06-21
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p className="mt-3 text-xs text-slate-500 leading-relaxed">
+                                历史环保处罚、历史终本案件、历史诉前调解、历史立案信息、历史法院公告、历史送达公告、历史裁判文书、历史动产抵押、历史开庭公告、历史股权出质、历史行政许可、历史股权冻结、历史知产出质、历史土地抵押，请登录官方网站进行查询。
+                            </p>
                         </div>
                         <div className="border-b border-slate-100" />
 
@@ -782,7 +768,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 注册资本
                                             </td>
                                             <td className="px-4 py-3">
-                                                1000万元
+                                                5000万元
                                             </td>
                                             <td className="px-4 py-3">
                                                 工商信息
@@ -799,7 +785,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 实缴资本
                                             </td>
                                             <td className="px-4 py-3">
-                                                90万元（2024年报）
+                                                2882.5万元（2025年报）
                                             </td>
                                             <td className="px-4 py-3">
                                                 工商信息
@@ -856,7 +842,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             <td className="px-4 py-3">
                                                 公开记录数
                                             </td>
-                                            <td className="px-4 py-3">42条</td>
+                                            <td className="px-4 py-3">52条</td>
                                         </tr>
                                         <tr className="bg-white hover:bg-slate-50/80">
                                             <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums w-16">
@@ -868,7 +854,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             <td className="px-4 py-3">
                                                 对外投资企业数
                                             </td>
-                                            <td className="px-4 py-3">1家</td>
+                                            <td className="px-4 py-3">2家</td>
                                         </tr>
                                         <tr className="bg-white hover:bg-slate-50/80">
                                             <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums w-16">
@@ -880,7 +866,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             <td className="px-4 py-3">
                                                 股东数量
                                             </td>
-                                            <td className="px-4 py-3">3位</td>
+                                            <td className="px-4 py-3">2位</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -968,8 +954,8 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                         weight: "高",
                                     },
                                     { label: "软件开发", weight: "高" },
+                                    { label: "人工智能应用软件开发", weight: "高" },
                                     { label: "信息系统集成服务", weight: "中" },
-                                    { label: "数据服务", weight: "中" },
                                 ].map((t) => (
                                     <span
                                         key={t.label}
@@ -1014,7 +1000,7 @@ const CompanyDetails: React.FC = () => {
                     { name: "招投标(次)", max: 60 },
                     { name: "股东数量(位)", max: 10 },
                     { name: "变更记录(条)", max: 30 },
-                    { name: "参保人数(人)", max: 100 },
+                    { name: "参保人数(人)", max: 30 },
                     { name: "对外投资(家)", max: 10 },
                 ],
                 splitNumber: 4,
@@ -1029,8 +1015,8 @@ const CompanyDetails: React.FC = () => {
                     type: "radar",
                     data: [
                         {
-                            value: [42, 3, 13, 11, 1],
-                            name: "北京智车睿控",
+                            value: [52, 2, 25, 0, 2],
+                            name: "北京智慧易科技",
                             areaStyle: { color: "rgba(37, 99, 235, 0.2)" },
                             lineStyle: { color: "#2563eb", width: 2 },
                             symbolSize: 0,
@@ -1057,12 +1043,12 @@ const CompanyDetails: React.FC = () => {
                         <div className="flex-1">
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-xl shadow-blue-200 shrink-0">
-                                    智
+                                    慧
                                 </div>
                                 <div>
                                     <div className="flex flex-wrap items-center gap-3 mb-1">
                                         <h1 className="text-3xl font-bold text-slate-900">
-                                            北京智车睿控信息技术有限公司
+                                            北京智慧易科技有限公司
                                         </h1>
                                         <span className="px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-md text-xs font-bold">
                                             存续
@@ -1071,7 +1057,7 @@ const CompanyDetails: React.FC = () => {
                                     <div className="flex flex-wrap gap-2">
                                         <span className="text-xs font-medium text-slate-500 flex items-center gap-1">
                                             <MapPin className="w-3.5 h-3.5" />
-                                            北京市朝阳区东三环北路甲19号楼14层1708
+                                            北京市顺义区军营南街10号院1幢1-6层3104室（科技创新功能区）
                                         </span>
                                         <span className="text-xs font-medium text-slate-500 flex items-center gap-1">
                                             <Building2 className="w-3.5 h-3.5" />
@@ -1086,7 +1072,7 @@ const CompanyDetails: React.FC = () => {
                                         社会信用代码
                                     </p>
                                     <p className="text-sm font-semibold">
-                                        91110108MA01PX7K22
+                                        91110108MA01T2BA3N
                                     </p>
                                 </div>
                                 <div>
@@ -1094,7 +1080,7 @@ const CompanyDetails: React.FC = () => {
                                         法定代表人
                                     </p>
                                     <p className="text-sm font-semibold text-blue-600 cursor-pointer hover:underline">
-                                        于素华
+                                        关涛
                                     </p>
                                 </div>
                                 <div>
@@ -1102,7 +1088,7 @@ const CompanyDetails: React.FC = () => {
                                         注册资本
                                     </p>
                                     <p className="text-sm font-semibold">
-                                        1000万元
+                                        5000万元
                                     </p>
                                 </div>
                                 <div>
@@ -1110,7 +1096,7 @@ const CompanyDetails: React.FC = () => {
                                         成立日期
                                     </p>
                                     <p className="text-sm font-semibold">
-                                        2020-01-14
+                                        2020-06-18
                                     </p>
                                 </div>
                                 <div>
@@ -1118,7 +1104,7 @@ const CompanyDetails: React.FC = () => {
                                         企业类型
                                     </p>
                                     <p className="text-sm font-semibold">
-                                        有限责任公司（自然人投资或控股）
+                                        其他有限责任公司
                                     </p>
                                 </div>
                                 <div>
@@ -1126,7 +1112,7 @@ const CompanyDetails: React.FC = () => {
                                         实缴资本
                                     </p>
                                     <p className="text-sm font-semibold">
-                                        90万元（2024年报）
+                                        2882.5万元（2025年报）
                                     </p>
                                 </div>
                                 <div>
@@ -1142,19 +1128,19 @@ const CompanyDetails: React.FC = () => {
                                         注册地址
                                     </p>
                                     <p className="text-sm font-semibold">
-                                        北京市朝阳区东三环北路甲19号楼14层1708
+                                        北京市顺义区军营南街10号院1幢1-6层3104室（科技创新功能区）
                                     </p>
                                 </div>
                             </div>
                             <p className="mt-4 text-xs text-slate-500 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
-                                联系信息：电话 13260126622 ｜ 邮箱
-                                zhangxinmei@zcrk.net ｜ 网址 www.zcrk.net
+                                联系信息：电话 17610177855 ｜ 邮箱 tim@ieasy123.com ｜ 网址
+                                https://ieasy123.com
                             </p>
                             <p className="mt-6 text-sm text-slate-500 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
                                 <span className="font-bold text-slate-700">
                                     企业简介：
                                 </span>
-                                一般项目包括技术服务、软件开发、信息系统集成、数据处理与互联网数据服务等；许可项目包括第二类增值电信业务、机动车检验检测服务。
+                                一般项目含技术服务、技术开发、软件开发、企业管理咨询、信息系统集成服务、人工智能应用软件开发等；许可项目含互联网信息服务、广播电视节目制作经营、基础电信业务（以登记机关核准为准）。
                             </p>
                         </div>
                         <div className="flex flex-col items-center lg:items-end gap-6">
@@ -1187,7 +1173,7 @@ const CompanyDetails: React.FC = () => {
                                         招投标活跃度
                                     </p>
                                     <p className="text-3xl font-black text-blue-600">
-                                        42
+                                        52
                                     </p>
                                     <p className="text-[10px] text-blue-400 mt-1">
                                         次公开记录（docx）
@@ -1198,10 +1184,10 @@ const CompanyDetails: React.FC = () => {
                                         参保人数
                                     </p>
                                     <p className="text-3xl font-black text-indigo-600">
-                                        11
+                                        0
                                     </p>
                                     <p className="text-[10px] text-indigo-400 mt-1">
-                                        人（2024年报）
+                                        人（2025年报）
                                     </p>
                                 </div>
                             </div>
@@ -1210,12 +1196,12 @@ const CompanyDetails: React.FC = () => {
                     <div className="mt-8 pt-4 border-t border-dashed border-slate-200 flex flex-wrap gap-4 items-center justify-between">
                         <div className="flex items-center gap-2 text-xs font-medium text-slate-400">
                             <RefreshCw className="w-3.5 h-3.5 animate-[spin_3s_linear_infinite]" />
-                            系统同步于: 2026-05-08 10:24
+                            系统同步于: 2026-05-13 14:33
                         </div>
                         <div className="flex flex-wrap gap-6 items-center">
                             <span className="flex items-center gap-2 text-xs font-bold text-red-500">
                                 <Flame className="w-3.5 h-3.5" />
-                                核准日期：2025-05-14（登记机关：北京市朝阳区市场监督管理局）
+                                核准日期：2026-02-09（登记机关：北京市顺义区市场监督管理局）
                             </span>
                             <Link
                                 to="/deep-data"
@@ -1531,13 +1517,13 @@ const CompanyDetails: React.FC = () => {
                                     <Layers className="w-5 h-5 text-indigo-400" />
                                 </div>
                                 <p className="text-2xl font-black text-slate-900">
-                                    4{" "}
+                                    3{" "}
                                     <span className="text-xs font-normal text-slate-400">
                                         层深度
                                     </span>
                                 </p>
                                 <p className="text-[10px] text-slate-400 mt-1">
-                                    涉及3家核心关联企业
+                                    含母公司、有限合伙及对外投资链路
                                 </p>
                             </div>
                             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
@@ -1548,13 +1534,13 @@ const CompanyDetails: React.FC = () => {
                                     <TrendingUp className="w-5 h-5 text-red-400" />
                                 </div>
                                 <p className="text-2xl font-black text-slate-900">
-                                    41{" "}
+                                    48{" "}
                                     <span className="text-xs font-normal text-slate-400">
                                         次招投标
                                     </span>
                                 </p>
                                 <p className="text-[10px] text-red-500 font-bold mt-1">
-                                    共 42 条，覆盖中标/候选/投标等角色
+                                    共 52 条公开记录，含中标/投标/被提及等角色
                                 </p>
                             </div>
                             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
@@ -1610,10 +1596,10 @@ const CompanyDetails: React.FC = () => {
                                     </span>
                                 </div>
                                 <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                                    <div className="bg-emerald-500 h-full w-[42%] rounded-full shadow-[0_0_10px_rgba(16,185,129,0.3)]" />
+                                    <div className="bg-emerald-500 h-full w-[55%] rounded-full shadow-[0_0_10px_rgba(16,185,129,0.3)]" />
                                 </div>
                                 <p className="text-[10px] text-slate-400 mt-2">
-                                    近年招投标活跃，公开招投标记录 42 条
+                                    招投标与资质披露活跃，公开招投标记录 52 条
                                 </p>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
@@ -1625,22 +1611,34 @@ const CompanyDetails: React.FC = () => {
                                         注册资本与治理结构
                                     </p>
                                     <p className="text-[10px] text-slate-400 mt-1">
-                                        注册资本 1000 万元，3
-                                        位股东，最大股东于素华（76%）
+                                        注册资本 5000 万元，2
+                                        位股东，最大股东北京元子拓扑科技有限公司（97%）
                                     </p>
                                 </div>
                                 <div className="p-4 border border-blue-50 bg-blue-50/20 rounded-2xl">
                                     <h4 className="text-xs font-bold text-blue-700 mb-2 italic">
-                                        区域产业热力
+                                        关联方认定（示意）
                                     </h4>
-                                    <p className="text-sm font-bold text-slate-800">
-                                        区域与组织规模
-                                    </p>
-                                    <p className="text-[10px] text-slate-400 mt-1">
-                                        朝阳区注册，人员规模少于 50 人，参保 11
+                                    <img
+                                        src={relatedPartyMapPng}
+                                        alt="北京智慧易科技有限公司关联方认定图（演示）"
+                                        className="w-full rounded-lg border border-blue-100 bg-white object-contain max-h-40"
+                                    />
+                                    <p className="text-[10px] text-slate-400 mt-2">
+                                        顺义区注册，人员规模少于 50 人；2025 年报参保 0
                                         人
                                     </p>
                                 </div>
+                            </div>
+                            <div className="rounded-2xl border border-slate-100 bg-slate-50/80 p-3">
+                                <p className="text-xs font-bold text-slate-600 mb-2">
+                                    企业图谱（演示）
+                                </p>
+                                <img
+                                    src={enterpriseMapPng}
+                                    alt="北京智慧易科技有限公司企业图谱"
+                                    className="w-full rounded-xl border border-slate-200 bg-white object-contain max-h-56"
+                                />
                             </div>
                         </div>
                     </section>
@@ -1672,10 +1670,11 @@ const CompanyDetails: React.FC = () => {
                                     <div className="mt-1 w-2 h-2 rounded-full bg-blue-500 shrink-0" />
                                     <div>
                                         <p className="text-sm font-bold">
-                                            股东结构 (3位股东)
+                                            股东结构 (2位股东)
                                         </p>
                                         <p className="text-xs text-slate-400">
-                                            最大股东于素华，持股比例 76.00%
+                                            最大股东北京元子拓扑科技有限公司，持股比例
+                                            97.00%
                                         </p>
                                     </div>
                                 </div>
@@ -1683,7 +1682,7 @@ const CompanyDetails: React.FC = () => {
                                     <div className="mt-1 w-2 h-2 rounded-full bg-indigo-500 shrink-0" />
                                     <div>
                                         <p className="text-sm font-bold">
-                                            招投标活跃度 (42条)
+                                            招投标活跃度 (52条)
                                         </p>
                                         <p className="text-xs text-slate-400">
                                             覆盖中标单位、投标单位、提及单位等角色
@@ -1697,7 +1696,7 @@ const CompanyDetails: React.FC = () => {
                                             资本结构
                                         </p>
                                         <p className="text-xs text-slate-400">
-                                            注册资本1000万，实缴资本90万，最大股东持股76%
+                                            注册资本5000万，实缴资本约2882.5万（2025年报），法人股东持股97%
                                         </p>
                                     </div>
                                 </div>
