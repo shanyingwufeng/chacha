@@ -1,11 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import * as echarts from "echarts";
-import { Badge } from "../components/ui/badge";
-import {
-    IndustryAnalysisContent as IndustryAnalysis,
-    IndustrySectionId,
-} from "./IndustryAnalysis";
 import {
     MapPin,
     Building2,
@@ -27,6 +22,7 @@ import {
     FileText,
     Tags,
     CircleDollarSign,
+    X,
 } from "lucide-react";
 import equityPenetrationMap from "../assets/北京智慧易科技有限公司-股权穿透图谱.png";
 import enterpriseMapPng from "../assets/北京智慧易科技有限公司-企业图谱.png";
@@ -40,17 +36,6 @@ type KnowledgeModuleId =
     | "creditPortrait"
     | "investmentTrace"
     | "tags";
-
-type MainDetailTab = "knowledge" | "industry" | "patent" | "risk";
-
-const INDUSTRY_TABS: { id: IndustrySectionId; label: string }[] = [
-    { id: "overview", label: "产业概览" },
-    { id: "portrait", label: "产业画像" },
-    { id: "chain-enterprises", label: "链上企业" },
-    { id: "key-companies", label: "重点企业" },
-    { id: "chain-map", label: "产业链图谱" },
-    { id: "heatmap", label: "区域产业热力图" },
-];
 
 const KNOWLEDGE_NAV: {
     id: KnowledgeModuleId;
@@ -161,8 +146,7 @@ const BIDDING_TABLE_MOCK: BiddingTableRow[] = [
         roles: ["winner"],
     },
     {
-        projectName:
-            "青岛澳柯玛智慧冷链有限公司关于图像标注的询价项目中标公告",
+        projectName: "青岛澳柯玛智慧冷链有限公司关于图像标注的询价项目中标公告",
         publishDate: "2026-04-08",
         tenderOrg: "青岛澳柯玛智慧冷链有限公司",
         winnerOrg: "北京智慧易科技有限公司",
@@ -215,8 +199,7 @@ const BIDDING_TABLE_MOCK: BiddingTableRow[] = [
         roles: ["winner"],
     },
     {
-        projectName:
-            "数字人民币移动支付营销服务选型入围项目中标候选人公示",
+        projectName: "数字人民币移动支付营销服务选型入围项目中标候选人公示",
         publishDate: "2025-07-18",
         tenderOrg: "中国银行股份有限公司陕西省分行",
         winnerOrg: "北京六一六信息技术有限公司",
@@ -377,8 +360,7 @@ function BiddingTrackingModule() {
                     </table>
                 </div>
                 <p className="mt-3 text-center text-xs text-slate-400">
-                    共 {filteredRows.length}{" "}
-                    条
+                    共 {filteredRows.length} 条
                 </p>
             </div>
         </section>
@@ -405,8 +387,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             </h4>
                             <p className="text-sm text-slate-600 leading-relaxed">
                                 文档披露：截至报告快照，无在办或未结民事案件登记；无处于公示状态的「被执行人」在办记录。历史信息维度中存在
-                                1 条被执行人记录（已归档至「历史被执行人」），执行标的合计
-                                4.90 万元，整体司法风险可控，但建议结合执行结案情况及后续公示复核。
+                                1
+                                条被执行人记录（已归档至「历史被执行人」），执行标的合计
+                                4.90
+                                万元，整体司法风险可控，但建议结合执行结案情况及后续公示复核。
                             </p>
                             <div className="mt-4 overflow-x-auto rounded-xl border border-slate-200">
                                 <table className="w-full min-w-[980px] border-collapse text-sm text-slate-700 table-fixed">
@@ -429,22 +413,40 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             >
                                                 序号
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 案件名称
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 案件类型
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 案由
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 案件身份
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 案号
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 法院
                                             </th>
                                             <th
@@ -453,7 +455,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             >
                                                 案件金额(元)
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 最新案件进程
                                             </th>
                                         </tr>
@@ -549,7 +554,9 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             <td className="px-4 py-3">
                                                 北京智慧易科技有限公司
                                             </td>
-                                            <td className="px-4 py-3">无在办</td>
+                                            <td className="px-4 py-3">
+                                                无在办
+                                            </td>
                                             <td className="px-4 py-3">—</td>
                                         </tr>
                                     </tbody>
@@ -560,8 +567,8 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                 历史被执行人 (1)
                             </h4>
                             <p className="text-sm text-slate-600 mb-3">
-                                文档 8.6：被执行人信息共 1 条，被执行总金额为 4.90
-                                万元（金额与案号以公示快照为准）。
+                                文档 8.6：被执行人信息共 1 条，被执行总金额为
+                                4.90 万元（金额与案号以公示快照为准）。
                             </p>
                             <div className="overflow-x-auto rounded-xl border border-slate-200">
                                 <table className="w-full min-w-[720px] border-collapse text-sm text-slate-700">
@@ -573,10 +580,16 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             >
                                                 序号
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 案号
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 被执行人
                                             </th>
                                             <th
@@ -585,7 +598,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             >
                                                 执行标的(元)
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 执行法院
                                             </th>
                                             <th
@@ -897,8 +913,12 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             </p>
                             <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
                                 <li>综合评分区间：稳健（示意）</li>
-                                <li>履约与负债维度权重已纳入模型，可按监管口径调整</li>
-                                <li>支持对接内部风控策略，输出预警与复核清单</li>
+                                <li>
+                                    履约与负债维度权重已纳入模型，可按监管口径调整
+                                </li>
+                                <li>
+                                    支持对接内部风控策略，输出预警与复核清单
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -924,7 +944,9 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
                                 <li>股权融资与增资扩股事件时间轴</li>
                                 <li>对外投资与参股路径并列展示</li>
-                                <li>可与关联图谱联动，定位共同投资方与一致行动线索</li>
+                                <li>
+                                    可与关联图谱联动，定位共同投资方与一致行动线索
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -954,7 +976,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                         weight: "高",
                                     },
                                     { label: "软件开发", weight: "高" },
-                                    { label: "人工智能应用软件开发", weight: "高" },
+                                    {
+                                        label: "人工智能应用软件开发",
+                                        weight: "高",
+                                    },
                                     { label: "信息系统集成服务", weight: "中" },
                                 ].map((t) => (
                                     <span
@@ -980,14 +1005,28 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
     }
 }
 
+type GraphImagePreview = "relatedParty" | "enterprise" | null;
+
 const CompanyDetails: React.FC = () => {
     const radarRef = useRef<HTMLDivElement | null>(null);
-    const [mainDetailTab, setMainDetailTab] =
-        useState<MainDetailTab | null>("knowledge");
     const [activeKnowledgeModule, setActiveKnowledgeModule] =
         useState<KnowledgeModuleId>("judicial");
-    const [activeIndustrySection, setActiveIndustrySection] =
-        useState<IndustrySectionId>("overview");
+    const [graphImagePreview, setGraphImagePreview] =
+        useState<GraphImagePreview>(null);
+
+    useEffect(() => {
+        if (!graphImagePreview) return;
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setGraphImagePreview(null);
+        };
+        window.addEventListener("keydown", onKey);
+        const prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        return () => {
+            window.removeEventListener("keydown", onKey);
+            document.body.style.overflow = prevOverflow;
+        };
+    }, [graphImagePreview]);
 
     useEffect(() => {
         const el = radarRef.current;
@@ -1133,8 +1172,8 @@ const CompanyDetails: React.FC = () => {
                                 </div>
                             </div>
                             <p className="mt-4 text-xs text-slate-500 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
-                                联系信息：电话 17610177855 ｜ 邮箱 tim@ieasy123.com ｜ 网址
-                                https://ieasy123.com
+                                联系信息：电话 17610177855 ｜ 邮箱
+                                tim@ieasy123.com ｜ 网址 https://ieasy123.com
                             </p>
                             <p className="mt-6 text-sm text-slate-500 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
                                 <span className="font-bold text-slate-700">
@@ -1213,114 +1252,11 @@ const CompanyDetails: React.FC = () => {
                     </div>
                 </section>
 
-                <section
-                    className="rounded-3xl border border-slate-200 bg-white px-4 py-3 sm:px-6"
-                    aria-label="详情模块导航"
-                >
-                    <div className="flex flex-wrap items-center gap-y-2">
-                        <div className="inline-flex flex-wrap items-center gap-1 rounded-full px-1.5 py-1.5">
-                            <button
-                                type="button"
-                                aria-expanded={mainDetailTab === "knowledge"}
-                                onClick={() =>
-                                    setMainDetailTab((prev) =>
-                                        prev === "knowledge"
-                                            ? null
-                                            : "knowledge"
-                                    )
-                                }
-                                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-bold transition-all sm:px-4 ${
-                                    mainDetailTab === "knowledge"
-                                        ? "border-indigo-200 bg-indigo-50 text-indigo-900 shadow-sm"
-                                        : "border-transparent text-slate-900 hover:bg-slate-50"
-                                }`}
-                            >
-                                <BrainCircuit
-                                    className="h-4 w-4 text-indigo-600 shrink-0"
-                                    aria-hidden
-                                />
-                                企业知识管理
-                            </button>
-                            {/* <button
-                                type="button"
-                                aria-expanded={mainDetailTab === "industry"}
-                                onClick={() =>
-                                    setMainDetailTab((prev) =>
-                                        prev === "industry" ? null : "industry"
-                                    )
-                                }
-                                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-bold transition-all sm:px-4 ${
-                                    mainDetailTab === "industry"
-                                        ? "border-emerald-200 bg-emerald-50 text-emerald-900 shadow-sm"
-                                        : "border-transparent text-slate-900 hover:bg-slate-50"
-                                }`}
-                            >
-                                <TrendingUp
-                                    className="h-4 w-4 text-emerald-600 shrink-0"
-                                    aria-hidden
-                                />
-                                产业分析
-                            </button> */}
-                            <button
-                                type="button"
-                                className="inline-flex items-center gap-2 rounded-full border border-transparent px-3.5 py-2 text-sm font-bold text-slate-900 transition-all sm:px-4 hover:bg-slate-50"
-                            >
-                                <PieChart
-                                    className="h-4 w-4 text-violet-600 shrink-0"
-                                    aria-hidden
-                                />
-                                企业发展
-                            </button>
-                            <button
-                                type="button"
-                                aria-expanded={mainDetailTab === "patent"}
-                                onClick={() =>
-                                    setMainDetailTab((prev) =>
-                                        prev === "patent" ? null : "patent"
-                                    )
-                                }
-                                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-bold transition-all sm:px-4 ${
-                                    mainDetailTab === "patent"
-                                        ? "border-violet-200 bg-violet-50 text-violet-900 shadow-sm"
-                                        : "border-transparent text-slate-900 hover:bg-slate-50"
-                                }`}
-                            >
-                                <FileText
-                                    className="h-4 w-4 text-violet-600 shrink-0"
-                                    aria-hidden
-                                />
-                                专利
-                            </button>
-                            <button
-                                type="button"
-                                aria-expanded={mainDetailTab === "risk"}
-                                onClick={() =>
-                                    setMainDetailTab((prev) =>
-                                        prev === "risk" ? null : "risk"
-                                    )
-                                }
-                                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-bold transition-all sm:px-4 ${
-                                    mainDetailTab === "risk"
-                                        ? "border-rose-200 bg-rose-50 text-rose-950 shadow-sm"
-                                        : "border-transparent text-slate-900 hover:bg-slate-50"
-                                }`}
-                            >
-                                <Flame
-                                    className="h-4 w-4 text-rose-600 shrink-0"
-                                    aria-hidden
-                                />
-                                风险画像
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                {mainDetailTab === "knowledge" && (
-                    <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
-                        <nav
-                            className="mb-8 flex flex-wrap items-center gap-3"
-                            aria-label="企业知识子模块"
-                        >
+                <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
+                    <nav
+                        className="mb-8 flex flex-wrap items-center gap-3"
+                        aria-label="企业知识子模块"
+                    >
                             {KNOWLEDGE_NAV.map(({ id, chipLabel, Icon }) => {
                                 const isActive = activeKnowledgeModule === id;
                                 return (
@@ -1350,120 +1286,22 @@ const CompanyDetails: React.FC = () => {
                                     </button>
                                 );
                             })}
-                        </nav>
-                        <div
-                            id="knowledge-module-panel"
-                            role="tabpanel"
-                            aria-label={
-                                KNOWLEDGE_NAV.find(
-                                    (m) => m.id === activeKnowledgeModule
-                                )?.chipLabel
-                            }
-                            className="scroll-mt-24 md:scroll-mt-28"
-                        >
-                            <KnowledgeModuleContent
-                                module={activeKnowledgeModule}
-                            />
-                        </div>
+                    </nav>
+                    <div
+                        id="knowledge-module-panel"
+                        role="tabpanel"
+                        aria-label={
+                            KNOWLEDGE_NAV.find(
+                                (m) => m.id === activeKnowledgeModule
+                            )?.chipLabel
+                        }
+                        className="scroll-mt-24 md:scroll-mt-28"
+                    >
+                        <KnowledgeModuleContent
+                            module={activeKnowledgeModule}
+                        />
                     </div>
-                )}
-
-                {mainDetailTab === "industry" && (
-                    <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
-                        <nav
-                            className="mb-8 flex flex-wrap items-center gap-3"
-                            aria-label="产业分析子模块"
-                        >
-                            {INDUSTRY_TABS.map(({ id, label }) => {
-                                const isActive = activeIndustrySection === id;
-                                return (
-                                    <button
-                                        key={id}
-                                        type="button"
-                                        role="tab"
-                                        aria-selected={isActive}
-                                        onClick={() =>
-                                            setActiveIndustrySection(id)
-                                        }
-                                        className={`inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
-                                            isActive
-                                                ? "border-emerald-300 bg-emerald-50 text-emerald-950 shadow-sm ring-1 ring-emerald-200/80"
-                                                : "border-[#e8eef4] bg-[#f8f9fb] text-[#334155] hover:border-slate-300 hover:bg-slate-100"
-                                        }`}
-                                    >
-                                        {label}
-                                    </button>
-                                );
-                            })}
-                        </nav>
-                        <div
-                            id="industry-module-panel"
-                            role="tabpanel"
-                            aria-label={
-                                INDUSTRY_TABS.find(
-                                    (tab) => tab.id === activeIndustrySection
-                                )?.label
-                            }
-                            className="scroll-mt-24 md:scroll-mt-28"
-                        >
-                            <IndustryAnalysis
-                                section={activeIndustrySection}
-                                hideHeader
-                            />
-                        </div>
-                    </div>
-                )}
-
-                {mainDetailTab === "risk" && (
-                    <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
-                        <div className="flex items-center gap-2 mb-5">
-                            <Flame className="h-5 w-5 text-rose-600" aria-hidden />
-                            <h2 className="font-semibold text-slate-900">风险画像</h2>
-                            <Badge variant="secondary" className="ml-2">
-                                风险概览与预警
-                            </Badge>
-                        </div>
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                            {[
-                                {
-                                    label: "司法风险",
-                                    value: "低",
-                                    color: "text-emerald-700 bg-emerald-50 border-emerald-100",
-                                },
-                                {
-                                    label: "经营异常",
-                                    value: "无",
-                                    color: "text-emerald-700 bg-emerald-50 border-emerald-100",
-                                },
-                                {
-                                    label: "行政处罚",
-                                    value: "0",
-                                    color: "text-slate-700 bg-slate-50 border-slate-200",
-                                },
-                                {
-                                    label: "舆情预警",
-                                    value: "关注",
-                                    color: "text-amber-800 bg-amber-50 border-amber-100",
-                                },
-                            ].map((x) => (
-                                <div
-                                    key={x.label}
-                                    className={`rounded-2xl border p-4 ${x.color}`}
-                                >
-                                    <div className="text-xs font-bold opacity-80">
-                                        {x.label}
-                                    </div>
-                                    <div className="mt-2 text-2xl font-black">
-                                        {x.value}
-                                    </div>
-                                    <div className="mt-1 text-[11px] opacity-80">
-                                        后续可接入实时监控数据源
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 group hover:border-blue-200 transition-all">
@@ -1602,47 +1440,82 @@ const CompanyDetails: React.FC = () => {
                                     招投标与资质披露活跃，公开招投标记录 52 条
                                 </p>
                             </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="p-4 border border-emerald-50 bg-emerald-50/20 rounded-2xl">
-                                    <h4 className="text-xs font-bold text-emerald-700 mb-2 italic">
-                                        产业链位置
-                                    </h4>
-                                    <p className="text-sm font-bold text-slate-800">
-                                        注册资本与治理结构
-                                    </p>
-                                    <p className="text-[10px] text-slate-400 mt-1">
-                                        注册资本 5000 万元，2
-                                        位股东，最大股东北京元子拓扑科技有限公司（97%）
-                                    </p>
-                                </div>
-                                <div className="p-4 border border-blue-50 bg-blue-50/20 rounded-2xl">
-                                    <h4 className="text-xs font-bold text-blue-700 mb-2 italic">
-                                        关联方认定（示意）
-                                    </h4>
-                                    <img
-                                        src={relatedPartyMapPng}
-                                        alt="北京智慧易科技有限公司关联方认定图（演示）"
-                                        className="w-full rounded-lg border border-blue-100 bg-white object-contain max-h-40"
-                                    />
-                                    <p className="text-[10px] text-slate-400 mt-2">
-                                        顺义区注册，人员规模少于 50 人；2025 年报参保 0
-                                        人
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="rounded-2xl border border-slate-100 bg-slate-50/80 p-3">
-                                <p className="text-xs font-bold text-slate-600 mb-2">
-                                    企业图谱（演示）
+                            <div className="p-4 border border-emerald-50 bg-emerald-50/20 rounded-2xl">
+                                <h4 className="text-xs font-bold text-emerald-700 mb-2 italic">
+                                    产业链位置
+                                </h4>
+                                <p className="text-sm font-bold text-slate-800">
+                                    注册资本与治理结构
                                 </p>
-                                <img
-                                    src={enterpriseMapPng}
-                                    alt="北京智慧易科技有限公司企业图谱"
-                                    className="w-full rounded-xl border border-slate-200 bg-white object-contain max-h-56"
-                                />
+                                <p className="text-[10px] text-slate-400 mt-1">
+                                    注册资本 5000 万元，2
+                                    位股东，最大股东北京元子拓扑科技有限公司（97%）
+                                </p>
                             </div>
                         </div>
                     </section>
                 </div>
+
+                <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
+                    <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+                        <div className="flex items-center gap-4 min-w-0">
+                            <div className="bg-sky-600 p-3 rounded-2xl text-white shadow-lg shadow-sky-100 shrink-0">
+                                <Network className="w-8 h-8" aria-hidden />
+                            </div>
+                            <div>
+                                <h2 className="text-xl font-bold text-slate-900">
+                                    关联方认定与企业图谱
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div className="rounded-2xl border border-blue-100 bg-blue-50/30 p-5">
+                            <h3 className="text-sm font-bold text-slate-800 mb-3">
+                                关联方认定
+                            </h3>
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setGraphImagePreview("relatedParty")
+                                }
+                                className="group relative w-full rounded-xl border border-blue-100 bg-white p-0 overflow-hidden text-left transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                aria-label="关联方认定图：点击放大预览"
+                            >
+                                <img
+                                    src={relatedPartyMapPng}
+                                    alt="北京智慧易科技有限公司关联方认定图（演示）"
+                                    className="block w-full object-contain max-h-[min(420px,55vh)] cursor-zoom-in"
+                                />
+                                <span className="pointer-events-none absolute bottom-2 right-2 rounded-md bg-slate-900/70 px-2 py-1 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100">
+                                    点击预览
+                                </span>
+                            </button>
+                        </div>
+                        <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-5">
+                            <h3 className="text-sm font-bold text-slate-800 mb-3">
+                                企业图谱
+                            </h3>
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setGraphImagePreview("enterprise")
+                                }
+                                className="group relative w-full rounded-xl border border-slate-200 bg-white p-0 overflow-hidden text-left transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+                                aria-label="企业图谱：点击放大预览"
+                            >
+                                <img
+                                    src={enterpriseMapPng}
+                                    alt="北京智慧易科技有限公司企业图谱"
+                                    className="block w-full object-contain max-h-[min(420px,55vh)] cursor-zoom-in"
+                                />
+                                <span className="pointer-events-none absolute bottom-2 right-2 rounded-md bg-slate-900/70 px-2 py-1 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100">
+                                    点击预览
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
 
                 <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
                     <div className="flex flex-col md:flex-row items-center gap-12">
@@ -1705,6 +1578,51 @@ const CompanyDetails: React.FC = () => {
                     </div>
                 </section>
             </div>
+
+            {graphImagePreview && (
+                <div
+                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
+                    role="presentation"
+                    onClick={() => setGraphImagePreview(null)}
+                >
+                    <div
+                        className="relative max-h-[92vh] max-w-[min(96vw,1400px)]"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label={
+                            graphImagePreview === "relatedParty"
+                                ? "关联方认定图预览"
+                                : "企业图谱预览"
+                        }
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            type="button"
+                            onClick={() => setGraphImagePreview(null)}
+                            className="absolute -right-1 -top-1 z-[1] rounded-full bg-white p-2 text-slate-700 shadow-lg ring-1 ring-slate-200 transition-colors hover:bg-slate-50 sm:-right-3 sm:-top-3"
+                            aria-label="关闭预览"
+                        >
+                            <X className="h-5 w-5" aria-hidden />
+                        </button>
+                        <img
+                            src={
+                                graphImagePreview === "relatedParty"
+                                    ? relatedPartyMapPng
+                                    : enterpriseMapPng
+                            }
+                            alt={
+                                graphImagePreview === "relatedParty"
+                                    ? "北京智慧易科技有限公司关联方认定图（预览）"
+                                    : "北京智慧易科技有限公司企业图谱（预览）"
+                            }
+                            className="max-h-[92vh] w-full rounded-lg object-contain shadow-2xl"
+                        />
+                        <p className="mt-2 text-center text-xs text-slate-300">
+                            按 Esc 或点击空白处关闭
+                        </p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

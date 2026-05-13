@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import * as echarts from "echarts";
-import { Badge } from "../components/ui/badge";
-import { IndustryAnalysisContent as IndustryAnalysis, IndustrySectionId } from "./IndustryAnalysis";
 import {
     MapPin,
     Building2,
@@ -34,17 +32,6 @@ type KnowledgeModuleId =
     | "creditPortrait"
     | "investmentTrace"
     | "tags";
-
-type MainDetailTab = "knowledge" | "industry" | "growth" | "patent" | "risk";
-
-const INDUSTRY_TABS: { id: IndustrySectionId; label: string }[] = [
-    { id: "overview", label: "产业概览" },
-    { id: "portrait", label: "产业画像" },
-    { id: "chain-enterprises", label: "链上企业" },
-    { id: "key-companies", label: "重点企业" },
-    { id: "chain-map", label: "产业链图谱" },
-    { id: "heatmap", label: "区域产业热力图" },
-];
 
 const KNOWLEDGE_NAV: {
     id: KnowledgeModuleId;
@@ -951,12 +938,8 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
 
 const SuzhouCompanyDetails: React.FC = () => {
     const radarRef = useRef<HTMLDivElement | null>(null);
-    const [mainDetailTab, setMainDetailTab] =
-        useState<MainDetailTab | null>("knowledge");
     const [activeKnowledgeModule, setActiveKnowledgeModule] =
         useState<KnowledgeModuleId>("judicial");
-    const [activeIndustrySection, setActiveIndustrySection] =
-        useState<IndustrySectionId>("overview");
 
     useEffect(() => {
         const el = radarRef.current;
@@ -1182,319 +1165,56 @@ const SuzhouCompanyDetails: React.FC = () => {
                     </div>
                 </section>
 
-                <section
-                    className="rounded-3xl border border-slate-200 bg-white px-4 py-3 sm:px-6"
-                    aria-label="详情模块导航"
-                >
-                    <div className="flex flex-wrap items-center gap-y-2">
-                        <div className="inline-flex flex-wrap items-center gap-1 rounded-full px-1.5 py-1.5">
-                            <button
-                                type="button"
-                                aria-expanded={mainDetailTab === "knowledge"}
-                                onClick={() =>
-                                    setMainDetailTab((prev) =>
-                                        prev === "knowledge"
-                                            ? null
-                                            : "knowledge"
-                                    )
-                                }
-                                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-bold transition-all sm:px-4 ${
-                                    mainDetailTab === "knowledge"
-                                        ? "border-indigo-200 bg-indigo-50 text-indigo-900 shadow-sm"
-                                        : "border-transparent text-slate-900 hover:bg-slate-50"
-                                }`}
-                            >
-                                <BrainCircuit
-                                    className="h-4 w-4 text-indigo-600 shrink-0"
-                                    aria-hidden
-                                />
-                                企业知识管理
-                            </button>
-                            {/* <button
-                                type="button"
-                                aria-expanded={mainDetailTab === "industry"}
-                                onClick={() =>
-                                    setMainDetailTab((prev) =>
-                                        prev === "industry" ? null : "industry"
-                                    )
-                                }
-                                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-bold transition-all sm:px-4 ${
-                                    mainDetailTab === "industry"
-                                        ? "border-emerald-200 bg-emerald-50 text-emerald-900 shadow-sm"
-                                        : "border-transparent text-slate-900 hover:bg-slate-50"
-                                }`}
-                            >
-                                <TrendingUp
-                                    className="h-4 w-4 text-emerald-600 shrink-0"
-                                    aria-hidden
-                                />
-                                产业分析
-                            </button> */}
-                            <button
-                                type="button"
-                                aria-expanded={mainDetailTab === "growth"}
-                                onClick={() =>
-                                    setMainDetailTab((prev) =>
-                                        prev === "growth" ? null : "growth"
-                                    )
-                                }
-                                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-bold transition-all sm:px-4 ${
-                                    mainDetailTab === "growth"
-                                        ? "border-fuchsia-200 bg-fuchsia-50 text-fuchsia-950 shadow-sm"
-                                        : "border-transparent text-slate-900 hover:bg-slate-50"
-                                }`}
-                            >
-                                <PieChart
-                                    className="h-4 w-4 text-fuchsia-600 shrink-0"
-                                    aria-hidden
-                                />
-                                企业发展
-                            </button>
-                            <button
-                                type="button"
-                                aria-expanded={mainDetailTab === "patent"}
-                                onClick={() =>
-                                    setMainDetailTab((prev) =>
-                                        prev === "patent" ? null : "patent"
-                                    )
-                                }
-                                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-bold transition-all sm:px-4 ${
-                                    mainDetailTab === "patent"
-                                        ? "border-violet-200 bg-violet-50 text-violet-900 shadow-sm"
-                                        : "border-transparent text-slate-900 hover:bg-slate-50"
-                                }`}
-                            >
-                                <FileText
-                                    className="h-4 w-4 text-violet-600 shrink-0"
-                                    aria-hidden
-                                />
-                                专利
-                            </button>
-                            <button
-                                type="button"
-                                aria-expanded={mainDetailTab === "risk"}
-                                onClick={() =>
-                                    setMainDetailTab((prev) =>
-                                        prev === "risk" ? null : "risk"
-                                    )
-                                }
-                                className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-bold transition-all sm:px-4 ${
-                                    mainDetailTab === "risk"
-                                        ? "border-rose-200 bg-rose-50 text-rose-950 shadow-sm"
-                                        : "border-transparent text-slate-900 hover:bg-slate-50"
-                                }`}
-                            >
-                                <Flame
-                                    className="h-4 w-4 text-rose-600 shrink-0"
-                                    aria-hidden
-                                />
-                                风险画像
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                {mainDetailTab === "knowledge" && (
-                    <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
-                        <nav
-                            className="mb-8 flex flex-wrap items-center gap-3"
-                            aria-label="企业知识子模块"
-                        >
-                            {KNOWLEDGE_NAV.map(({ id, chipLabel, Icon }) => {
-                                const isActive = activeKnowledgeModule === id;
-                                return (
-                                    <button
-                                        key={id}
-                                        type="button"
-                                        role="tab"
-                                        aria-selected={isActive}
-                                        onClick={() =>
-                                            setActiveKnowledgeModule(id)
-                                        }
-                                        className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
-                                            isActive
-                                                ? "border-indigo-300 bg-indigo-50 text-indigo-950 shadow-sm ring-1 ring-indigo-200/80"
-                                                : "border-[#e8eef4] bg-[#f8f9fb] text-[#334155] hover:border-slate-300 hover:bg-slate-100"
-                                        }`}
-                                    >
-                                        <Icon
-                                            className={`h-4 w-4 shrink-0 ${
-                                                isActive
-                                                    ? "text-indigo-600"
-                                                    : "text-slate-600"
-                                            }`}
-                                            aria-hidden
-                                        />
-                                        {chipLabel}
-                                    </button>
-                                );
-                            })}
-                        </nav>
-                        <div
-                            id="knowledge-module-panel"
-                            role="tabpanel"
-                            aria-label={
-                                KNOWLEDGE_NAV.find(
-                                    (m) => m.id === activeKnowledgeModule
-                                )?.chipLabel
-                            }
-                            className="scroll-mt-24 md:scroll-mt-28"
-                        >
-                            <KnowledgeModuleContent
-                                module={activeKnowledgeModule}
-                            />
-                        </div>
-                    </div>
-                )}
-
-                {mainDetailTab === "industry" && (
-                    <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
-                        <nav
-                            className="mb-8 flex flex-wrap items-center gap-3"
-                            aria-label="产业分析子模块"
-                        >
-                            {INDUSTRY_TABS.map(({ id, label }) => {
-                                const isActive = activeIndustrySection === id;
-                                return (
-                                    <button
-                                        key={id}
-                                        type="button"
-                                        role="tab"
-                                        aria-selected={isActive}
-                                        onClick={() =>
-                                            setActiveIndustrySection(id)
-                                        }
-                                        className={`inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
-                                            isActive
-                                                ? "border-emerald-300 bg-emerald-50 text-emerald-950 shadow-sm ring-1 ring-emerald-200/80"
-                                                : "border-[#e8eef4] bg-[#f8f9fb] text-[#334155] hover:border-slate-300 hover:bg-slate-100"
-                                        }`}
-                                    >
-                                        {label}
-                                    </button>
-                                );
-                            })}
-                        </nav>
-                        <div
-                            id="industry-module-panel"
-                            role="tabpanel"
-                            aria-label={
-                                INDUSTRY_TABS.find(
-                                    (tab) => tab.id === activeIndustrySection
-                                )?.label
-                            }
-                            className="scroll-mt-24 md:scroll-mt-28"
-                        >
-                            <IndustryAnalysis
-                                section={activeIndustrySection}
-                                hideHeader
-                            />
-                        </div>
-                    </div>
-                )}
-
-                {mainDetailTab === "growth" && (
-                    <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
-                        <div className="flex items-center gap-2 mb-5">
-                            <PieChart className="h-5 w-5 text-fuchsia-600" aria-hidden />
-                            <h2 className="font-semibold text-slate-900">企业发展</h2>
-                            <Badge variant="secondary" className="ml-2">
-                                成长趋势与经营概览
-                            </Badge>
-                        </div>
-                        <div className="grid sm:grid-cols-3 gap-4">
-                            {[
-                                { label: "成立年限", value: "6年", tone: "bg-white" },
-                                { label: "招投标次数", value: "23次", tone: "bg-white" },
-                                { label: "知识产权", value: "22件", tone: "bg-white" },
-                            ].map((x) => (
-                                <div
-                                    key={x.label}
-                                    className={`rounded-2xl border border-slate-200 p-4 ${x.tone}`}
+                <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
+                    <nav
+                        className="mb-8 flex flex-wrap items-center gap-3"
+                        aria-label="企业知识子模块"
+                    >
+                        {KNOWLEDGE_NAV.map(({ id, chipLabel, Icon }) => {
+                            const isActive = activeKnowledgeModule === id;
+                            return (
+                                <button
+                                    key={id}
+                                    type="button"
+                                    role="tab"
+                                    aria-selected={isActive}
+                                    onClick={() =>
+                                        setActiveKnowledgeModule(id)
+                                    }
+                                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+                                        isActive
+                                            ? "border-indigo-300 bg-indigo-50 text-indigo-950 shadow-sm ring-1 ring-indigo-200/80"
+                                            : "border-[#e8eef4] bg-[#f8f9fb] text-[#334155] hover:border-slate-300 hover:bg-slate-100"
+                                    }`}
                                 >
-                                    <div className="text-xs font-bold text-slate-400">
-                                        {x.label}
-                                    </div>
-                                    <div className="mt-2 text-2xl font-black text-slate-900">
-                                        {x.value}
-                                    </div>
-                                    <div className="mt-1 text-[11px] text-slate-500">
-                                        可扩展为营收/融资/团队规模等指标
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                    <Icon
+                                        className={`h-4 w-4 shrink-0 ${
+                                            isActive
+                                                ? "text-indigo-600"
+                                                : "text-slate-600"
+                                        }`}
+                                        aria-hidden
+                                    />
+                                    {chipLabel}
+                                </button>
+                            );
+                        })}
+                    </nav>
+                    <div
+                        id="knowledge-module-panel"
+                        role="tabpanel"
+                        aria-label={
+                            KNOWLEDGE_NAV.find(
+                                (m) => m.id === activeKnowledgeModule
+                            )?.chipLabel
+                        }
+                        className="scroll-mt-24 md:scroll-mt-28"
+                    >
+                        <KnowledgeModuleContent
+                            module={activeKnowledgeModule}
+                        />
                     </div>
-                )}
-
-                {mainDetailTab === "patent" && (
-                    <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
-                        <div className="flex items-center gap-2 mb-5">
-                            <FileText className="h-5 w-5 text-violet-600" aria-hidden />
-                            <h2 className="font-semibold text-slate-900">专利</h2>
-                            <Badge variant="secondary" className="ml-2">
-                                近期开源示例
-                            </Badge>
-                        </div>
-                        <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0">
-                                {[
-                                    { name: "车载系统数据同步方法", type: "发明", year: "2024" },
-                                    { name: "座舱交互异常检测装置", type: "实用新型", year: "2023" },
-                                    { name: "多屏联动渲染优化方案", type: "发明", year: "2022" },
-                                ].map((p) => (
-                                    <div
-                                        key={p.name}
-                                        className="p-4 border-t border-slate-200 sm:border-t-0 sm:border-l first:border-l-0"
-                                    >
-                                        <div className="text-sm font-semibold text-slate-900">
-                                            {p.name}
-                                        </div>
-                                        <div className="mt-2 flex items-center gap-2 text-xs text-slate-500">
-                                            <Badge variant="secondary">{p.type}</Badge>
-                                            <span>{p.year}</span>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                {mainDetailTab === "risk" && (
-                    <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
-                        <div className="flex items-center gap-2 mb-5">
-                            <Flame className="h-5 w-5 text-rose-600" aria-hidden />
-                            <h2 className="font-semibold text-slate-900">风险画像</h2>
-                            <Badge variant="secondary" className="ml-2">
-                                风险概览与预警
-                            </Badge>
-                        </div>
-                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                            {[
-                                { label: "司法风险", value: "低", color: "text-emerald-700 bg-emerald-50 border-emerald-100" },
-                                { label: "经营异常", value: "无", color: "text-emerald-700 bg-emerald-50 border-emerald-100" },
-                                { label: "行政处罚", value: "0", color: "text-slate-700 bg-slate-50 border-slate-200" },
-                                { label: "舆情预警", value: "关注", color: "text-amber-800 bg-amber-50 border-amber-100" },
-                            ].map((x) => (
-                                <div
-                                    key={x.label}
-                                    className={`rounded-2xl border p-4 ${x.color}`}
-                                >
-                                    <div className="text-xs font-bold opacity-80">
-                                        {x.label}
-                                    </div>
-                                    <div className="mt-2 text-2xl font-black">
-                                        {x.value}
-                                    </div>
-                                    <div className="mt-1 text-[11px] opacity-80">
-                                        后续可接入实时监控数据源
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 group hover:border-blue-200 transition-all">
