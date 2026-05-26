@@ -29,21 +29,39 @@ function Panel({
     title,
     tone,
     children,
+    compact,
 }: {
     title: string;
     tone: "blue" | "red";
     children: React.ReactNode;
+    compact?: boolean;
 }) {
     const head =
         tone === "blue"
             ? "bg-blue-600 text-white"
             : "bg-red-500 text-white";
     return (
-        <div className="rounded-lg border border-slate-200 overflow-hidden bg-white shadow-sm min-w-[200px] max-w-[280px]">
-            <div className={`px-3 py-1.5 text-xs font-bold ${head}`}>
+        <div
+            className={`rounded-lg border border-slate-200 overflow-hidden bg-white shadow-sm ${
+                compact
+                    ? "min-w-[7.5rem] max-w-[9.5rem]"
+                    : "min-w-[200px] max-w-[280px]"
+            }`}
+        >
+            <div
+                className={`font-bold ${head} ${
+                    compact ? "px-2 py-1 text-[9px] leading-tight" : "px-3 py-1.5 text-xs"
+                }`}
+            >
                 {title}
             </div>
-            <ul className="px-3 py-2 space-y-1.5 text-[11px] text-slate-700 leading-snug">
+            <ul
+                className={`text-slate-700 leading-snug ${
+                    compact
+                        ? "px-2 py-1.5 space-y-1 text-[9px]"
+                        : "px-3 py-2 space-y-1.5 text-[11px]"
+                }`}
+            >
                 {children}
             </ul>
         </div>
@@ -89,21 +107,37 @@ function ArrowDown({ label, tone }: { label: string; tone: "blue" | "red" }) {
     );
 }
 
-export function RelatedPartyGraph() {
+export function RelatedPartyGraph({ compact = false }: { compact?: boolean }) {
     return (
         <div
-            className="w-full overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm py-6 px-4"
+            className={`w-full ${
+                compact
+                    ? "py-2 px-1"
+                    : "overflow-x-auto rounded-xl border border-slate-200 shadow-sm py-6 px-4"
+            }`}
             role="img"
-            aria-label={`${TARGET}关联方认定图（演示数据）`}
+            aria-label={`${TARGET}关联方认定图`}
         >
-            <p className="text-center text-xs text-slate-500 mb-6">
-                关联方认定（数据依据企业信用决策报告 · 演示）
+            <p
+                className={`text-center text-slate-500 ${
+                    compact ? "text-[9px] mb-2" : "text-xs mb-6"
+                }`}
+            >
+                关联方认定（数据依据企业信用决策报告）
             </p>
 
-            <div className="flex flex-col items-center gap-1 min-w-[320px] mx-auto">
+            <div
+                className={`flex flex-col items-center mx-auto ${
+                    compact ? "gap-0.5" : "gap-1 min-w-[320px]"
+                }`}
+            >
                 {/* 上方：股东 / 母公司 */}
-                <div className="flex flex-wrap justify-center gap-3">
-                    <Panel title="母公司 / 控股股东" tone="blue">
+                <div
+                    className={`flex flex-wrap justify-center ${
+                        compact ? "gap-1.5" : "gap-3"
+                    }`}
+                >
+                    <Panel title="母公司 / 控股股东" tone="blue" compact={compact}>
                         {PARENT_HOLDERS.map((p) => (
                             <ListItem
                                 key={p.name}
@@ -112,7 +146,7 @@ export function RelatedPartyGraph() {
                             />
                         ))}
                     </Panel>
-                    <Panel title="董监高" tone="red">
+                    <Panel title="董监高" tone="red" compact={compact}>
                         {KEY_PERSONS.map((p) => (
                             <ListItem
                                 key={p.name}
@@ -129,11 +163,25 @@ export function RelatedPartyGraph() {
                 </div>
 
                 {/* 中心 */}
-                <div className="rounded-xl bg-blue-600 px-6 py-3 text-center shadow-lg max-w-md">
-                    <p className="text-sm sm:text-base font-bold text-white">
+                <div
+                    className={`rounded-xl bg-blue-600 text-center shadow-lg w-full ${
+                        compact
+                            ? "px-3 py-2 max-w-full"
+                            : "px-6 py-3 max-w-md"
+                    }`}
+                >
+                    <p
+                        className={`font-bold text-white leading-snug ${
+                            compact ? "text-[10px]" : "text-sm sm:text-base"
+                        }`}
+                    >
                         {TARGET}
                     </p>
-                    <p className="text-[10px] text-blue-100 mt-1">
+                    <p
+                        className={`text-blue-100 mt-0.5 ${
+                            compact ? "text-[8px]" : "text-[10px] mt-1"
+                        }`}
+                    >
                         实际控制人：关涛（表决权约 97%）
                     </p>
                 </div>
@@ -141,8 +189,12 @@ export function RelatedPartyGraph() {
                 <ArrowDown label="控制" tone="blue" />
 
                 {/* 下方：控制企业 */}
-                <div className="flex flex-wrap justify-center gap-3">
-                    <Panel title="控制企业" tone="blue">
+                <div
+                    className={`flex flex-wrap justify-center ${
+                        compact ? "gap-1.5" : "gap-3"
+                    }`}
+                >
+                    <Panel title="控制企业" tone="blue" compact={compact}>
                         {CONTROL_ENTERPRISES.map((p) => (
                             <ListItem
                                 key={p.name}
@@ -154,7 +206,13 @@ export function RelatedPartyGraph() {
                             />
                         ))}
                     </Panel>
-                    <Panel title="直接或间接持股 5% 及以上" tone="blue">
+                    <Panel
+                        title={
+                            compact ? "持股 5% 及以上" : "直接或间接持股 5% 及以上"
+                        }
+                        tone="blue"
+                        compact={compact}
+                    >
                         {INFLUENCE_ENTERPRISES.map((p) => (
                             <ListItem
                                 key={p.name}
@@ -166,8 +224,12 @@ export function RelatedPartyGraph() {
                 </div>
             </div>
 
-            <p className="text-center text-[9px] text-slate-400 mt-6">
-                蓝线：控制关系 · 红线：影响关系 · 由公开工商数据整理，仅供演示
+            <p
+                className={`text-center text-slate-400 ${
+                    compact ? "text-[8px] mt-2" : "text-[9px] mt-6"
+                }`}
+            >
+                蓝线：控制关系 · 红线：影响关系 · 由公开工商数据整理
             </p>
         </div>
     );

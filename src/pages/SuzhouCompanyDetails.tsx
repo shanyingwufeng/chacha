@@ -1291,7 +1291,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     </span>
                                 </p>
                                 <p className="text-[10px] text-red-500 font-bold mt-1">
-                                    招投标数据用于演示（按报告汇总）
+                                    招投标数据（按报告汇总）
                                 </p>
                             </div>
                             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
@@ -1398,9 +1398,6 @@ const SuzhouCompanyDetails: React.FC = () => {
                                         <p className="text-sm font-bold">
                                             合规记录（以公开信息为准）
                                         </p>
-                                        <p className="text-xs text-slate-400">
-                                            指标用于演示：请以公示信息为准
-                                        </p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
@@ -1421,7 +1418,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                             招投标活跃度（23条）
                                         </p>
                                         <p className="text-xs text-slate-400">
-                                            指标来自报告汇总（演示）
+                                            指标来自报告汇总
                                         </p>
                                     </div>
                                 </div>

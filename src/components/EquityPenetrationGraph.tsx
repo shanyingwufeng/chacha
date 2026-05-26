@@ -112,11 +112,8 @@ export function EquityPenetrationGraph() {
         <div
             className="w-full rounded-xl border border-slate-200 bg-white shadow-sm py-5 px-3 sm:px-5"
             role="img"
-            aria-label={`${TARGET}股权穿透图谱（演示数据）`}
+            aria-label={`${TARGET}股权穿透图谱`}
         >
-            <p className="text-center text-xs text-slate-500 mb-5">
-                股权穿透（数据依据企业信用决策报告 · 演示）
-            </p>
 
             <div className="flex flex-col items-center gap-0 max-w-4xl mx-auto">
                 {/* 上游股东 */}
@@ -206,10 +203,6 @@ export function EquityPenetrationGraph() {
                     ))}
                 </div>
             </div>
-
-            <p className="text-center text-[9px] text-slate-400 mt-5 leading-relaxed">
-                上图由公开工商与报告数据整理生成，仅供演示，不构成投资建议
-            </p>
         </div>
     );
 }

@@ -149,20 +149,36 @@ const toneStyles = {
     },
 } as const;
 
-function BranchCard({ branch }: { branch: BranchItem }) {
+function BranchCard({
+    branch,
+    compact,
+}: {
+    branch: BranchItem;
+    compact?: boolean;
+}) {
     const s = toneStyles[branch.tone];
     return (
         <div
             className={`rounded-lg border ${s.border} ${s.bg} overflow-hidden text-left shadow-sm`}
         >
-            <div className={`px-2.5 py-1 text-[10px] font-bold ${s.head}`}>
+            <div
+                className={`font-bold ${s.head} ${
+                    compact ? "px-1.5 py-0.5 text-[8px]" : "px-2.5 py-1 text-[10px]"
+                }`}
+            >
                 {branch.category}
             </div>
-            <ul className="px-2.5 py-2 space-y-1.5">
+            <ul
+                className={
+                    compact ? "px-1.5 py-1 space-y-0.5" : "px-2.5 py-2 space-y-1.5"
+                }
+            >
                 {branch.items.map((item) => (
                     <li
                         key={`${branch.category}-${item.primary}`}
-                        className="text-[10px] leading-snug"
+                        className={
+                            compact ? "text-[8px] leading-tight" : "text-[10px] leading-snug"
+                        }
                     >
                         <span className="font-semibold text-slate-900">
                             {item.primary}
@@ -195,50 +211,86 @@ function Connector({ side }: { side: "left" | "right" }) {
     );
 }
 
-export function EnterpriseGraph() {
+export function EnterpriseGraph({ compact = false }: { compact?: boolean }) {
     return (
         <div
-            className="w-full overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm py-5 px-3 sm:px-4"
+            className={`w-full ${
+                compact
+                    ? "py-2 px-1"
+                    : "overflow-x-auto rounded-xl border border-slate-200 shadow-sm py-5 px-3 sm:px-4"
+            }`}
             role="img"
-            aria-label={`${TARGET}企业图谱（演示数据）`}
+            aria-label={`${TARGET}企业图谱`}
         >
-            <p className="text-center text-xs text-slate-500 mb-4">
-                企业图谱（数据依据企业信用决策报告 · 演示）
+            <p
+                className={`text-center text-slate-500 ${
+                    compact ? "text-[9px] mb-2" : "text-xs mb-4"
+                }`}
+            >
+                企业图谱（数据依据企业信用决策报告）
             </p>
 
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-4 lg:gap-3 items-start min-w-[640px]">
-                <div className="space-y-2 lg:pr-2">
+            <div
+                className={`grid items-start min-w-0 ${
+                    compact
+                        ? "grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-1.5"
+                        : "grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-4 lg:gap-3 min-w-[640px]"
+                }`}
+            >
+                <div className={compact ? "space-y-1" : "space-y-2 lg:pr-2"}>
                     {LEFT_BRANCHES.map((b) => (
                         <div key={b.category} className="relative">
-                            <BranchCard branch={b} />
-                            <Connector side="left" />
+                            <BranchCard branch={b} compact={compact} />
+                            {!compact && <Connector side="left" />}
                         </div>
                     ))}
                 </div>
 
-                <div className="flex items-center justify-center py-4 lg:py-8 lg:sticky lg:top-4">
-                    <div className="relative rounded-xl bg-blue-600 px-4 py-4 sm:px-6 text-center shadow-lg max-w-[220px]">
-                        <p className="text-sm font-bold text-white leading-snug">
+                <div
+                    className={`flex items-center justify-center ${
+                        compact ? "py-1 sm:py-2" : "py-4 lg:py-8 lg:sticky lg:top-4"
+                    }`}
+                >
+                    <div
+                        className={`relative rounded-xl bg-blue-600 text-center shadow-lg w-full ${
+                            compact
+                                ? "px-2 py-2 max-w-full sm:max-w-[9rem]"
+                                : "px-4 py-4 sm:px-6 max-w-[220px]"
+                        }`}
+                    >
+                        <p
+                            className={`font-bold text-white leading-snug ${
+                                compact ? "text-[9px]" : "text-sm"
+                            }`}
+                        >
                             {TARGET}
                         </p>
-                        <p className="text-[10px] text-blue-100 mt-2">
+                        <p
+                            className={`text-blue-100 ${
+                                compact ? "text-[7px] mt-0.5" : "text-[10px] mt-2"
+                            }`}
+                        >
                             科学研究和技术服务业
                         </p>
                     </div>
                 </div>
 
-                <div className="space-y-2 lg:pl-2">
+                <div className={compact ? "space-y-1" : "space-y-2 lg:pl-2"}>
                     {RIGHT_BRANCHES.map((b) => (
                         <div key={b.category} className="relative">
-                            <Connector side="right" />
-                            <BranchCard branch={b} />
+                            {!compact && <Connector side="right" />}
+                            <BranchCard branch={b} compact={compact} />
                         </div>
                     ))}
                 </div>
             </div>
 
-            <p className="text-center text-[9px] text-slate-400 mt-4">
-                左：控制与经营扩展 · 右：治理与股权 · 由公开数据整理，仅供演示
+            <p
+                className={`text-center text-slate-400 ${
+                    compact ? "text-[8px] mt-2" : "text-[9px] mt-4"
+                }`}
+            >
+                左：控制与经营扩展 · 右：治理与股权 · 由公开数据整理
             </p>
         </div>
     );

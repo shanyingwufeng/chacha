@@ -1477,8 +1477,8 @@ const CompanyDetails: React.FC = () => {
                                 className="group relative w-full rounded-xl border border-blue-100 bg-white p-0 overflow-hidden text-left transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 cursor-zoom-in"
                                 aria-label="关联方认定图：点击放大预览"
                             >
-                                <div className="pointer-events-none max-h-[min(420px,55vh)] overflow-hidden">
-                                    <RelatedPartyGraph />
+                                <div className="pointer-events-none w-full overflow-visible">
+                                    <RelatedPartyGraph compact />
                                 </div>
                                 <span className="pointer-events-none absolute bottom-2 right-2 rounded-md bg-slate-900/70 px-2 py-1 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100">
                                     点击预览
@@ -1497,8 +1497,8 @@ const CompanyDetails: React.FC = () => {
                                 className="group relative w-full rounded-xl border border-slate-200 bg-white p-0 overflow-hidden text-left transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 cursor-zoom-in"
                                 aria-label="企业图谱：点击放大预览"
                             >
-                                <div className="pointer-events-none max-h-[min(420px,55vh)] overflow-auto">
-                                    <EnterpriseGraph />
+                                <div className="pointer-events-none w-full overflow-visible">
+                                    <EnterpriseGraph compact />
                                 </div>
                                 <span className="pointer-events-none absolute bottom-2 right-2 rounded-md bg-slate-900/70 px-2 py-1 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100">
                                     点击预览
@@ -1595,7 +1595,7 @@ const CompanyDetails: React.FC = () => {
                         >
                             <X className="h-5 w-5" aria-hidden />
                         </button>
-                        <div className="max-h-[92vh] w-full min-w-[min(96vw,900px)] overflow-auto rounded-lg bg-white shadow-2xl">
+                        <div className="max-h-[92vh] w-full min-w-[min(96vw,960px)] overflow-auto rounded-lg bg-white shadow-2xl p-2 sm:p-4">
                             {graphImagePreview === "relatedParty" ? (
                                 <RelatedPartyGraph />
                             ) : (
