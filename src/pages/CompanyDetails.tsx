@@ -24,9 +24,9 @@ import {
     CircleDollarSign,
     X,
 } from "lucide-react";
-import equityPenetrationMap from "../assets/北京智慧易科技有限公司-股权穿透图谱.png";
-import enterpriseMapPng from "../assets/北京智慧易科技有限公司-企业图谱.png";
-import relatedPartyMapPng from "../assets/北京智慧易科技有限公司-关联方认定图.png";
+import { EquityPenetrationGraph } from "../components/EquityPenetrationGraph";
+import { RelatedPartyGraph } from "../components/RelatedPartyGraph";
+import { EnterpriseGraph } from "../components/EnterpriseGraph";
 
 type KnowledgeModuleId =
     | "judicial"
@@ -99,15 +99,10 @@ function RelationGraphSurface({ children }: { children: React.ReactNode }) {
     );
 }
 
-/** 演示数据：股权穿透以报告附图为准（见 assets） */
 function SimpleEquityPenetrationGraph() {
     return (
         <RelationGraphSurface>
-            <img
-                src={equityPenetrationMap}
-                alt="北京智慧易科技有限公司股权穿透图谱（演示）"
-                className="max-w-full max-h-[min(520px,70vh)] w-auto h-auto object-contain rounded-xl border border-slate-200 shadow-sm bg-white"
-            />
+            <EquityPenetrationGraph />
         </RelationGraphSurface>
     );
 }
@@ -1479,14 +1474,12 @@ const CompanyDetails: React.FC = () => {
                                 onClick={() =>
                                     setGraphImagePreview("relatedParty")
                                 }
-                                className="group relative w-full rounded-xl border border-blue-100 bg-white p-0 overflow-hidden text-left transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                className="group relative w-full rounded-xl border border-blue-100 bg-white p-0 overflow-hidden text-left transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 cursor-zoom-in"
                                 aria-label="关联方认定图：点击放大预览"
                             >
-                                <img
-                                    src={relatedPartyMapPng}
-                                    alt="北京智慧易科技有限公司关联方认定图（演示）"
-                                    className="block w-full object-contain max-h-[min(420px,55vh)] cursor-zoom-in"
-                                />
+                                <div className="pointer-events-none max-h-[min(420px,55vh)] overflow-hidden">
+                                    <RelatedPartyGraph />
+                                </div>
                                 <span className="pointer-events-none absolute bottom-2 right-2 rounded-md bg-slate-900/70 px-2 py-1 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100">
                                     点击预览
                                 </span>
@@ -1501,14 +1494,12 @@ const CompanyDetails: React.FC = () => {
                                 onClick={() =>
                                     setGraphImagePreview("enterprise")
                                 }
-                                className="group relative w-full rounded-xl border border-slate-200 bg-white p-0 overflow-hidden text-left transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+                                className="group relative w-full rounded-xl border border-slate-200 bg-white p-0 overflow-hidden text-left transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 cursor-zoom-in"
                                 aria-label="企业图谱：点击放大预览"
                             >
-                                <img
-                                    src={enterpriseMapPng}
-                                    alt="北京智慧易科技有限公司企业图谱"
-                                    className="block w-full object-contain max-h-[min(420px,55vh)] cursor-zoom-in"
-                                />
+                                <div className="pointer-events-none max-h-[min(420px,55vh)] overflow-auto">
+                                    <EnterpriseGraph />
+                                </div>
                                 <span className="pointer-events-none absolute bottom-2 right-2 rounded-md bg-slate-900/70 px-2 py-1 text-[10px] font-medium text-white opacity-0 transition-opacity group-hover:opacity-100">
                                     点击预览
                                 </span>
@@ -1604,19 +1595,13 @@ const CompanyDetails: React.FC = () => {
                         >
                             <X className="h-5 w-5" aria-hidden />
                         </button>
-                        <img
-                            src={
-                                graphImagePreview === "relatedParty"
-                                    ? relatedPartyMapPng
-                                    : enterpriseMapPng
-                            }
-                            alt={
-                                graphImagePreview === "relatedParty"
-                                    ? "北京智慧易科技有限公司关联方认定图（预览）"
-                                    : "北京智慧易科技有限公司企业图谱（预览）"
-                            }
-                            className="max-h-[92vh] w-full rounded-lg object-contain shadow-2xl"
-                        />
+                        <div className="max-h-[92vh] w-full min-w-[min(96vw,900px)] overflow-auto rounded-lg bg-white shadow-2xl">
+                            {graphImagePreview === "relatedParty" ? (
+                                <RelatedPartyGraph />
+                            ) : (
+                                <EnterpriseGraph />
+                            )}
+                        </div>
                         <p className="mt-2 text-center text-xs text-slate-300">
                             按 Esc 或点击空白处关闭
                         </p>
