@@ -3,6 +3,7 @@ import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { Search } from "lucide-react";
 import Home from "./pages/Home";
 import SearchResults from "./pages/SearchResults";
+import AdvancedSearch from "./pages/AdvancedSearch";
 import CompanyDetails from "./pages/CompanyDetails";
 import SuzhouCompanyDetails from "./pages/SuzhouCompanyDetails";
 import DetailsEntry from "./pages/DetailsEntry";
@@ -81,6 +82,10 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/results" element={<SearchResults />} />
+                    <Route
+                        path="/advanced-search"
+                        element={<AdvancedSearch />}
+                    />
                     <Route path="/details" element={<DetailsEntry />} />
                     <Route
                         path="/details-suzhou"

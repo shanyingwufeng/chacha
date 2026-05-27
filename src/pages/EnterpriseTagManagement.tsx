@@ -3,6 +3,10 @@ import { Tags, Sparkles, RotateCcw, Building2, MapPin } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
+import {
+  ENTERPRISE_TAG_INDUSTRIES as INDUSTRIES,
+  TECH_CERTS_OPTIONS,
+} from '../constants/enterpriseFilters';
 
 type CompanyRecord = {
   id: string;
@@ -283,26 +287,6 @@ const MOCK_COMPANIES: CompanyRecord[] = [
     email: 'ir@haisheng-mat.example',
     website: 'https://haisheng-mat.example',
   },
-];
-
-const INDUSTRIES = [
-  '软件和信息技术服务业',
-  '制造业',
-  '互联网和相关服务',
-  '电气机械和器材制造业',
-  '农、林、牧、渔专业及辅助性活动',
-  '卫生和社会工作',
-  '交通运输、仓储和邮政业',
-  '化学原料和化学制品制造业',
-] as const;
-
-const TECH_CERTS_OPTIONS = [
-  '高新技术企业',
-  '科技型中小企业',
-  '专精特新小巨人',
-  '专精特新中小企业',
-  '省级企业技术中心',
-  '创新型中小企业',
 ];
 
 const INITIAL_FILTERS = {

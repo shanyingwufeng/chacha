@@ -172,6 +172,7 @@ const Home: React.FC = () => {
                                     type="button"
                                     variant="outline"
                                     className="h-12 shrink-0 px-6 rounded-2xl border-slate-200 bg-slate-50 text-slate-700 text-base font-medium hover:bg-slate-100 hover:text-slate-900 shadow-none"
+                                    onClick={() => navigate("/advanced-search")}
                                 >
                                     高级搜索
                                 </Button>
