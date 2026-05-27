@@ -37,9 +37,7 @@ function Panel({
     compact?: boolean;
 }) {
     const head =
-        tone === "blue"
-            ? "bg-blue-600 text-white"
-            : "bg-red-500 text-white";
+        tone === "blue" ? "bg-blue-600 text-white" : "bg-red-500 text-white";
     return (
         <div
             className={`rounded-lg border border-slate-200 overflow-hidden bg-white shadow-sm ${
@@ -50,7 +48,9 @@ function Panel({
         >
             <div
                 className={`font-bold ${head} ${
-                    compact ? "px-2 py-1 text-[9px] leading-tight" : "px-3 py-1.5 text-xs"
+                    compact
+                        ? "px-2 py-1 text-[9px] leading-tight"
+                        : "px-3 py-1.5 text-xs"
                 }`}
             >
                 {title}
@@ -123,7 +123,7 @@ export function RelatedPartyGraph({ compact = false }: { compact?: boolean }) {
                     compact ? "text-[9px] mb-2" : "text-xs mb-6"
                 }`}
             >
-                关联方认定（数据依据企业信用决策报告）
+                关联方认定
             </p>
 
             <div
@@ -137,7 +137,11 @@ export function RelatedPartyGraph({ compact = false }: { compact?: boolean }) {
                         compact ? "gap-1.5" : "gap-3"
                     }`}
                 >
-                    <Panel title="母公司 / 控股股东" tone="blue" compact={compact}>
+                    <Panel
+                        title="母公司 / 控股股东"
+                        tone="blue"
+                        compact={compact}
+                    >
                         {PARENT_HOLDERS.map((p) => (
                             <ListItem
                                 key={p.name}
@@ -165,9 +169,7 @@ export function RelatedPartyGraph({ compact = false }: { compact?: boolean }) {
                 {/* 中心 */}
                 <div
                     className={`rounded-xl bg-blue-600 text-center shadow-lg w-full ${
-                        compact
-                            ? "px-3 py-2 max-w-full"
-                            : "px-6 py-3 max-w-md"
+                        compact ? "px-3 py-2 max-w-full" : "px-6 py-3 max-w-md"
                     }`}
                 >
                     <p
@@ -200,15 +202,15 @@ export function RelatedPartyGraph({ compact = false }: { compact?: boolean }) {
                                 key={p.name}
                                 name={p.name}
                                 meta={p.pct}
-                                tag={
-                                    p.status === "注销" ? "注销" : undefined
-                                }
+                                tag={p.status === "注销" ? "注销" : undefined}
                             />
                         ))}
                     </Panel>
                     <Panel
                         title={
-                            compact ? "持股 5% 及以上" : "直接或间接持股 5% 及以上"
+                            compact
+                                ? "持股 5% 及以上"
+                                : "直接或间接持股 5% 及以上"
                         }
                         tone="blue"
                         compact={compact}
@@ -229,7 +231,7 @@ export function RelatedPartyGraph({ compact = false }: { compact?: boolean }) {
                     compact ? "text-[8px] mt-2" : "text-[9px] mt-6"
                 }`}
             >
-                蓝线：控制关系 · 红线：影响关系 · 由公开工商数据整理
+                蓝线：控制关系 · 红线：影响关系
             </p>
         </div>
     );

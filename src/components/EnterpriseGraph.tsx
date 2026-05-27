@@ -227,7 +227,7 @@ export function EnterpriseGraph({ compact = false }: { compact?: boolean }) {
                     compact ? "text-[9px] mb-2" : "text-xs mb-4"
                 }`}
             >
-                企业图谱（数据依据企业信用决策报告）
+                企业图谱
             </p>
 
             <div
@@ -290,7 +290,7 @@ export function EnterpriseGraph({ compact = false }: { compact?: boolean }) {
                     compact ? "text-[8px] mt-2" : "text-[9px] mt-4"
                 }`}
             >
-                左：控制与经营扩展 · 右：治理与股权 · 由公开数据整理
+                左：控制与经营扩展 · 右：治理与股权
             </p>
         </div>
     );
