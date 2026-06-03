@@ -31,7 +31,7 @@ const EChartPanel: React.FC<EChartPanelProps> = ({ option, className }) => {
     return <div ref={containerRef} className={className ?? "h-72 w-full"} />;
 };
 
-const CATEGORY_COLORS = ["#38bdf8", "#6366f1", "#22c55e", "#f59e0b", "#f472b6"];
+const CATEGORY_COLORS = ["#fb923c", "#ea580c", "#22c55e", "#f59e0b", "#f472b6"];
 
 export const RegionalIndustryHeatmap: React.FC = () => {
     const heatmapMax = useMemo(
@@ -77,7 +77,7 @@ export const RegionalIndustryHeatmap: React.FC = () => {
                 left: "center",
                 bottom: 8,
                 inRange: {
-                    color: ["#f8fafc", "#bae6fd", "#38bdf8", "#0284c7", "#075985"],
+                    color: ["#f8fafc", "#bae6fd", "#fb923c", "#c2410c", "#075985"],
                 },
                 text: ["高", "低"],
                 textStyle: { fontSize: 11, color: "#64748b" },
@@ -88,7 +88,7 @@ export const RegionalIndustryHeatmap: React.FC = () => {
                     label: {
                         show: true,
                         fontSize: 11,
-                        color: "#334155",
+                        color: "#f1f5f9",
                         formatter: (p) => {
                             const raw = Array.isArray(p.value) ? p.value[2] : 0;
                             const value = typeof raw === "number" ? raw : 0;
@@ -154,7 +154,7 @@ export const RegionalIndustryHeatmap: React.FC = () => {
         <div className="space-y-5">
             <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
                 <span>产业节点合计 {NODE_GRAND_TOTAL} 个</span>
-                <span className="text-slate-300">|</span>
+                <span className="text-slate-700">|</span>
                 <span>省级数据归纳为大区展示</span>
             </div>
 
@@ -179,12 +179,12 @@ export const RegionalIndustryHeatmap: React.FC = () => {
             <div className="grid lg:grid-cols-2 gap-4">
                 <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4">
                     <h3 className="text-sm font-medium text-slate-700 mb-1">大区 × 节点热力</h3>
-                    <p className="text-xs text-slate-400 mb-3">颜色越深表示节点数量越多</p>
+                    <p className="text-xs text-slate-600 mb-3">颜色越深表示节点数量越多</p>
                     <EChartPanel option={heatmapOption} className="h-80 w-full" />
                 </div>
                 <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-4">
                     <h3 className="text-sm font-medium text-slate-700 mb-1">大区节点构成</h3>
-                    <p className="text-xs text-slate-400 mb-3">五类节点在各区域的堆叠分布</p>
+                    <p className="text-xs text-slate-600 mb-3">五类节点在各区域的堆叠分布</p>
                     <EChartPanel option={stackedBarOption} className="h-80 w-full" />
                 </div>
             </div>

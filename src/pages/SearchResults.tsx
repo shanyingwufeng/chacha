@@ -4,6 +4,7 @@ import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { useNavigate } from 'react-router-dom';
+import { XINHEYIJIA_FULL, XINHEYIJIA_PROFILE } from '../data/xinheyijiaCompanyProfile';
 
 const SearchResults: React.FC = () => {
   const navigate = useNavigate();
@@ -18,14 +19,14 @@ const SearchResults: React.FC = () => {
   const companies = [
     {
       id: 1,
-      name: '北京智慧易科技有限公司',
-      rep: '关涛',
-      capital: '5000万人民币',
-      date: '2020-06-18',
-      status: '存续',
-      address: '北京市顺义区军营南街10号院1幢1-6层3104室（科技创新功能区）',
-      tags: ['科学研究和技术服务业', '软件开发', '人工智能应用', '信息系统集成'],
-      riskCount: 1
+      name: XINHEYIJIA_FULL,
+      rep: XINHEYIJIA_PROFILE.legalRepresentative,
+      capital: XINHEYIJIA_PROFILE.regCapital,
+      date: XINHEYIJIA_PROFILE.foundedDate,
+      status: XINHEYIJIA_PROFILE.status,
+      address: XINHEYIJIA_PROFILE.regAddress,
+      tags: [...XINHEYIJIA_PROFILE.techCertifications].slice(0, 4),
+      riskCount: 0
     },
     {
       id: 2,
@@ -68,7 +69,7 @@ const SearchResults: React.FC = () => {
       <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-            搜索结果: <span className="text-indigo-600">"智慧易"</span>
+            搜索结果: <span className="text-orange-500">"江苏鑫合易家"</span>
             <span className="text-sm font-normal text-slate-500 ml-2">找到约 36 条相关企业</span>
           </h1>
         </div>
@@ -85,17 +86,17 @@ const SearchResults: React.FC = () => {
       <div className="grid lg:grid-cols-4 gap-8">
         {/* Sidebar Filters */}
         <aside className="space-y-6">
-          <div className="bg-white rounded-xl border border-slate-200 p-5 space-y-6 sticky top-24">
+          <div className="bg-card rounded-xl border border-slate-200 p-5 space-y-6 sticky top-24">
             <div>
               <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-indigo-600" /> 省份地区
+                <MapPin className="w-4 h-4 text-orange-500" /> 省份地区
               </h3>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 {['浙江省', '上海市', '北京市', '广东省', '江苏省', '山东省'].map(area => (
                   <button 
                     key={area}
                     onClick={() => toggleFilter(area)}
-                    className={`px-2 py-1.5 rounded border text-left transition-colors ${activeFilters.includes(area) ? 'bg-indigo-50 border-indigo-500 text-indigo-700' : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-indigo-300'}`}
+                    className={`px-2 py-1.5 rounded border text-left transition-colors ${activeFilters.includes(area) ? 'bg-orange-500/10 border-orange-500 text-orange-600' : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-orange-600'}`}
                   >
                     {area}
                   </button>
@@ -105,13 +106,13 @@ const SearchResults: React.FC = () => {
 
             <div>
               <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <Building className="w-4 h-4 text-indigo-600" /> 行业分类
+                <Building className="w-4 h-4 text-orange-500" /> 行业分类
               </h3>
               <div className="space-y-2 text-xs">
                 {['信息传输、软件和信息技术服务业', '批发和零售业', '租赁和商务服务业', '科学研究和技术服务业'].map(industry => (
                   <div key={industry} className="flex items-center gap-2">
-                    <input type="checkbox" id={industry} className="rounded text-indigo-600 focus:ring-indigo-500" />
-                    <label htmlFor={industry} className="text-slate-600 cursor-pointer hover:text-indigo-600">{industry}</label>
+                    <input type="checkbox" id={industry} className="rounded text-orange-500 focus:ring-ring" />
+                    <label htmlFor={industry} className="text-slate-600 cursor-pointer hover:text-orange-500">{industry}</label>
                   </div>
                 ))}
               </div>
@@ -119,20 +120,20 @@ const SearchResults: React.FC = () => {
 
             <div>
               <h3 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-indigo-600" /> 成立年限
+                <Calendar className="w-4 h-4 text-orange-500" /> 成立年限
               </h3>
               <div className="space-y-2 text-xs">
                 {['1年以内', '1-5年', '5-10年', '10年以上'].map(year => (
                   <div key={year} className="flex items-center gap-2">
-                    <input type="checkbox" id={year} className="rounded text-indigo-600 focus:ring-indigo-500" />
+                    <input type="checkbox" id={year} className="rounded text-orange-500 focus:ring-ring" />
                     <label htmlFor={year} className="text-slate-600 cursor-pointer">{year}</label>
                   </div>
                 ))}
               </div>
             </div>
 
-            <Button className="w-full bg-indigo-600 hover:bg-indigo-700">确定筛选</Button>
-            <Button variant="ghost" className="w-full text-xs text-slate-400">重置所有筛选项</Button>
+            <Button className="w-full bg-orange-500 hover:bg-orange-600">确定筛选</Button>
+            <Button variant="ghost" className="w-full text-xs text-slate-600">重置所有筛选项</Button>
           </div>
         </aside>
 
@@ -145,7 +146,7 @@ const SearchResults: React.FC = () => {
                   <div className="flex items-center gap-3 mb-2">
                     <h2 
                       onClick={() => navigate('/details')}
-                      className="text-lg font-bold text-slate-900 group-hover:text-indigo-600 cursor-pointer transition-colors"
+                      className="text-lg font-bold text-slate-900 group-hover:text-orange-500 cursor-pointer transition-colors"
                     >
                       {company.name}
                     </h2>
@@ -159,19 +160,19 @@ const SearchResults: React.FC = () => {
                   
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-y-2 gap-x-6 text-sm">
                     <div className="flex flex-col">
-                      <span className="text-slate-400 text-xs">法定代表人</span>
-                      <span className="text-indigo-600 font-medium cursor-pointer hover:underline">{company.rep}</span>
+                      <span className="text-slate-600 text-xs">法定代表人</span>
+                      <span className="text-orange-500 font-medium cursor-pointer hover:underline">{company.rep}</span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-slate-400 text-xs">注册资本</span>
+                      <span className="text-slate-600 text-xs">注册资本</span>
                       <span className="text-slate-900">{company.capital}</span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-slate-400 text-xs">成立日期</span>
+                      <span className="text-slate-600 text-xs">成立日期</span>
                       <span className="text-slate-900">{company.date}</span>
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-slate-400 text-xs">所在地区</span>
+                      <span className="text-slate-600 text-xs">所在地区</span>
                       <span className="text-slate-900 truncate">{company.address.split(' ')[0]}</span>
                     </div>
                   </div>
@@ -189,7 +190,7 @@ const SearchResults: React.FC = () => {
                     {tag}
                   </span>
                 ))}
-                <div className="ml-auto text-xs text-slate-400 flex items-center gap-1">
+                <div className="ml-auto text-xs text-slate-600 flex items-center gap-1">
                   <MapPin className="w-3 h-3" /> {company.address}
                 </div>
               </div>
@@ -200,10 +201,10 @@ const SearchResults: React.FC = () => {
           <div className="flex justify-center pt-8">
             <nav className="flex items-center gap-1">
               <Button variant="outline" size="sm" disabled>上一页</Button>
-              <Button size="sm" className="bg-indigo-600">1</Button>
+              <Button size="sm" className="bg-orange-500">1</Button>
               <Button variant="outline" size="sm">2</Button>
               <Button variant="outline" size="sm">3</Button>
-              <span className="px-2 text-slate-400">...</span>
+              <span className="px-2 text-slate-600">...</span>
               <Button variant="outline" size="sm">50</Button>
               <Button variant="outline" size="sm">下一页</Button>
             </nav>

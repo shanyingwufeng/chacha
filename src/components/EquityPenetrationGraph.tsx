@@ -1,210 +1,91 @@
 import React from "react";
+import { XINHEYIJIA_FULL, XINHEYIJIA_PROFILE } from "../data/xinheyijiaCompanyProfile";
 
-const TARGET = "北京智慧易科技有限公司";
+const TARGET = XINHEYIJIA_FULL;
 
-type UpstreamNode = {
-    name: string;
-    pct: string;
-    person?: boolean;
-    role?: string;
-    muted?: boolean;
-};
+const SHAREHOLDER = XINHEYIJIA_PROFILE.shareholder;
 
-const YUANZI_UPSTREAM: UpstreamNode[] = [
-    { name: "关涛", pct: "45.01%", role: "实际控制人", person: true },
-    { name: "北京元拓企业管理中心（有限合伙）", pct: "10.28%" },
-    { name: "杭州阿米巴博远创业投资合伙企业（有限合伙）", pct: "9.99%" },
-    { name: "北京海淀开元企业管理中心（有限合伙）", pct: "8.12%" },
-    { name: "其余机构股东", pct: "等6家", muted: true },
-];
-
-const YINGTAN_UPSTREAM: UpstreamNode[] = [
-    { name: "陈凤珍", pct: "90%", person: true },
-    { name: "陈国文", pct: "10%", person: true },
-];
-
-const DIRECT_SHAREHOLDERS = [
-    { name: "北京元子拓扑科技有限公司", pct: "97.00%" },
-    { name: "鹰潭鼎创投资咨询（有限合伙）", pct: "3.00%" },
-] as const;
-
-const SUBSIDIARIES = [
-    { name: "东莞市知慧易科技有限责任公司", pct: "100%", status: "存续" as const },
-    { name: "海南智慧易科技有限公司", pct: "100%", status: "注销" as const },
-] as const;
+const INVESTMENTS = XINHEYIJIA_PROFILE.investments;
 
 function NodeCard({
     name,
     sub,
     variant = "company",
     badge,
-    className = "",
 }: {
     name: string;
     sub?: string;
-    variant?: "person" | "company" | "target" | "muted";
+    variant?: "company" | "person" | "target" | "muted";
     badge?: string;
-    className?: string;
 }) {
     const styles = {
         person: "border-red-300 bg-red-50 text-slate-900",
-        company: "border-blue-200 bg-white text-slate-900",
-        target: "border-blue-700 bg-blue-600 text-white shadow-md",
+        company: "border-orange-200 bg-white text-slate-900",
+        target: "border-orange-600 bg-orange-500 text-white shadow-md",
         muted: "border-slate-200 bg-slate-50 text-slate-600",
-    }[variant];
-
-    const subClass =
-        variant === "target" ? "text-blue-100" : "text-slate-500";
-
+    };
     return (
         <div
-            className={`relative rounded-lg border px-3 py-2.5 text-center min-w-[7.5rem] max-w-[11rem] ${styles} ${className}`}
-            title={name}
+            className={`relative rounded-xl border px-3 py-2 text-center min-w-[100px] max-w-[160px] ${styles[variant]}`}
         >
             {badge && (
-                <span className="absolute -top-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-red-600 px-1.5 py-0.5 text-[9px] font-bold text-white shadow-sm">
+                <span className="absolute -top-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-orange-100 px-1.5 py-0.5 text-[9px] font-bold text-orange-700">
                     {badge}
                 </span>
             )}
-            <p
-                className={`text-[11px] font-semibold leading-snug break-words ${
-                    badge ? "mt-2" : ""
-                }`}
-            >
-                {name}
-            </p>
+            <p className="text-[11px] font-bold leading-tight">{name}</p>
             {sub && (
-                <p className={`mt-1 text-[10px] font-bold ${subClass}`}>{sub}</p>
+                <p className="text-[10px] mt-0.5 opacity-80 leading-tight">{sub}</p>
             )}
-        </div>
-    );
-}
-
-function VConnector({ label }: { label?: string }) {
-    return (
-        <div className="flex flex-col items-center py-1 text-slate-400" aria-hidden>
-            <div className="w-px h-4 border-l-2 border-dashed border-slate-300" />
-            {label && (
-                <span className="my-0.5 text-[11px] font-bold text-blue-600">
-                    {label}
-                </span>
-            )}
-            <span className="text-[10px]">▼</span>
-        </div>
-    );
-}
-
-function HBranch() {
-    return (
-        <div
-            className="flex items-center justify-center w-full max-w-2xl mx-auto py-1"
-            aria-hidden
-        >
-            <div className="h-px flex-1 border-t-2 border-dashed border-slate-300" />
-            <div className="w-px h-3 border-l-2 border-dashed border-slate-300 mx-2" />
-            <div className="h-px flex-1 border-t-2 border-dashed border-slate-300" />
         </div>
     );
 }
 
 export function EquityPenetrationGraph() {
+    const ac = XINHEYIJIA_PROFILE.actualController;
     return (
-        <div
-            className="w-full rounded-xl border border-slate-200 bg-white shadow-sm py-5 px-3 sm:px-5"
-            role="img"
-            aria-label={`${TARGET}股权穿透图谱`}
-        >
-
-            <div className="flex flex-col items-center gap-0 max-w-4xl mx-auto">
-                {/* 上游股东 */}
-                <div className="w-full space-y-3">
-                    <p className="text-[10px] font-semibold text-slate-400 text-center uppercase tracking-wide">
-                        上游股东（元子拓扑）
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                        {YUANZI_UPSTREAM.map((node) => (
-                            <NodeCard
-                                key={node.name}
-                                name={node.name}
-                                sub={node.pct}
-                                variant={
-                                    node.person
-                                        ? "person"
-                                        : node.muted
-                                          ? "muted"
-                                          : "company"
-                                }
-                                badge={node.role}
-                            />
-                        ))}
-                    </div>
-                </div>
-
-                <div className="w-full space-y-3 mt-2">
-                    <p className="text-[10px] font-semibold text-slate-400 text-center">
-                        鹰潭鼎创上游
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                        {YINGTAN_UPSTREAM.map((node) => (
-                            <NodeCard
-                                key={node.name}
-                                name={node.name}
-                                sub={node.pct}
-                                variant="person"
-                            />
-                        ))}
-                    </div>
-                </div>
-
-                <HBranch />
-                <VConnector />
-
-                {/* 直接股东 */}
-                <div className="flex flex-wrap justify-center gap-4 sm:gap-8 w-full">
-                    {DIRECT_SHAREHOLDERS.map((sh) => (
-                        <div
-                            key={sh.name}
-                            className="flex flex-col items-center"
-                        >
-                            <NodeCard
-                                name={sh.name}
-                                sub={sh.pct}
-                                className="max-w-[13rem] sm:max-w-[15rem]"
-                            />
-                        </div>
-                    ))}
-                </div>
-
-                <VConnector />
-
-                <NodeCard
-                    name={TARGET}
-                    variant="target"
-                    className="max-w-md w-full sm:w-auto px-6 py-3"
-                />
-
-                <VConnector label="100%" />
-
-                {/* 对外投资 */}
-                <div className="flex flex-wrap justify-center gap-3 sm:gap-6 w-full">
-                    {SUBSIDIARIES.map((sub) => (
-                        <div key={sub.name} className="relative">
-                            <NodeCard
-                                name={sub.name}
-                                sub={`${sub.pct} · ${sub.status}`}
-                                className="max-w-[14rem]"
-                            />
-                            {sub.status === "注销" && (
-                                <span className="absolute -top-1.5 -right-1 rounded bg-orange-500 px-1.5 py-0.5 text-[9px] font-bold text-white shadow-sm">
-                                    注销
-                                </span>
-                            )}
-                        </div>
+        <div className="flex flex-col items-center gap-4 w-full max-w-3xl mx-auto py-2">
+            <NodeCard
+                name={ac.name}
+                sub={`实际控制人 · 间接持股 ${ac.indirectRatio}`}
+                variant="muted"
+                badge="实控"
+            />
+            <div className="flex flex-col items-center text-slate-400">
+                <div className="w-px h-4 bg-slate-300" />
+                <span className="text-[9px] text-slate-500">100%</span>
+                <div className="w-px h-4 bg-slate-300" />
+            </div>
+            <NodeCard
+                name={SHAREHOLDER.name}
+                sub={`认缴 ${SHAREHOLDER.subscribedWan} 万 · ${SHAREHOLDER.ratio}`}
+                variant="company"
+            />
+            <div className="flex flex-col items-center text-orange-500">
+                <div className="w-px h-6 bg-orange-300" />
+                <span className="text-[10px] font-bold">100%</span>
+                <div className="w-px h-6 bg-orange-300" />
+            </div>
+            <NodeCard name={TARGET} variant="target" badge="主体企业" />
+            <div className="flex flex-col items-center text-slate-400 w-full">
+                <div className="w-px h-5 bg-slate-300" />
+                <span className="text-[10px] font-medium text-slate-500 mb-2">
+                    对外投资
+                </span>
+                <div className="flex flex-wrap justify-center gap-3">
+                    {INVESTMENTS.map((inv) => (
+                        <NodeCard
+                            key={inv.name}
+                            name={inv.name}
+                            sub={`${inv.ratio} · ${inv.amountWan}万 · ${inv.investDate}`}
+                            variant="company"
+                        />
                     ))}
                 </div>
             </div>
+            <p className="text-[10px] text-slate-500 text-center max-w-md mt-2">
+                {ac.chain}
+            </p>
         </div>
     );
 }
-
-export default EquityPenetrationGraph;

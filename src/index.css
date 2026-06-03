@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+}
+
 html,
 body,
 #root {

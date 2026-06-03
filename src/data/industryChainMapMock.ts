@@ -50,9 +50,9 @@ export const INDUSTRY_CHAIN_LAYERS: ChainLayer[] = [
         id: "midstream",
         label: "中游",
         subtitle: "技术层",
-        accent: "text-indigo-700",
-        ring: "ring-indigo-200",
-        bg: "from-indigo-500/10 to-indigo-500/5",
+        accent: "text-orange-600",
+        ring: "ring-orange-800",
+        bg: "from-orange-500/10 to-orange-500/5",
         categories: [
             {
                 name: "通用技术",

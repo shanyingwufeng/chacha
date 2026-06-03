@@ -69,7 +69,7 @@ const INITIAL_FORM: FormState = {
 };
 
 const selectClass =
-    "flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/20 focus-visible:border-indigo-500";
+    "flex h-10 w-full rounded-md border border-slate-200 bg-card px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/20 focus-visible:border-orange-500";
 
 const AdvancedSearch: React.FC = () => {
     const navigate = useNavigate();
@@ -93,7 +93,7 @@ const AdvancedSearch: React.FC = () => {
             <div className="mb-8">
                 <Link
                     to="/"
-                    className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-indigo-600 transition-colors mb-4"
+                    className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-orange-500 transition-colors mb-4"
                 >
                     <ArrowLeft className="h-4 w-4" />
                     返回首页
@@ -106,11 +106,11 @@ const AdvancedSearch: React.FC = () => {
 
             <form
                 onSubmit={handleSearch}
-                className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+                className="rounded-2xl border border-slate-200 bg-card shadow-sm overflow-hidden"
             >
                 <div className="border-b border-slate-100 bg-slate-50/80 px-6 py-4">
                     <h2 className="text-sm font-semibold text-slate-800 flex items-center gap-2">
-                        <Search className="h-4 w-4 text-indigo-600" />
+                        <Search className="h-4 w-4 text-orange-500" />
                         搜索条件
                     </h2>
                 </div>
@@ -118,7 +118,7 @@ const AdvancedSearch: React.FC = () => {
                 <div className="p-6 space-y-8">
                     <section className="space-y-4">
                         <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-                            <Building2 className="h-4 w-4 text-indigo-600" />
+                            <Building2 className="h-4 w-4 text-orange-500" />
                             基本信息
                         </h3>
                         <div className="grid sm:grid-cols-2 gap-4">
@@ -164,7 +164,7 @@ const AdvancedSearch: React.FC = () => {
 
                     <section className="space-y-4">
                         <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-                            <MapPin className="h-4 w-4 text-indigo-600" />
+                            <MapPin className="h-4 w-4 text-orange-500" />
                             地区与行业
                         </h3>
                         <div className="grid sm:grid-cols-2 gap-4">
@@ -207,7 +207,7 @@ const AdvancedSearch: React.FC = () => {
 
                     <section className="space-y-4">
                         <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-                            <Calendar className="h-4 w-4 text-indigo-600" />
+                            <Calendar className="h-4 w-4 text-orange-500" />
                             成立与资本
                         </h3>
                         <div className="grid sm:grid-cols-2 gap-4">
@@ -260,7 +260,7 @@ const AdvancedSearch: React.FC = () => {
 
                     <section className="space-y-4">
                         <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-                            <Users className="h-4 w-4 text-indigo-600" />
+                            <Users className="h-4 w-4 text-orange-500" />
                             人员规模
                         </h3>
                         <div className="flex flex-wrap gap-2">
@@ -276,8 +276,8 @@ const AdvancedSearch: React.FC = () => {
                                     }
                                     className={`px-3 py-1.5 rounded-lg border text-sm transition-colors ${
                                         form.employeeScale === scale
-                                            ? "bg-indigo-50 border-indigo-500 text-indigo-700"
-                                            : "bg-slate-50 border-slate-200 text-slate-600 hover:border-indigo-300"
+                                            ? "bg-orange-500/10 border-orange-500 text-orange-600"
+                                            : "bg-slate-50 border-slate-200 text-slate-600 hover:border-orange-600"
                                     }`}
                                 >
                                     {scale}
@@ -288,7 +288,7 @@ const AdvancedSearch: React.FC = () => {
 
                     <section className="space-y-4">
                         <h3 className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-                            <Sparkles className="h-4 w-4 text-indigo-600" />
+                            <Sparkles className="h-4 w-4 text-orange-500" />
                             企业标签与认定
                         </h3>
                         <div className="grid sm:grid-cols-2 gap-4">
@@ -449,7 +449,7 @@ const AdvancedSearch: React.FC = () => {
                     </Button>
                     <Button
                         type="submit"
-                        className="sm:min-w-[120px] bg-indigo-600 hover:bg-indigo-700 gap-2"
+                        className="sm:min-w-[120px] bg-orange-500 hover:bg-orange-600 gap-2"
                     >
                         <Search className="h-4 w-4" />
                         开始搜索

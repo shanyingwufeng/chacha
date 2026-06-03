@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
+import { XINHEYIJIA_SHORT } from "../constants/demoCompany";
 
 type ServiceItem = {
     title: string;
@@ -55,9 +56,9 @@ const SERVICE_GRID_ITEMS: ServiceItem[] = [
     },
 ];
 
-/** 首页联想：输入「北京」「苏州」匹配对应企业 */
+/** 首页联想：输入「鑫」「苏州」匹配对应企业 */
 const DEMO_COMPANIES = [
-    { keyword: "北京", name: "北京智慧易" },
+    { keyword: "鑫", name: XINHEYIJIA_SHORT },
     { keyword: "苏州", name: "苏州海鑫" },
 ] as const;
 
@@ -85,6 +86,10 @@ const Home: React.FC = () => {
             navigate("/details?id=2549");
             return;
         }
+        if (name === XINHEYIJIA_SHORT) {
+            navigate("/details");
+            return;
+        }
         navigate("/details");
     };
 
@@ -94,12 +99,12 @@ const Home: React.FC = () => {
 
     return (
         <div className="flex flex-col min-h-[calc(100vh-4rem)]">
-            <section className="relative flex-1 flex flex-col overflow-hidden bg-gradient-to-b from-indigo-50 via-white to-slate-50">
+            <section className="relative flex-1 flex flex-col overflow-hidden bg-gradient-to-b from-orange-50 via-white to-slate-50">
                 <div className="flex-1 flex flex-col justify-center py-8 md:py-10 pb-12 md:pb-16">
                     <div className="container mx-auto px-4 relative z-10 text-center max-w-7xl">
                         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
-                            AI EASY
-                            <span className="text-indigo-600">
+                            鑫合易家
+                            <span className="text-orange-500">
                                 {" "}
                                 数据智能平台
                             </span>
@@ -115,7 +120,7 @@ const Home: React.FC = () => {
                             >
                                 <div className="relative group flex-1">
                                     <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none z-10">
-                                        <Search className="h-6 w-6 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
+                                        <Search className="h-6 w-6 text-slate-600 group-focus-within:text-orange-500 transition-colors" />
                                     </div>
                                     <input
                                         type="text"
@@ -133,18 +138,18 @@ const Home: React.FC = () => {
                                                 150
                                             );
                                         }}
-                                        className="block w-full pl-14 pr-[8rem] py-3.5 rounded-2xl border-2 border-slate-200 bg-white text-base md:text-[17px] focus:outline-none focus:ring-2 focus:ring-indigo-500/15 focus:border-indigo-500 transition-all shadow-md shadow-indigo-500/5"
+                                        className="block w-full pl-14 pr-[8rem] py-3.5 rounded-2xl border-2 border-slate-200 bg-card text-base md:text-[17px] focus:outline-none focus:ring-2 focus:ring-ring/15 focus:border-orange-500 transition-all shadow-md shadow-orange-500/5"
                                     />
                                     {suggestOpen && suggestions.length > 0 && (
                                         <ul
-                                            className="absolute left-0 right-0 top-full mt-1.5 z-20 rounded-lg border border-slate-200 bg-white py-0.5 shadow-lg shadow-slate-200/70 text-left overflow-hidden"
+                                            className="absolute left-0 right-0 top-full mt-1.5 z-20 rounded-lg border border-slate-200 bg-card py-0.5 shadow-lg shadow-slate-200/70 text-left overflow-hidden"
                                             role="listbox"
                                         >
                                             {suggestions.map((c) => (
                                                 <li key={c.name}>
                                                     <button
                                                         type="button"
-                                                        className="w-full px-4 py-3 text-left text-slate-800 hover:bg-indigo-50 hover:text-indigo-700 text-base transition-colors"
+                                                        className="w-full px-4 py-3 text-left text-slate-800 hover:bg-orange-500/10 hover:text-orange-600 text-base transition-colors"
                                                         onMouseDown={(e) =>
                                                             e.preventDefault()
                                                         }
@@ -162,7 +167,7 @@ const Home: React.FC = () => {
                                         <Button
                                             type="submit"
                                             size="default"
-                                            className="h-10 px-7 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-base font-semibold shadow-md shadow-indigo-200/80"
+                                            className="h-10 px-7 text-white rounded-xl bg-orange-500 hover:bg-orange-600 text-base font-semibold shadow-md shadow-orange-200/80"
                                         >
                                             查一下
                                         </Button>
@@ -182,37 +187,37 @@ const Home: React.FC = () => {
                                 <span>热搜：</span>
                                 <button
                                     onClick={() => navigate("/details")}
-                                    className="hover:text-indigo-600"
+                                    className="hover:text-orange-500"
                                 >
-                                    北京智慧易
+                                    鑫合易家
                                 </button>
                                 <button
                                     onClick={() => navigate("/details?id=2549")}
-                                    className="hover:text-indigo-600"
+                                    className="hover:text-orange-500"
                                 >
                                     苏州海鑫
                                 </button>
                                 <button
                                     onClick={() => navigate("/details")}
-                                    className="hover:text-indigo-600"
+                                    className="hover:text-orange-500"
                                 >
                                     阿里巴巴
                                 </button>
                                 <button
                                     onClick={() => navigate("/details")}
-                                    className="hover:text-indigo-600"
+                                    className="hover:text-orange-500"
                                 >
                                     腾讯科技
                                 </button>
                                 <button
                                     onClick={() => navigate("/details")}
-                                    className="hover:text-indigo-600"
+                                    className="hover:text-orange-500"
                                 >
                                     华为
                                 </button>
                                 <button
                                     onClick={() => navigate("/details")}
-                                    className="hover:text-indigo-600"
+                                    className="hover:text-orange-500"
                                 >
                                     比亚迪
                                 </button>
@@ -225,7 +230,7 @@ const Home: React.FC = () => {
                                     const Icon = item.icon;
                                     const inner = (
                                         <>
-                                            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 ring-1 ring-blue-100/80">
+                                            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-orange-500/10 text-orange-500 ring-1 ring-orange-200/80">
                                                 <Icon
                                                     className="h-5 w-5"
                                                     strokeWidth={2}
@@ -242,7 +247,7 @@ const Home: React.FC = () => {
                                         </>
                                     );
                                     const tileClass =
-                                        "flex gap-3 rounded-xl p-2 -m-2 text-left transition-colors hover:bg-white/80 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30";
+                                        "flex gap-3 rounded-xl p-2 -m-2 text-left transition-colors hover:bg-white/80 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/30";
 
                                     if (item.to) {
                                         return (

@@ -110,12 +110,12 @@ function RelationNodeCard({
         <div
             className={
                 compact
-                    ? "bg-white border border-slate-200 p-2 rounded-lg shadow-sm text-[10px] text-center max-w-[92px] leading-tight"
-                    : "bg-white border border-slate-200 p-3 rounded-xl shadow-sm text-xs text-center max-w-[140px]"
+                    ? "bg-card border border-slate-200 p-2 rounded-lg shadow-sm text-[10px] text-center max-w-[92px] leading-tight"
+                    : "bg-card border border-slate-200 p-3 rounded-xl shadow-sm text-xs text-center max-w-[140px]"
             }
         >
             <p className="font-bold text-slate-900">{title}</p>
-            <p className="text-slate-400 mt-0.5">{subtitle}</p>
+            <p className="text-slate-600 mt-0.5">{subtitle}</p>
         </div>
     );
 }
@@ -125,7 +125,7 @@ function SimpleEquityPenetrationGraph() {
     return (
         <RelationGraphSurface>
             <div className="flex flex-col items-center gap-10 sm:gap-12">
-                <div className="bg-blue-600 text-white px-5 sm:px-6 py-3 rounded-2xl shadow-xl font-bold text-sm sm:text-base text-center">
+                <div className="bg-orange-500 text-white px-5 sm:px-6 py-3 rounded-2xl shadow-xl font-bold text-sm sm:text-base text-center">
                     {RELATION_TARGET_LABEL}
                 </div>
                 <div className="flex flex-wrap justify-center gap-8 sm:gap-16">
@@ -154,7 +154,7 @@ function DeepPenetrationGraph({
     return (
         <RelationGraphSurface>
             <div className="flex flex-col items-center gap-8 sm:gap-10 max-w-full">
-                <div className="bg-blue-600 text-white px-5 sm:px-6 py-3 rounded-2xl shadow-xl font-bold text-sm sm:text-base text-center">
+                <div className="bg-orange-500 text-white px-5 sm:px-6 py-3 rounded-2xl shadow-xl font-bold text-sm sm:text-base text-center">
                     {RELATION_TARGET_LABEL}
                 </div>
                 <div className="flex flex-wrap justify-center gap-8 sm:gap-12 lg:gap-16 items-start">
@@ -246,10 +246,10 @@ function BiddingTrackingModule() {
               );
 
     return (
-        <section className="bg-white rounded-3xl border border-slate-200 shadow-sm scroll-mt-24 overflow-hidden">
+        <section className="bg-card rounded-3xl border border-slate-200 shadow-sm scroll-mt-24 overflow-hidden">
             <div className="p-6 border-b border-slate-100 flex flex-wrap justify-between items-center gap-4">
                 <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
-                    <FileText className="w-5 h-5 text-blue-600 shrink-0" />
+                    <FileText className="w-5 h-5 text-orange-500 shrink-0" />
                     招投标智能追踪
                 </h3>
                 <span className="px-2 py-1 bg-red-100 text-red-600 rounded text-[10px] font-bold shrink-0">
@@ -274,8 +274,8 @@ function BiddingTrackingModule() {
                                 onClick={() => setStakeholderFilter(id)}
                                 className={`rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
                                     active
-                                        ? "border-blue-500 bg-blue-50 text-blue-900 shadow-sm"
-                                        : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+                                        ? "border-orange-500 bg-orange-500/10 text-orange-800 shadow-sm"
+                                        : "border-slate-200 bg-card text-slate-700 hover:border-slate-300 hover:bg-slate-50"
                                 }`}
                             >
                                 {label}
@@ -341,7 +341,7 @@ function BiddingTrackingModule() {
                                 filteredRows.map((row, i) => (
                                     <tr
                                         key={`${row.projectName}-${row.publishDate}`}
-                                        className="bg-white hover:bg-slate-50/80"
+                                        className="bg-card hover:bg-slate-50/80"
                                     >
                                         <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums align-top">
                                             {i + 1}
@@ -367,7 +367,7 @@ function BiddingTrackingModule() {
                         </tbody>
                     </table>
                 </div>
-                <p className="mt-3 text-center text-xs text-slate-400">
+                <p className="mt-3 text-center text-xs text-slate-600">
                     共 {filteredRows.length} 条
                 </p>
             </div>
@@ -379,10 +379,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
     switch (module) {
         case "judicial":
             return (
-                <section className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
+                <section className="bg-card rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
                     <div className="px-6 pt-6 pb-4">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
-                            <Gavel className="w-5 h-5 text-blue-600 shrink-0" />
+                            <Gavel className="w-5 h-5 text-orange-500 shrink-0" />
                             司法风险全景视图
                         </h3>
                         <div className="mt-4 border-b border-slate-200" />
@@ -488,7 +488,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                         ].map((row, idx) => (
                                             <tr
                                                 key={`${row.docketNo}-${idx}`}
-                                                className="bg-white hover:bg-slate-50/80"
+                                                className="bg-card hover:bg-slate-50/80"
                                             >
                                                 <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums align-top">
                                                     {idx + 1}
@@ -566,7 +566,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-slate-100">
-                                        <tr className="bg-white hover:bg-slate-50/80">
+                                        <tr className="bg-card hover:bg-slate-50/80">
                                             <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums w-16">
                                                 1
                                             </td>
@@ -618,7 +618,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-slate-100">
-                                        <tr className="bg-white hover:bg-slate-50/80">
+                                        <tr className="bg-card hover:bg-slate-50/80">
                                             <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums w-16">
                                                 1
                                             </td>
@@ -637,15 +637,15 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
             );
         case "relation":
             return (
-                <section className="bg-white rounded-3xl border border-slate-200 shadow-sm scroll-mt-24 overflow-hidden">
+                <section className="bg-card rounded-3xl border border-slate-200 shadow-sm scroll-mt-24 overflow-hidden">
                     <div className="p-6 border-b border-slate-100 flex justify-between items-center gap-4">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
-                            <Network className="w-5 h-5 text-blue-600 shrink-0" />
+                            <Network className="w-5 h-5 text-orange-500 shrink-0" />
                             关联关系穿透图谱
                         </h3>
                         <button
                             type="button"
-                            className="text-xs text-blue-600 font-bold hover:underline shrink-0"
+                            className="text-xs text-orange-500 font-bold hover:underline shrink-0"
                         >
                             展开全图图谱
                         </button>
@@ -662,13 +662,13 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
             );
         case "monitoring":
             return (
-                <section className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
+                <section className="bg-card rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
                     <div className="p-6 border-b border-slate-100 flex justify-between items-center gap-4">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
-                            <Eye className="w-5 h-5 text-blue-600 shrink-0" />
+                            <Eye className="w-5 h-5 text-orange-500 shrink-0" />
                             经营动态监控看板
                         </h3>
-                        <span className="text-xs text-slate-400 shrink-0">
+                        <span className="text-xs text-slate-600 shrink-0">
                             监控周期：近 12 个月
                         </span>
                     </div>
@@ -714,7 +714,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-slate-100">
-                                        <tr className="bg-white hover:bg-slate-50/80">
+                                        <tr className="bg-card hover:bg-slate-50/80">
                                             <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums w-16">
                                                 1
                                             </td>
@@ -731,7 +731,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 工商信息
                                             </td>
                                         </tr>
-                                        <tr className="bg-white hover:bg-slate-50/80">
+                                        <tr className="bg-card hover:bg-slate-50/80">
                                             <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums w-16">
                                                 2
                                             </td>
@@ -789,7 +789,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-slate-100">
-                                        <tr className="bg-white hover:bg-slate-50/80">
+                                        <tr className="bg-card hover:bg-slate-50/80">
                                             <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums w-16">
                                                 1
                                             </td>
@@ -801,7 +801,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             </td>
                                             <td className="px-4 py-3">23条</td>
                                         </tr>
-                                        <tr className="bg-white hover:bg-slate-50/80">
+                                        <tr className="bg-card hover:bg-slate-50/80">
                                             <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums w-16">
                                                 2
                                             </td>
@@ -813,7 +813,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             </td>
                                             <td className="px-4 py-3">2家</td>
                                         </tr>
-                                        <tr className="bg-white hover:bg-slate-50/80">
+                                        <tr className="bg-card hover:bg-slate-50/80">
                                             <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums w-16">
                                                 3
                                             </td>
@@ -837,10 +837,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
             return <BiddingTrackingModule />;
         case "creditPortrait":
             return (
-                <section className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
+                <section className="bg-card rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
                     <div className="p-6 border-b border-slate-100">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
-                            <PieChart className="w-5 h-5 text-blue-600 shrink-0" />
+                            <PieChart className="w-5 h-5 text-orange-500 shrink-0" />
                             信用评分动态画像
                         </h3>
                         <p className="mt-2 text-sm text-slate-600 leading-relaxed">
@@ -863,10 +863,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
             );
         case "investmentTrace":
             return (
-                <section className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
+                <section className="bg-card rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
                     <div className="p-6 border-b border-slate-100">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
-                            <CircleDollarSign className="w-5 h-5 text-blue-600 shrink-0" />
+                            <CircleDollarSign className="w-5 h-5 text-orange-500 shrink-0" />
                             投融资关系溯源
                         </h3>
                         <p className="mt-2 text-sm text-slate-600 leading-relaxed">
@@ -889,19 +889,19 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
             );
         case "tags":
             return (
-                <section className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
+                <section className="bg-card rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24">
                     <div className="p-6 border-b border-slate-100 flex justify-between items-center">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
-                            <Tags className="w-5 h-5 text-blue-600 shrink-0" />
+                            <Tags className="w-5 h-5 text-orange-500 shrink-0" />
                             企业标签
                         </h3>
-                        <span className="text-xs text-slate-400">
+                        <span className="text-xs text-slate-600">
                             标签体系：行业 · 能力 · 风险
                         </span>
                     </div>
                     <div className="p-8 space-y-6">
                         <div>
-                            <p className="text-xs font-bold text-slate-400 uppercase mb-3">
+                            <p className="text-xs font-bold text-slate-600 uppercase mb-3">
                                 已打标 (系统推荐)
                             </p>
                             <div className="flex flex-wrap gap-2">
@@ -915,10 +915,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                 ].map((t) => (
                                     <span
                                         key={t.label}
-                                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-blue-50 border border-blue-100 text-xs font-semibold text-blue-800"
+                                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-orange-500/10 border border-orange-900/40 text-xs font-semibold text-orange-300"
                                     >
                                         {t.label}
-                                        <span className="text-[10px] font-normal text-blue-500">
+                                        <span className="text-[10px] font-normal text-orange-500">
                                             权重 {t.weight}
                                         </span>
                                     </span>
@@ -970,7 +970,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                             value: [23, 1, 24, 56, 2],
                             name: "苏州海鑫",
                             areaStyle: { color: "rgba(37, 99, 235, 0.2)" },
-                            lineStyle: { color: "#2563eb", width: 2 },
+                            lineStyle: { color: "#ea580c", width: 2 },
                             symbolSize: 0,
                         },
                     ],
@@ -989,12 +989,12 @@ const SuzhouCompanyDetails: React.FC = () => {
     return (
         <div className="bg-slate-50 text-slate-900 pb-12">
             <div className="container mx-auto max-w-7xl px-6 py-8 space-y-8">
-                <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 overflow-hidden relative">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-blue-50/50 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
+                <section className="bg-card rounded-3xl border border-slate-200 shadow-sm p-8 overflow-hidden relative">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/10/50 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
                     <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
                         <div className="flex-1">
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-xl shadow-blue-200 shrink-0">
+                                <div className="w-20 h-20 bg-orange-500 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-xl shadow-orange-800 shrink-0">
                                     海
                                 </div>
                                 <div>
@@ -1020,7 +1020,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                             </div>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-y border-slate-100 mt-6">
                                 <div>
-                                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">
+                                    <p className="text-[10px] uppercase font-bold text-slate-600 mb-1">
                                         社会信用代码
                                     </p>
                                     <p className="text-sm font-semibold">
@@ -1028,15 +1028,15 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">
+                                    <p className="text-[10px] uppercase font-bold text-slate-600 mb-1">
                                         法定代表人
                                     </p>
-                                    <p className="text-sm font-semibold text-blue-600 cursor-pointer hover:underline">
+                                    <p className="text-sm font-semibold text-orange-500 cursor-pointer hover:underline">
                                         陈羽衡
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">
+                                    <p className="text-[10px] uppercase font-bold text-slate-600 mb-1">
                                         注册资本
                                     </p>
                                     <p className="text-sm font-semibold">
@@ -1044,7 +1044,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">
+                                    <p className="text-[10px] uppercase font-bold text-slate-600 mb-1">
                                         成立日期
                                     </p>
                                     <p className="text-sm font-semibold">
@@ -1052,7 +1052,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">
+                                    <p className="text-[10px] uppercase font-bold text-slate-600 mb-1">
                                         企业类型
                                     </p>
                                     <p className="text-sm font-semibold">
@@ -1060,7 +1060,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">
+                                    <p className="text-[10px] uppercase font-bold text-slate-600 mb-1">
                                         实缴资本
                                     </p>
                                     <p className="text-sm font-semibold">
@@ -1068,7 +1068,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">
+                                    <p className="text-[10px] uppercase font-bold text-slate-600 mb-1">
                                         登记状态
                                     </p>
                                     <p className="text-sm font-semibold">
@@ -1076,7 +1076,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     </p>
                                 </div>
                                 <div>
-                                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">
+                                    <p className="text-[10px] uppercase font-bold text-slate-600 mb-1">
                                         注册地址
                                     </p>
                                     <p className="text-sm font-semibold">
@@ -1113,32 +1113,32 @@ const SuzhouCompanyDetails: React.FC = () => {
                                 </button>
                                 <button
                                     type="button"
-                                    className="bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-blue-200 transition-all"
+                                    className="bg-orange-500 text-white px-6 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 hover:shadow-lg hover:shadow-orange-800 transition-all"
                                 >
                                     <Download className="w-4 h-4" />
                                     生成深度报告
                                 </button>
                             </div>
                             <div className="flex gap-4">
-                                <div className="bg-blue-50 border border-blue-100 p-4 rounded-2xl text-center w-32">
-                                    <p className="text-[10px] text-blue-600 font-bold mb-1">
+                                <div className="bg-orange-500/10 border border-orange-900/40 p-4 rounded-2xl text-center w-32">
+                                    <p className="text-[10px] text-orange-500 font-bold mb-1">
                                         招投标活跃度
                                     </p>
-                                    <p className="text-3xl font-black text-blue-600">
+                                    <p className="text-3xl font-black text-orange-500">
                                         23
                                     </p>
-                                    <p className="text-[10px] text-blue-400 mt-1">
+                                    <p className="text-[10px] text-orange-400 mt-1">
                                         次公开记录（docx）
                                     </p>
                                 </div>
-                                <div className="bg-indigo-50 border border-indigo-100 p-4 rounded-2xl text-center w-32">
-                                    <p className="text-[10px] text-indigo-600 font-bold mb-1">
+                                <div className="bg-orange-500/10 border border-orange-900/40 p-4 rounded-2xl text-center w-32">
+                                    <p className="text-[10px] text-orange-500 font-bold mb-1">
                                         参保人数
                                     </p>
-                                    <p className="text-3xl font-black text-indigo-600">
+                                    <p className="text-3xl font-black text-orange-500">
                                         56
                                     </p>
-                                    <p className="text-[10px] text-indigo-400 mt-1">
+                                    <p className="text-[10px] text-orange-400 mt-1">
                                         人（2024年报）
                                     </p>
                                 </div>
@@ -1146,7 +1146,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                         </div>
                     </div>
                     <div className="mt-8 pt-4 border-t border-dashed border-slate-200 flex flex-wrap gap-4 items-center justify-between">
-                        <div className="flex items-center gap-2 text-xs font-medium text-slate-400">
+                        <div className="flex items-center gap-2 text-xs font-medium text-slate-600">
                             <RefreshCw className="w-3.5 h-3.5 animate-[spin_3s_linear_infinite]" />
                             系统同步于: 2026-05-08 10:24
                         </div>
@@ -1157,7 +1157,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                             </span>
                             <Link
                                 to="/deep-data"
-                                className="text-xs font-bold text-blue-600 hover:underline whitespace-nowrap"
+                                className="text-xs font-bold text-orange-500 hover:underline whitespace-nowrap"
                             >
                                 查看全部动态 →
                             </Link>
@@ -1183,14 +1183,14 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     }
                                     className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
                                         isActive
-                                            ? "border-indigo-300 bg-indigo-50 text-indigo-950 shadow-sm ring-1 ring-indigo-200/80"
-                                            : "border-[#e8eef4] bg-[#f8f9fb] text-[#334155] hover:border-slate-300 hover:bg-slate-100"
+                                            ? "border-orange-600 bg-orange-500/10 text-orange-800 shadow-sm ring-1 ring-orange-800/80"
+                                            : "border-slate-200 bg-slate-100 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
                                     }`}
                                 >
                                     <Icon
                                         className={`h-4 w-4 shrink-0 ${
                                             isActive
-                                                ? "text-indigo-600"
+                                                ? "text-orange-500"
                                                 : "text-slate-600"
                                         }`}
                                         aria-hidden
@@ -1217,24 +1217,24 @@ const SuzhouCompanyDetails: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 group hover:border-blue-200 transition-all">
+                    <section className="bg-card rounded-3xl border border-slate-200 shadow-sm p-8 group hover:border-orange-800 transition-all">
                         <div className="flex items-center justify-between mb-8 gap-4">
                             <div className="flex items-center gap-4 min-w-0">
-                                <div className="bg-indigo-600 p-3 rounded-2xl text-white shadow-lg shadow-indigo-100 shrink-0">
+                                <div className="bg-orange-500 p-3 rounded-2xl text-white shadow-lg shadow-orange-900/40 shrink-0">
                                     <BrainCircuit className="w-8 h-8" />
                                 </div>
                                 <div>
                                     <h2 className="text-xl font-bold text-slate-900">
                                         企业知识管理看板
                                     </h2>
-                                    <p className="text-xs text-slate-400">
+                                    <p className="text-xs text-slate-600">
                                         整合司法、股权、动态于一体的知识库
                                     </p>
                                 </div>
                             </div>
                             <Link
                                 to="/deep-data"
-                                className="text-xs font-bold text-blue-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 shrink-0"
+                                className="text-xs font-bold text-orange-500 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1 shrink-0"
                             >
                                 进入详情中心{" "}
                                 <ArrowRight className="w-3.5 h-3.5" />
@@ -1243,7 +1243,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                         <div className="grid grid-cols-2 gap-4">
                             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
                                 <div className="flex justify-between items-center mb-4">
-                                    <span className="text-xs font-bold text-slate-400 uppercase">
+                                    <span className="text-xs font-bold text-slate-600 uppercase">
                                         司法风险
                                     </span>
                                     <span className="p-1 bg-amber-100 text-amber-600 rounded-full">
@@ -1252,41 +1252,41 @@ const SuzhouCompanyDetails: React.FC = () => {
                                 </div>
                                 <p className="text-2xl font-black text-slate-900">
                                     4{" "}
-                                    <span className="text-xs font-normal text-slate-400">
+                                    <span className="text-xs font-normal text-slate-600">
                                         件诉讼
                                     </span>
                                 </p>
-                                <p className="text-[10px] text-slate-400 mt-1">
+                                <p className="text-[10px] text-slate-600 mt-1">
                                     司法案件以报告披露为准
                                 </p>
                             </div>
                             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
                                 <div className="flex justify-between items-center mb-4">
-                                    <span className="text-xs font-bold text-slate-400 uppercase">
+                                    <span className="text-xs font-bold text-slate-600 uppercase">
                                         股权穿透
                                     </span>
-                                    <Layers className="w-5 h-5 text-indigo-400" />
+                                    <Layers className="w-5 h-5 text-orange-400" />
                                 </div>
                                 <p className="text-2xl font-black text-slate-900">
                                     3{" "}
-                                    <span className="text-xs font-normal text-slate-400">
+                                    <span className="text-xs font-normal text-slate-600">
                                         层深度
                                     </span>
                                 </p>
-                                <p className="text-[10px] text-slate-400 mt-1">
+                                <p className="text-[10px] text-slate-600 mt-1">
                                     自然人独资结构
                                 </p>
                             </div>
                             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
                                 <div className="flex justify-between items-center mb-4">
-                                    <span className="text-xs font-bold text-slate-400 uppercase">
+                                    <span className="text-xs font-bold text-slate-600 uppercase">
                                         中标动态
                                     </span>
                                     <TrendingUp className="w-5 h-5 text-red-400" />
                                 </div>
                                 <p className="text-2xl font-black text-slate-900">
                                     23{" "}
-                                    <span className="text-xs font-normal text-slate-400">
+                                    <span className="text-xs font-normal text-slate-600">
                                         次招投标
                                     </span>
                                 </p>
@@ -1296,16 +1296,16 @@ const SuzhouCompanyDetails: React.FC = () => {
                             </div>
                             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
                                 <div className="flex justify-between items-center mb-4">
-                                    <span className="text-xs font-bold text-slate-400 uppercase">
+                                    <span className="text-xs font-bold text-slate-600 uppercase">
                                         标签权重
                                     </span>
-                                    <Bookmark className="w-5 h-5 text-blue-400" />
+                                    <Bookmark className="w-5 h-5 text-orange-400" />
                                 </div>
                                 <div className="flex flex-wrap gap-1 mt-1">
-                                    <span className="text-[9px] px-1.5 py-0.5 bg-blue-100 text-blue-600 rounded">
+                                    <span className="text-[9px] px-1.5 py-0.5 bg-orange-900/40 text-orange-500 rounded">
                                         科学研究和技术服务业
                                     </span>
-                                    <span className="text-[9px] px-1.5 py-0.5 bg-blue-100 text-blue-600 rounded">
+                                    <span className="text-[9px] px-1.5 py-0.5 bg-orange-900/40 text-orange-500 rounded">
                                         企业管理咨询
                                     </span>
                                 </div>
@@ -1313,7 +1313,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                         </div>
                     </section>
 
-                    <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 group hover:border-emerald-200 transition-all">
+                    <section className="bg-card rounded-3xl border border-slate-200 shadow-sm p-8 group hover:border-emerald-200 transition-all">
                         <div className="flex items-center justify-between mb-8 gap-4">
                             <div className="flex items-center gap-4 min-w-0">
                                 <div className="bg-emerald-600 p-3 rounded-2xl text-white shadow-lg shadow-emerald-100 shrink-0">
@@ -1323,7 +1323,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     <h2 className="text-xl font-bold text-slate-900">
                                         产业地位深度分析
                                     </h2>
-                                    <p className="text-xs text-slate-400">
+                                    <p className="text-xs text-slate-600">
                                         行业画像、链条位置及区域竞争力
                                     </p>
                                 </div>
@@ -1349,7 +1349,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                 <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
                                     <div className="bg-emerald-500 h-full w-[42%] rounded-full shadow-[0_0_10px_rgba(16,185,129,0.3)]" />
                                 </div>
-                                <p className="text-[10px] text-slate-400 mt-2">
+                                <p className="text-[10px] text-slate-600 mt-2">
                                     公开招投标记录 23 条
                                 </p>
                             </div>
@@ -1361,18 +1361,18 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     <p className="text-sm font-bold text-slate-800">
                                         注册资本与治理结构
                                     </p>
-                                    <p className="text-[10px] text-slate-400 mt-1">
+                                    <p className="text-[10px] text-slate-600 mt-1">
                                         注册资本 100 万元，1 位股东，自然人独资
                                     </p>
                                 </div>
-                                <div className="p-4 border border-blue-50 bg-blue-50/20 rounded-2xl">
-                                    <h4 className="text-xs font-bold text-blue-700 mb-2 italic">
+                                <div className="p-4 border border-orange-500/10 bg-orange-500/10/20 rounded-2xl">
+                                    <h4 className="text-xs font-bold text-orange-600 mb-2 italic">
                                         区域产业热力
                                     </h4>
                                     <p className="text-sm font-bold text-slate-800">
                                         区域与组织规模
                                     </p>
-                                    <p className="text-[10px] text-slate-400 mt-1">
+                                    <p className="text-[10px] text-slate-600 mt-1">
                                         苏州工业园区注册，参保 56 人
                                     </p>
                                 </div>
@@ -1381,7 +1381,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                     </section>
                 </div>
 
-                <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
+                <section className="bg-card rounded-3xl border border-slate-200 shadow-sm p-8">
                     <div className="flex flex-col md:flex-row items-center gap-12">
                         <div
                             ref={radarRef}
@@ -1401,23 +1401,23 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="mt-1 w-2 h-2 rounded-full bg-blue-500 shrink-0" />
+                                    <div className="mt-1 w-2 h-2 rounded-full bg-orange-500 shrink-0" />
                                     <div>
                                         <p className="text-sm font-bold">
                                             股东结构（1位股东）
                                         </p>
-                                        <p className="text-xs text-slate-400">
+                                        <p className="text-xs text-slate-600">
                                             最大股东陈羽衡，持股比例 100%
                                         </p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
-                                    <div className="mt-1 w-2 h-2 rounded-full bg-indigo-500 shrink-0" />
+                                    <div className="mt-1 w-2 h-2 rounded-full bg-orange-500 shrink-0" />
                                     <div>
                                         <p className="text-sm font-bold">
                                             招投标活跃度（23条）
                                         </p>
-                                        <p className="text-xs text-slate-400">
+                                        <p className="text-xs text-slate-600">
                                             指标来自报告汇总
                                         </p>
                                     </div>
@@ -1428,7 +1428,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                         <p className="text-sm font-bold">
                                             资本结构
                                         </p>
-                                        <p className="text-xs text-slate-400">
+                                        <p className="text-xs text-slate-600">
                                             注册资本100万，实缴资本100万（2024年报）
                                         </p>
                                     </div>

@@ -1,20 +1,23 @@
 :root {
-  --background: #f7f8fc;
-  --foreground: #111827;
+  /* 浅色底 + 橘黄主色（贴近 logo） */
+  --background: #f8fafc;
+  --foreground: #0f172a;
   --card: #ffffff;
-  --card-foreground: #111827;
+  --card-foreground: #0f172a;
   --popover: #ffffff;
-  --popover-foreground: #111827;
-  --primary: #2563eb;
-  --primary-foreground: #eff6ff;
-  --secondary: #e8eefb;
-  --secondary-foreground: #1f2937;
-  --muted: #eef2ff;
-  --muted-foreground: #667085;
-  --accent: #dbeafe;
-  --accent-foreground: #1e3a8a;
-  --border: #d9e2f2;
-  --input: #d9e2f2;
-  --ring: #2563eb;
-  --radius: 1rem;
+  --popover-foreground: #0f172a;
+  --primary: #ea580c;
+  --primary-foreground: #ffffff;
+  --secondary: #fff7ed;
+  --secondary-foreground: #9a3412;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #ffedd5;
+  --accent-foreground: #c2410c;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #f97316;
+  --radius: 0.75rem;
+  --brand-orange: #ea580c;
+  --brand-amber: #f59e0b;
 }

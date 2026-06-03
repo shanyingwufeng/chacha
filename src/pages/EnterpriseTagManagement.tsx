@@ -7,6 +7,7 @@ import {
   ENTERPRISE_TAG_INDUSTRIES as INDUSTRIES,
   TECH_CERTS_OPTIONS,
 } from '../constants/enterpriseFilters';
+import { XINHEYIJIA_FULL, XINHEYIJIA_PROFILE } from '../data/xinheyijiaCompanyProfile';
 
 type CompanyRecord = {
   id: string;
@@ -39,28 +40,28 @@ const CURRENT_YEAR = 2026;
 const MOCK_COMPANIES: CompanyRecord[] = [
   {
     id: '1',
-    name: '北京智慧易科技有限公司',
-    industry: '科学研究和技术服务业',
-    businessScale: '小型',
-    techCert: ['高新技术企业', '纳税信用A级'],
-    province: '北京市',
-    nationalIndustry: '科技推广与应用服务 / 软件开发（经营范围）',
-    strategicEmerging: '新一代信息技术',
-    foundedYear: 2020,
-    regStatus: '存续',
+    name: XINHEYIJIA_FULL,
+    industry: XINHEYIJIA_PROFILE.industryShort,
+    businessScale: '中型',
+    techCert: [...XINHEYIJIA_PROFILE.techCertifications],
+    province: '江苏省',
+    nationalIndustry: XINHEYIJIA_PROFILE.industry,
+    strategicEmerging: XINHEYIJIA_PROFILE.emergingIndustries[0],
+    foundedYear: 2016,
+    regStatus: XINHEYIJIA_PROFILE.status,
     listingStatus: '未上市',
-    registrationType: '其他有限责任公司',
-    taxCreditLevel: 'A级',
-    customsCredit: '一般信用企业',
-    tenderActivity: '高',
-    capitalBackground: '多元股东（企业法人为主）',
-    regCapitalWan: 5000,
-    paidInCapitalWan: 2883,
-    employeeScale: '少于50人',
-    patentCount: 33,
-    phone: '17610177855',
-    email: 'tim@ieasy123.com',
-    website: 'https://ieasy123.com',
+    registrationType: XINHEYIJIA_PROFILE.companyType,
+    taxCreditLevel: XINHEYIJIA_PROFILE.finance.taxGrade,
+    customsCredit: '—',
+    tenderActivity: `${XINHEYIJIA_PROFILE.overviewStats.biddingEvents}条招投标`,
+    capitalBackground: XINHEYIJIA_PROFILE.shareholder.name,
+    regCapitalWan: XINHEYIJIA_PROFILE.shareholder.subscribedWan,
+    paidInCapitalWan: XINHEYIJIA_PROFILE.shareholder.paidInWan ?? XINHEYIJIA_PROFILE.shareholder.subscribedWan,
+    employeeScale: `${XINHEYIJIA_PROFILE.operations.socialInsuranceEmployees}人（${XINHEYIJIA_PROFILE.operations.socialInsuranceYear}年报社保）`,
+    patentCount: XINHEYIJIA_PROFILE.ip.patentTotal,
+    phone: XINHEYIJIA_PROFILE.contact.phone,
+    email: XINHEYIJIA_PROFILE.contact.email,
+    website: XINHEYIJIA_PROFILE.contact.website,
   },
   {
     id: '2',
@@ -411,7 +412,7 @@ function companyDisplayTags(c: CompanyRecord): string[] {
 }
 
 const selectClass =
-  'w-full h-10 rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500';
+  'w-full h-10 rounded-md border border-slate-200 bg-card px-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-ring';
 
 const EnterpriseTagManagement: React.FC = () => {
   const [draft, setDraft] = useState(INITIAL_FILTERS);
@@ -437,7 +438,7 @@ const EnterpriseTagManagement: React.FC = () => {
       <div className="mb-8 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-            <Tags className="w-7 h-7 text-blue-600" />
+            <Tags className="w-7 h-7 text-orange-500" />
             企业标签管理
           </h1>
           <p className="text-slate-500 mt-1 max-w-2xl">
@@ -451,7 +452,7 @@ const EnterpriseTagManagement: React.FC = () => {
           </Button>
           <Button
             type="button"
-            className="gap-2 bg-blue-600 hover:bg-blue-700 text-white"
+            className="gap-2 bg-orange-500 hover:bg-orange-600 text-white"
             onClick={apply}
           >
             <Sparkles className="w-4 h-4" />
@@ -746,13 +747,13 @@ const EnterpriseTagManagement: React.FC = () => {
             </div>
             <div className="mt-3 flex flex-wrap gap-2 min-h-[2rem]">
               {ruleTags.length === 0 ? (
-                <span className="text-sm text-slate-400">请先在上方选择至少一个筛选条件，再点击「生成企业列表」。</span>
+                <span className="text-sm text-slate-600">请先在上方选择至少一个筛选条件，再点击「生成企业列表」。</span>
               ) : (
                 ruleTags.map((t) => (
                   <Badge
                     key={t.key + t.label}
                     variant="secondary"
-                    className="bg-indigo-50 text-indigo-800 border-indigo-100"
+                    className="bg-orange-500/10 text-orange-300 border-orange-900/40"
                   >
                     {t.label}
                   </Badge>
@@ -770,7 +771,7 @@ const EnterpriseTagManagement: React.FC = () => {
                 <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                   <div>
                     <div className="flex items-center gap-2">
-                      <Building2 className="w-5 h-5 text-blue-600 shrink-0" />
+                      <Building2 className="w-5 h-5 text-orange-500 shrink-0" />
                       <h3 className="text-base font-semibold text-slate-900">{c.name}</h3>
                     </div>
                     <div className="mt-2 flex items-start gap-2 text-xs text-slate-500">
@@ -793,15 +794,15 @@ const EnterpriseTagManagement: React.FC = () => {
                 </div>
                 <div className="mt-3 grid sm:grid-cols-3 gap-2 text-xs text-slate-600">
                   <div>
-                    <span className="text-slate-400">电话：</span>
+                    <span className="text-slate-600">电话：</span>
                     {c.phone || '—'}
                   </div>
                   <div className="truncate">
-                    <span className="text-slate-400">邮箱：</span>
+                    <span className="text-slate-600">邮箱：</span>
                     {c.email || '—'}
                   </div>
                   <div className="truncate">
-                    <span className="text-slate-400">官网：</span>
+                    <span className="text-slate-600">官网：</span>
                     {c.website || '—'}
                   </div>
                 </div>

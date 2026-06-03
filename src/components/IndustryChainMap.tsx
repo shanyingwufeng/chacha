@@ -22,7 +22,7 @@ export const IndustryChainMap: React.FC = () => {
         <div className="space-y-5">
             <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
                 <span>共 {INDUSTRY_CHAIN_SEGMENT_COUNT} 个产业环节</span>
-                <span className="text-slate-300">|</span>
+                <span className="text-slate-700">|</span>
                 <span>上中下游三层结构</span>
             </div>
 
@@ -38,10 +38,10 @@ export const IndustryChainMap: React.FC = () => {
                                 className={`flex-1 rounded-xl border px-4 py-3 text-left transition-all ${
                                     selected
                                         ? `border-slate-300 bg-gradient-to-br ${layer.bg} shadow-sm ring-1 ${layer.ring}`
-                                        : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50"
+                                        : "border-slate-200 bg-card hover:border-slate-300 hover:bg-slate-50"
                                 }`}
                             >
-                                <div className={`text-xs font-medium ${selected ? layer.accent : "text-slate-400"}`}>
+                                <div className={`text-xs font-medium ${selected ? layer.accent : "text-slate-600"}`}>
                                     {layer.label} · {layer.subtitle}
                                 </div>
                                 <div className="mt-1 flex items-baseline justify-between gap-2">
@@ -54,7 +54,7 @@ export const IndustryChainMap: React.FC = () => {
                                 </div>
                             </button>
                             {index < INDUSTRY_CHAIN_LAYERS.length - 1 && (
-                                <div className="hidden sm:flex items-center px-1 text-slate-300">
+                                <div className="hidden sm:flex items-center px-1 text-slate-700">
                                     <ChevronRight className="w-4 h-4" />
                                 </div>
                             )}
@@ -67,11 +67,11 @@ export const IndustryChainMap: React.FC = () => {
                 {activeLayer.categories.map((category) => (
                     <div
                         key={category.name}
-                        className="rounded-xl border border-slate-200 bg-white p-4 space-y-3"
+                        className="rounded-xl border border-slate-200 bg-card p-4 space-y-3"
                     >
                         <div className="flex items-center justify-between gap-2">
                             <h3 className="text-sm font-semibold text-slate-900">{category.name}</h3>
-                            <span className="text-xs text-slate-400 tabular-nums">{category.items.length} 项</span>
+                            <span className="text-xs text-slate-600 tabular-nums">{category.items.length} 项</span>
                         </div>
                         <div className="flex flex-wrap gap-2">
                             {category.items.map((item) => (

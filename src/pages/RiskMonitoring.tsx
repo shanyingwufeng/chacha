@@ -31,7 +31,7 @@ const RiskMonitoring: React.FC = () => {
           </div>
           <p className="text-sm text-slate-500">高风险信息</p>
           <h2 className="text-3xl font-bold text-rose-600 mt-1">2</h2>
-          <p className="text-[10px] text-slate-400 mt-2">限制高消费、失信信息</p>
+          <p className="text-[10px] text-slate-600 mt-2">限制高消费、失信信息</p>
         </Card>
         
         <Card className="p-6 border-orange-100 bg-orange-50/30 flex flex-col items-center text-center">
@@ -40,25 +40,25 @@ const RiskMonitoring: React.FC = () => {
           </div>
           <p className="text-sm text-slate-500">警示信息</p>
           <h2 className="text-3xl font-bold text-orange-600 mt-1">15</h2>
-          <p className="text-[10px] text-slate-400 mt-2">被执行人、终本案件等</p>
+          <p className="text-[10px] text-slate-600 mt-2">被执行人、终本案件等</p>
         </Card>
         
-        <Card className="p-6 border-blue-100 bg-blue-50/30 flex flex-col items-center text-center">
-          <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-3">
-            <Info className="w-6 h-6 text-blue-500" />
+        <Card className="p-6 border-orange-900/40 bg-orange-500/10/30 flex flex-col items-center text-center">
+          <div className="w-12 h-12 rounded-full bg-orange-900/40 flex items-center justify-center mb-3">
+            <Info className="w-6 h-6 text-orange-500" />
           </div>
           <p className="text-sm text-slate-500">提示信息</p>
-          <h2 className="text-3xl font-bold text-blue-600 mt-1">45</h2>
-          <p className="text-[10px] text-slate-400 mt-2">开庭公告、司法变动</p>
+          <h2 className="text-3xl font-bold text-orange-500 mt-1">45</h2>
+          <p className="text-[10px] text-slate-600 mt-2">开庭公告、司法变动</p>
         </Card>
         
-        <Card className="p-6 border-slate-200 bg-white flex flex-col items-center text-center">
+        <Card className="p-6 border-slate-200 bg-card flex flex-col items-center text-center">
           <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center mb-3">
-            <ShieldAlert className="w-6 h-6 text-slate-400" />
+            <ShieldAlert className="w-6 h-6 text-slate-600" />
           </div>
           <p className="text-sm text-slate-500">监控状态</p>
           <h2 className="text-3xl font-bold text-emerald-600 mt-1">健康</h2>
-          <p className="text-[10px] text-slate-400 mt-2">上次扫描: 1小时前</p>
+          <p className="text-[10px] text-slate-600 mt-2">上次扫描: 1小时前</p>
         </Card>
       </div>
 
@@ -68,17 +68,17 @@ const RiskMonitoring: React.FC = () => {
         <Card className="p-6">
           <div className="flex items-center justify-between mb-6 border-b pb-4">
             <div className="flex items-center gap-2">
-              <Scale className="w-5 h-5 text-indigo-600" />
+              <Scale className="w-5 h-5 text-orange-500" />
               <h3 className="font-bold text-slate-900">法律诉讼</h3>
               <Badge className="bg-slate-100 text-slate-500 border-none ml-2">42 条</Badge>
             </div>
             <div className="flex items-center gap-4">
               <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" />
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-600" />
                 <input 
                   type="text" 
                   placeholder="搜索案号或案由" 
-                  className="pl-9 pr-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                  className="pl-9 pr-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-ring"
                 />
               </div>
             </div>
@@ -103,14 +103,14 @@ const RiskMonitoring: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-6 text-sm text-right">
                   <div className="flex flex-col items-end">
-                    <span className="text-slate-400 text-xs">涉案金额</span>
+                    <span className="text-slate-600 text-xs">涉案金额</span>
                     <span className="text-slate-900 font-medium">{item.amount}</span>
                   </div>
                   <div className="flex flex-col items-end min-w-[80px]">
-                    <span className="text-slate-400 text-xs">状态</span>
+                    <span className="text-slate-600 text-xs">状态</span>
                     <Badge className={item.status === '审理中' ? 'bg-orange-50 text-orange-600 border-orange-100' : 'bg-slate-50 text-slate-500 border-slate-100'}>{item.status}</Badge>
                   </div>
-                  <Button variant="ghost" size="icon" className="text-slate-400">
+                  <Button variant="ghost" size="icon" className="text-slate-600">
                     <ChevronRight className="w-5 h-5" />
                   </Button>
                 </div>
@@ -118,7 +118,7 @@ const RiskMonitoring: React.FC = () => {
             ))}
           </div>
           
-          <Button variant="ghost" className="w-full mt-6 text-indigo-600 text-sm">查看全部诉讼记录 <ChevronRight className="w-4 h-4" /></Button>
+          <Button variant="ghost" className="w-full mt-6 text-orange-500 text-sm">查看全部诉讼记录 <ChevronRight className="w-4 h-4" /></Button>
         </Card>
 
         {/* Operational Abnormalities Section */}
@@ -131,7 +131,7 @@ const RiskMonitoring: React.FC = () => {
             </div>
             <div className="flex flex-col items-center justify-center py-8 text-center">
               <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
-                <ShieldAlert className="w-8 h-8 text-slate-300" />
+                <ShieldAlert className="w-8 h-8 text-slate-700" />
               </div>
               <p className="text-slate-500 text-sm">暂未发现相关经营异常公示</p>
             </div>
@@ -145,7 +145,7 @@ const RiskMonitoring: React.FC = () => {
             </div>
             <div className="flex flex-col items-center justify-center py-8 text-center">
               <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
-                <ShieldAlert className="w-8 h-8 text-slate-300" />
+                <ShieldAlert className="w-8 h-8 text-slate-700" />
               </div>
               <p className="text-slate-500 text-sm">暂未发现相关失信名单公示</p>
             </div>

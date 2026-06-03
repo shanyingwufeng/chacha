@@ -5,9 +5,9 @@ export type SciTechMetric = {
 };
 
 export const SCI_TECH_ENTERPRISE_METRICS: SciTechMetric[] = [
-    { label: "A股上市企业", value: 2, accent: "from-indigo-500/10 to-indigo-500/5 ring-indigo-200" },
+    { label: "A股上市企业", value: 2, accent: "from-orange-500/10 to-orange-500/5 ring-orange-800" },
     { label: "新三板企业", value: 1, accent: "from-violet-500/10 to-violet-500/5 ring-violet-200" },
-    { label: "高新技术企业", value: 118, accent: "from-blue-500/10 to-blue-500/5 ring-blue-200" },
+    { label: "高新技术企业", value: 118, accent: "from-orange-500/10 to-orange-500/5 ring-orange-800" },
     { label: "企业技术中心", value: 11, accent: "from-cyan-500/10 to-cyan-500/5 ring-cyan-200" },
     { label: "科技型中小企业", value: 107, accent: "from-sky-500/10 to-sky-500/5 ring-sky-200" },
     { label: "创新型中小企业", value: 63, accent: "from-teal-500/10 to-teal-500/5 ring-teal-200" },

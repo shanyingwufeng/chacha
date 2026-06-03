@@ -83,7 +83,7 @@ function riskLevelClass(level: string): string {
         case "S":
             return "text-emerald-700 bg-emerald-50 border-emerald-100";
         case "A":
-            return "text-blue-700 bg-blue-50 border-blue-100";
+            return "text-orange-600 bg-orange-500/10 border-orange-900/40";
         case "B":
             return "text-amber-700 bg-amber-50 border-amber-100";
         case "C":
@@ -124,7 +124,7 @@ const IndustryCompanyTable: React.FC<IndustryCompanyTableProps> = ({ data }) => 
                         <img
                             src={company.logoUrl}
                             alt=""
-                            className="w-8 h-8 rounded border border-slate-200 object-contain bg-white shrink-0"
+                            className="w-8 h-8 rounded border border-slate-200 object-contain bg-card shrink-0"
                         />
                     ) : (
                         <div className="w-8 h-8 rounded bg-violet-50 border border-violet-100 flex items-center justify-center shrink-0">
@@ -134,12 +134,12 @@ const IndustryCompanyTable: React.FC<IndustryCompanyTableProps> = ({ data }) => 
                     <div>
                         <button
                             type="button"
-                            className="font-medium text-slate-900 hover:text-blue-600 text-left"
+                            className="font-medium text-slate-900 hover:text-orange-500 text-left"
                             onClick={() => navigate("/details")}
                         >
                             {company.companyName}
                         </button>
-                        <div className="text-xs text-slate-400 mt-0.5">
+                        <div className="text-xs text-slate-600 mt-0.5">
                             {company.creditNo}
                         </div>
                         {company.techCertificationList.length > 0 && (
@@ -195,13 +195,13 @@ const IndustryCompanyTable: React.FC<IndustryCompanyTableProps> = ({ data }) => 
                     <span className="text-sm text-slate-700">
                         {company.sciTechLevel}
                         {company.sciTechScore > 0 && (
-                            <span className="text-slate-400 ml-1">
+                            <span className="text-slate-600 ml-1">
                                 ({company.sciTechScore})
                             </span>
                         )}
                     </span>
                 ) : (
-                    <span className="text-slate-400">—</span>
+                    <span className="text-slate-600">—</span>
                 )}
             </td>
             <td className="px-4 py-3 min-w-[200px]">
@@ -257,7 +257,7 @@ const IndustryCompanyTable: React.FC<IndustryCompanyTableProps> = ({ data }) => 
                             <tr>
                                 <td
                                     colSpan={12}
-                                    className="px-4 py-12 text-center text-slate-400"
+                                    className="px-4 py-12 text-center text-slate-600"
                                 >
                                     暂无数据
                                 </td>
@@ -324,8 +324,8 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                     symbol: "circle",
                     symbolSize: 6,
                     data: ENTERPRISE_TREND_COUNTS,
-                    lineStyle: { width: 2, color: "#6366f1" },
-                    itemStyle: { color: "#6366f1" },
+                    lineStyle: { width: 2, color: "#ea580c" },
+                    itemStyle: { color: "#ea580c" },
                     areaStyle: {
                         color: {
                             type: "linear",
@@ -367,7 +367,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                     data: CAPITAL_DISTRIBUTION.map((d, i) => ({
                         ...d,
                         itemStyle: {
-                            color: ["#818cf8", "#60a5fa", "#34d399", "#fbbf24", "#f472b6"][i],
+                            color: ["#fb923c", "#f97316", "#34d399", "#fbbf24", "#f472b6"][i],
                         },
                     })),
                 },
@@ -407,8 +407,8 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                                 x2: 0,
                                 y2: 1,
                                 colorStops: [
-                                    { offset: 0, color: ["#0ea5e9", "#38bdf8", "#22d3ee", "#2dd4bf", "#94a3b8", "#cbd5e1", "#e2e8f0"][i] },
-                                    { offset: 1, color: ["#0284c7", "#0ea5e9", "#06b6d4", "#14b8a6", "#64748b", "#94a3b8", "#cbd5e1"][i] },
+                                    { offset: 0, color: ["#f97316", "#fb923c", "#fbbf24", "#2dd4bf", "#94a3b8", "#cbd5e1", "#e2e8f0"][i] },
+                                    { offset: 1, color: ["#c2410c", "#f97316", "#ea580c", "#14b8a6", "#64748b", "#94a3b8", "#cbd5e1"][i] },
                                 ],
                             },
                         },
@@ -449,7 +449,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                     data: INTELLECTUAL_PROPERTY_DISTRIBUTION.map((d, i) => ({
                         ...d,
                         itemStyle: {
-                            color: ["#4f46e5", "#0ea5e9", "#f59e0b"][i],
+                            color: ["#ea580c", "#f97316", "#f59e0b"][i],
                         },
                     })),
                 },
@@ -472,7 +472,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
             {show("overview") && <Card className="p-5 space-y-6">
                 <div className="flex items-center justify-between gap-4 flex-wrap">
                     <div className="flex items-center gap-2">
-                        <TrendingUp className="w-5 h-5 text-blue-600" />
+                        <TrendingUp className="w-5 h-5 text-orange-500" />
                         <h2 className="font-semibold text-slate-900">产业概览</h2>
                     </div>
                 </div>
@@ -492,7 +492,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                                     <span className="text-xl font-bold text-slate-900 tabular-nums">
                                         {item.value}
                                     </span>
-                                    <span className="text-xs text-slate-400">家</span>
+                                    <span className="text-xs text-slate-600">家</span>
                                 </div>
                             </div>
                         ))}
@@ -512,7 +512,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                         <h3 className="text-sm font-medium text-slate-700 mb-1">
                             企业数量趋势
                         </h3>
-                        <p className="text-xs text-slate-400 mb-3">2015 — 2025 年新设企业数量</p>
+                        <p className="text-xs text-slate-600 mb-3">2015 — 2025 年新设企业数量</p>
                         <EChartPanel
                             option={enterpriseTrendOption}
                             className="h-64 w-full"
@@ -524,13 +524,13 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                                 <h3 className="text-sm font-medium text-slate-700">
                                     企业注册资本分布
                                 </h3>
-                                <p className="text-xs text-slate-400 mt-1">按注册资本区间统计</p>
+                                <p className="text-xs text-slate-600 mt-1">按注册资本区间统计</p>
                             </div>
                             <div className="text-right">
                                 <div className="text-2xl font-bold text-slate-900 tabular-nums">
                                     {ENTERPRISE_TOTAL}
                                 </div>
-                                <div className="text-xs text-slate-400">企业总数</div>
+                                <div className="text-xs text-slate-600">企业总数</div>
                             </div>
                         </div>
                         <EChartPanel
@@ -542,7 +542,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                         <h3 className="text-sm font-medium text-slate-700 mb-1">
                             企业成立年限分布
                         </h3>
-                        <p className="text-xs text-slate-400 mb-3">按成立时间区间统计企业数量</p>
+                        <p className="text-xs text-slate-600 mb-3">按成立时间区间统计企业数量</p>
                         <EChartPanel
                             option={establishmentYearsOption}
                             className="h-64 w-full"
@@ -554,13 +554,13 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                                 <h3 className="text-sm font-medium text-slate-700">
                                     知识产权分布
                                 </h3>
-                                <p className="text-xs text-slate-400 mt-1">专利类型构成</p>
+                                <p className="text-xs text-slate-600 mt-1">专利类型构成</p>
                             </div>
                             <div className="text-right">
                                 <div className="text-2xl font-bold text-slate-900 tabular-nums">
                                     {INTELLECTUAL_PROPERTY_TOTAL.toLocaleString()}
                                 </div>
-                                <div className="text-xs text-slate-400">知识产权总数</div>
+                                <div className="text-xs text-slate-600">知识产权总数</div>
                             </div>
                         </div>
                         <EChartPanel
@@ -599,7 +599,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
 
             {show("chain-map") && <Card className="p-5">
                 <div className="flex items-center gap-2 mb-4">
-                    <Network className="w-5 h-5 text-indigo-600" />
+                    <Network className="w-5 h-5 text-orange-500" />
                     <h2 className="font-semibold text-slate-900">
                         产业链图谱
                     </h2>
@@ -974,11 +974,11 @@ const IndustryAnalysis: React.FC = () => {
                             <button
                                 key={m.id}
                                 type="button"
-                                className="flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-4 text-left hover:bg-slate-50"
+                                className="flex items-center justify-between rounded-xl border border-slate-200 bg-card px-4 py-4 text-left hover:bg-slate-50"
                                 onClick={() => go({ module: m.id, sub: undefined, section: undefined })}
                             >
                                 <div className="font-semibold text-slate-900">{m.name}</div>
-                                <ChevronRight className="w-4 h-4 text-slate-400" />
+                                <ChevronRight className="w-4 h-4 text-slate-600" />
                             </button>
                         ))}
                     </div>
@@ -1016,12 +1016,12 @@ const IndustryAnalysis: React.FC = () => {
                                 <button
                                     key={s.id}
                                     type="button"
-                                    className="group rounded-xl border border-slate-200 bg-white p-4 text-left hover:shadow-md transition-shadow"
+                                    className="group rounded-xl border border-slate-200 bg-card p-4 text-left hover:shadow-md transition-shadow"
                                     onClick={() => go({ sub: s.id, section: "overview" })}
                                 >
                                     <div className="flex items-center gap-3">
-                                        <div className="h-10 w-10 rounded-lg bg-blue-50 flex items-center justify-center">
-                                            <Icon className="w-5 h-5 text-blue-600" />
+                                        <div className="h-10 w-10 rounded-lg bg-orange-500/10 flex items-center justify-center">
+                                            <Icon className="w-5 h-5 text-orange-500" />
                                         </div>
                                         <div className="font-semibold text-slate-900">{s.name}</div>
                                     </div>
@@ -1047,7 +1047,7 @@ const IndustryAnalysis: React.FC = () => {
                     <div className="flex items-center gap-2 text-sm text-slate-500">
                         <button
                             type="button"
-                            className="hover:text-blue-600"
+                            className="hover:text-orange-500"
                             onClick={() => go({ sub: undefined, section: undefined })}
                         >
                             {selectedModule.name}
@@ -1088,7 +1088,7 @@ const IndustryAnalysis: React.FC = () => {
                             variant={section === id ? "default" : "outline"}
                             className={
                                 section === id
-                                    ? "bg-blue-600 hover:bg-blue-700 text-white"
+                                    ? "bg-orange-500 hover:bg-orange-600 text-white"
                                     : ""
                             }
                             onClick={() => go({ section: id })}

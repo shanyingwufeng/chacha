@@ -12,7 +12,7 @@ import FinancialAnalysis from "./pages/FinancialAnalysis";
 // @ts-ignore - IDE occasionally reports stale module resolution here
 import IndustryAnalysis from "./pages/IndustryAnalysis";
 import EnterpriseTagManagement from "./pages/EnterpriseTagManagement";
-import headerLogo from "./assets/header-logo.jpg";
+import logo from "./assets/logo.png";
 
 function RouteScrollTop() {
     const location = useLocation();
@@ -32,22 +32,26 @@ const App: React.FC = () => {
     const demoUserName = "admin";
 
     return (
-        <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
+        <div className="min-h-screen bg-background flex flex-col font-sans text-foreground">
             <RouteScrollTop />
-            <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
+            <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur-md">
                 <div className="container mx-auto max-w-7xl flex h-16 items-center justify-between px-6">
                     <div className="flex min-w-0 flex-1 items-center gap-6 md:gap-8">
                         <Link
                             to="/"
-                            className="flex shrink-0 items-center gap-2"
+                            className="flex shrink-0 items-center gap-1.5"
+                            aria-label="返回首页"
                         >
-                            <img
-                                src={headerLogo}
-                                alt=""
-                                className="h-6 w-6 shrink-0 rounded-lg object-contain"
-                            />
-                            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-                                AI EASY 数据智能平台
+                            {/* 仅展示图标区域，裁掉 PNG 右侧透明/白字占位 */}
+                            <span className="block h-8 w-16 shrink-0 overflow-hidden">
+                                <img
+                                    src={logo}
+                                    alt=""
+                                    className="h-8 w-auto max-w-none object-left object-contain"
+                                />
+                            </span>
+                            <span className="text-xl font-bold tracking-tight text-orange-600">
+                                鑫合易家 数据智能平台
                             </span>
                         </Link>
                         <nav className="hidden md:flex min-w-0 flex-1 flex-row-reverse flex-wrap items-center gap-x-4 gap-y-1">
@@ -60,9 +64,9 @@ const App: React.FC = () => {
                     <div className="flex shrink-0 items-center gap-4">
                         {!isHomePage && (
                             <div className="relative hidden sm:block">
-                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
                                 <input
-                                    className="bg-slate-100 border-none rounded-full pl-10 pr-4 py-2 text-sm w-64 focus:ring-2 focus:ring-blue-500 transition-all"
+                                    className="bg-slate-100 text-slate-900 placeholder:text-slate-500 border-none rounded-full pl-10 pr-4 py-2 text-sm w-64 focus:ring-2 focus:ring-ring transition-all"
                                     placeholder="搜企业、搜品牌、搜老板..."
                                     type="text"
                                 />
@@ -70,7 +74,7 @@ const App: React.FC = () => {
                         )}
                         <button
                             type="button"
-                            className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 shadow-md shadow-blue-100"
+                            className="bg-orange-600 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md hover:bg-orange-400 transition-colors"
                         >
                             {demoUserName}
                         </button>
@@ -105,12 +109,12 @@ const App: React.FC = () => {
                 </Routes>
             </main>
             {/* 
-            <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+            <footer className="bg-white text-slate-600 py-12 border-t border-slate-100">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-12">
                         <div className="col-span-2">
                             <div className="flex items-center gap-2 mb-4">
-                                <div className="bg-indigo-500 p-1 rounded">
+                                <div className="bg-orange-500 p-1 rounded">
                                     <Search className="w-4 h-4 text-white" />
                                 </div>
                                 <span className="text-xl font-bold text-white">
@@ -129,7 +133,7 @@ const App: React.FC = () => {
                                 <li>
                                     <Link
                                         to="/results"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         企业查询
                                     </Link>
@@ -137,7 +141,7 @@ const App: React.FC = () => {
                                 <li>
                                     <Link
                                         to="/risk"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         风险监控
                                     </Link>
@@ -145,7 +149,7 @@ const App: React.FC = () => {
                                 <li>
                                     <Link
                                         to="/financials"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         财务报告
                                     </Link>
@@ -153,7 +157,7 @@ const App: React.FC = () => {
                                 <li>
                                     <Link
                                         to="/deep-data"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         产业地图
                                     </Link>
@@ -168,7 +172,7 @@ const App: React.FC = () => {
                                 <li>
                                     <a
                                         href="#"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         公司简介
                                     </a>
@@ -176,7 +180,7 @@ const App: React.FC = () => {
                                 <li>
                                     <a
                                         href="#"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         新闻中心
                                     </a>
@@ -184,7 +188,7 @@ const App: React.FC = () => {
                                 <li>
                                     <a
                                         href="#"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         诚聘英才
                                     </a>
@@ -192,7 +196,7 @@ const App: React.FC = () => {
                                 <li>
                                     <a
                                         href="#"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         联系我们
                                     </a>
@@ -207,7 +211,7 @@ const App: React.FC = () => {
                                 <li>
                                     <a
                                         href="#"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         常见问题
                                     </a>
@@ -215,7 +219,7 @@ const App: React.FC = () => {
                                 <li>
                                     <a
                                         href="#"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         服务协议
                                     </a>
@@ -223,7 +227,7 @@ const App: React.FC = () => {
                                 <li>
                                     <a
                                         href="#"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         隐私政策
                                     </a>
@@ -231,7 +235,7 @@ const App: React.FC = () => {
                                 <li>
                                     <a
                                         href="#"
-                                        className="hover:text-indigo-400"
+                                        className="hover:text-orange-400"
                                     >
                                         发票申请
                                     </a>
@@ -242,14 +246,14 @@ const App: React.FC = () => {
                             <h4 className="text-white font-semibold mb-4">
                                 官方微信
                             </h4>
-                            <div className="bg-slate-800 w-24 h-24 rounded flex items-center justify-center border border-slate-700">
+                            <div className="bg-slate-100 w-24 h-24 rounded flex items-center justify-center border border-slate-200">
                                 <span className="text-[10px] text-slate-500">
                                     二维码占位
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div className="pt-8 border-t border-slate-800 text-xs text-center">
+                    <div className="pt-8 border-t border-slate-100 text-xs text-center">
                         <p>
                             © 2026 企查查企业信息查询平台. 版权所有. 当前日期:
                             2026年05月08日

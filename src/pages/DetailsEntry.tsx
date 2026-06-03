@@ -11,7 +11,7 @@ const DetailsEntry: React.FC = () => {
         return <SuzhouCompanyDetails />;
     }
 
-    // 北京智慧易 id=1001 或未传 id 的情况）
+    // 鑫合易家（默认演示主体）或未传 id
     return <CompanyDetails />;
 };
 
