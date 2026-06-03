@@ -7,7 +7,6 @@ import {
     Share2,
     Star,
     Download,
-    RefreshCw,
     Flame,
     BrainCircuit,
     Check,
@@ -248,7 +247,7 @@ function BiddingTrackingModule() {
                         科创评级 {XINHEYIJIA_PROFILE.sciTechRating}
                     </span>
                     <span className="px-2 py-1 bg-slate-100 text-slate-700 rounded text-[10px] font-bold shrink-0">
-                        报告招投标 {XINHEYIJIA_PROFILE.overviewStats.biddingEvents} 条
+                        招投标 {XINHEYIJIA_PROFILE.overviewStats.biddingEvents} 条
                     </span>
                 </div>
             </div>
@@ -568,7 +567,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             </div>
 
                             <h4 className="text-sm font-bold text-slate-800 mt-8 mb-2">
-                                风险概览（信用决策报告）
+                                风险概览
                             </h4>
                             <p className="text-sm font-semibold text-slate-700 mb-1">
                                 主体自身风险
@@ -751,7 +750,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                     <div className="px-6 pb-6 pt-2 space-y-0">
                         <div className="py-5">
                             <h4 className="text-sm font-bold text-slate-800 mb-3">
-                                财务总览（信用决策报告）
+                                财务总览
                             </h4>
                             <p className="text-xs text-slate-500 mb-3">
                                 {XINHEYIJIA_PROFILE.finance.dataNote}
@@ -852,7 +851,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 {XINHEYIJIA_PROFILE.regCapital}
                                             </td>
                                             <td className="px-4 py-3">
-                                                科创报告
+                                                公开数据
                                             </td>
                                         </tr>
                                         <tr className="bg-card hover:bg-slate-50/80">
@@ -880,7 +879,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
 
                         <div className="py-5">
                             <h4 className="text-sm font-bold text-slate-800 mb-3">
-                                经营活跃度（信用决策报告）
+                                经营活跃度
                             </h4>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                                 {(
@@ -1031,9 +1030,6 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             <PieChart className="w-5 h-5 text-orange-500 shrink-0" />
                             信用评分动态画像
                         </h3>
-                        <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                            依据信用决策报告（{XINHEYIJIA_PROFILE.reportMeta.creditReportNo}）整合科创评级、财务区间与风险项。
-                        </p>
                     </div>
                     <div className="px-6 pb-6 pt-2 space-y-4">
                         <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-5 text-sm text-slate-700">
@@ -1102,7 +1098,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             投融资关系溯源
                         </h3>
                         <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                            信用决策报告：融资历史 {XINHEYIJIA_PROFILE.overviewStats.financingEvents} 次；对外投资 {XINHEYIJIA_PROFILE.investments.length} 家。
+                            融资历史 {XINHEYIJIA_PROFILE.overviewStats.financingEvents} 次；对外投资 {XINHEYIJIA_PROFILE.investments.length} 家。
                         </p>
                     </div>
                     <div className="px-6 pb-6 pt-2 overflow-x-auto">
@@ -1134,7 +1130,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                         </table>
                         <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50/80 p-4 text-sm text-slate-600">
                             <p className="font-semibold text-slate-800 mb-2">
-                                资质证书（{XINHEYIJIA_PROFILE.qualifications.length} 项，报告 4.1）
+                                资质证书（{XINHEYIJIA_PROFILE.qualifications.length} 项）
                             </p>
                             <ul className="space-y-2 max-h-64 overflow-y-auto">
                                 {XINHEYIJIA_PROFILE.qualifications.map((q) => (
@@ -1481,9 +1477,7 @@ const CompanyDetails: React.FC = () => {
                                     <p className="text-3xl font-black text-orange-500">
                                         {XINHEYIJIA_PROFILE.ip.patentTotal}
                                     </p>
-                                    <p className="text-[10px] text-orange-400 mt-1">
-                                        件（科创报告）
-                                    </p>
+                                    <p className="text-[10px] text-orange-400 mt-1">件</p>
                                 </div>
                                 <div className="bg-orange-500/10 border border-orange-900/40 p-4 rounded-2xl text-center w-32">
                                     <p className="text-[10px] text-orange-500 font-bold mb-1">
@@ -1492,23 +1486,12 @@ const CompanyDetails: React.FC = () => {
                                     <p className="text-lg font-black text-orange-500 leading-tight">
                                         {XINHEYIJIA_PROFILE.finance.salesRange}
                                     </p>
-                                    <p className="text-[10px] text-orange-400 mt-1">
-                                        信用决策报告
-                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="mt-8 pt-4 border-t border-dashed border-slate-200 flex flex-wrap gap-4 items-center justify-between">
-                        <div className="flex items-center gap-2 text-xs font-medium text-slate-600">
-                            <RefreshCw className="w-3.5 h-3.5 animate-[spin_3s_linear_infinite]" />
-                            双报告同步: {XINHEYIJIA_PROFILE.reportMeta.reportDate}（科创分析 + 信用决策 ·{" "}
-                            {XINHEYIJIA_PROFILE.reportMeta.creditReportGeneratedAt}）
-                        </div>
+                    <div className="mt-8 pt-4 border-t border-dashed border-slate-200 flex flex-wrap gap-4 items-center justify-end">
                         <div className="flex flex-wrap gap-6 items-center">
-                            <span className="text-xs text-slate-600">
-                                报告编码 {XINHEYIJIA_PROFILE.reportMeta.creditReportNo}
-                            </span>
                             <span className="flex items-center gap-2 text-xs font-bold text-red-500">
                                 <Flame className="w-3.5 h-3.5" />
                                 核准日期：{XINHEYIJIA_PROFILE.approvalDate}（{XINHEYIJIA_PROFILE.regAuthority}）
@@ -1804,7 +1787,7 @@ const CompanyDetails: React.FC = () => {
                                             合规记录 (0件风险事件)
                                         </p>
                                         <p className="text-xs text-slate-600">
-                                            科创报告：暂无行政处罚记录
+                                            暂无行政处罚记录
                                         </p>
                                     </div>
                                 </div>

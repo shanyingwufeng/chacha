@@ -39,7 +39,7 @@ export const XINHEYIJIA_PROFILE = {
         level: "L-11",
         scoreRange: "900-999",
         description: "信用表现卓越，当前处于良性循环状态，违约风险很低",
-        note: "信用决策报告企查分等级说明；具体分值以报告图表为准",
+        note: "企查分等级说明；具体分值以公示图表为准",
     },
     actualController: {
         name: "南京银行工会委员会",
@@ -50,7 +50,7 @@ export const XINHEYIJIA_PROFILE = {
     sciTechRating: "AAA（卓越）",
     sciTechRankIndustry: "前 3.53%",
     sciTechRankRegion: "前 3.02%",
-    scaleRankNote: "经营/利润/资产规模均位居同行业前 30%（信用决策报告）",
+    scaleRankNote: "经营/利润/资产规模均位居同行业前 30%",
     techCertifications: [
         "科技型中小企业",
         "专精特新企业",
@@ -397,13 +397,13 @@ export const XINHEYIJIA_PROFILE = {
     finance: {
         taxGrade: "A级",
         taxGradeYears: ["2025", "2023", "2022", "2021", "2020"] as const,
-        taxGradeNote: "纳税信用等级连续多年 A（信用决策报告公示 5 个年度）",
+        taxGradeNote: "纳税信用等级连续多年 A（公示 5 个年度）",
         taxpayerType: "增值税一般纳税人",
         salesRange: "1亿～5亿",
         profitRange: "1000万～5000万",
         assetsRange: "1亿～5亿",
         debtRatioRange: "30%～50%",
-        dataNote: "2024年度纳税数据及2023年度企业年报财务数据（区间披露）；财务简析见信用决策报告 2.8-2.9",
+        dataNote: "2024年度纳税数据及2023年度企业年报财务数据（区间披露）",
         growthHistory: [
             {
                 year: "2023",
@@ -468,9 +468,9 @@ export const XINHEYIJIA_PROFILE = {
         envPenalty: 0,
         patentInvalid: 0,
         subjectNote:
-            "信用决策报告：主体自身上述司法、税务、处罚类风险项均为 0，暂无相关公示信息（不排除滞后或未公示）",
+            "主体自身上述司法、税务、处罚类风险项均为 0，暂无相关公示信息（不排除滞后或未公示）",
         associatedNote:
-            "关联风险（报告第 8 章）：对外投资企业存在股权冻结、商业合作纠纷等公示信息，需结合持股路径综合研判",
+            "对外投资企业存在股权冻结、商业合作纠纷等公示信息，需结合持股路径综合研判",
     },
     reportMeta: {
         sciTechReportNo: "AHZX20260603150243.966966",
