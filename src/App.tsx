@@ -29,7 +29,7 @@ function RouteScrollTop() {
 const App: React.FC = () => {
     const location = useLocation();
     const isHomePage = location.pathname === "/";
-    const demoUserName = "admin";
+    const demoUserName = "鑫合生产账号";
 
     return (
         <div className="min-h-screen bg-background flex flex-col font-sans text-foreground">
