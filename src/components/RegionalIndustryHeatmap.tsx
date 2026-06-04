@@ -5,8 +5,11 @@ import {
     NODE_CATEGORIES,
     NODE_CATEGORY_TOTALS,
     NODE_GRAND_TOTAL,
+    PROVINCE_NODE_ROWS,
     REGIONAL_NODE_ROWS,
 } from "../data/industryRegionalHeatmapMock";
+
+const formatCount = (n: number) => n.toLocaleString("zh-CN");
 
 type EChartPanelProps = {
     option: echarts.EChartsOption;
@@ -53,7 +56,7 @@ export const RegionalIndustryHeatmap: React.FC = () => {
                     const p = Array.isArray(params) ? params[0] : params;
                     if (!p || !Array.isArray(p.value)) return "";
                     const [x, y, value] = p.value as [number, number, number];
-                    return `${MACRO_REGIONS[y]} · ${NODE_CATEGORIES[x]}<br/>节点数：<b>${value}</b>`;
+                    return `${MACRO_REGIONS[y]} · ${NODE_CATEGORIES[x]}<br/>节点数：<b>${formatCount(value)}</b>`;
                 },
             },
             grid: { left: 72, right: 24, top: 16, bottom: 72 },
@@ -92,7 +95,7 @@ export const RegionalIndustryHeatmap: React.FC = () => {
                         formatter: (p) => {
                             const raw = Array.isArray(p.value) ? p.value[2] : 0;
                             const value = typeof raw === "number" ? raw : 0;
-                            return value > 0 ? String(value) : "";
+                            return value > 0 ? formatCount(value) : "";
                         },
                     },
                     data: REGIONAL_NODE_ROWS.flatMap((row, y) =>
@@ -153,7 +156,7 @@ export const RegionalIndustryHeatmap: React.FC = () => {
     return (
         <div className="space-y-5">
             <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-                <span>产业节点合计 {NODE_GRAND_TOTAL} 个</span>
+                <span>产业节点合计 {formatCount(NODE_GRAND_TOTAL)} 个</span>
                 <span className="text-slate-700">|</span>
                 <span>省级数据归纳为大区展示</span>
             </div>
@@ -170,10 +173,56 @@ export const RegionalIndustryHeatmap: React.FC = () => {
                         />
                         <span className="text-xs text-slate-600">{cat}</span>
                         <span className="text-sm font-semibold text-slate-900 tabular-nums">
-                            {NODE_CATEGORY_TOTALS[cat]}
+                            {formatCount(NODE_CATEGORY_TOTALS[cat])}
                         </span>
                     </div>
                 ))}
+            </div>
+
+            <div className="rounded-xl border border-slate-200 overflow-hidden">
+                <div className="px-4 py-3 border-b border-slate-200 bg-slate-50/80">
+                    <h3 className="text-sm font-medium text-slate-700">产业节点分布</h3>
+                    <p className="text-xs text-slate-600 mt-0.5">各省（区、市）五类产业节点数量</p>
+                </div>
+                <div className="overflow-x-auto max-h-[420px] overflow-y-auto">
+                    <table className="w-full min-w-[640px] border-collapse text-sm">
+                        <thead className="sticky top-0 z-10 bg-slate-50">
+                            <tr className="border-b border-slate-200 text-left text-xs font-semibold text-slate-600">
+                                <th className="px-4 py-3 whitespace-nowrap">地区</th>
+                                {NODE_CATEGORIES.map((cat) => (
+                                    <th key={cat} className="px-4 py-3 text-right whitespace-nowrap">
+                                        {cat}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100 text-slate-700">
+                            {PROVINCE_NODE_ROWS.map((row) => (
+                                <tr key={row.region} className="hover:bg-slate-50/80">
+                                    <td className="px-4 py-2.5 font-medium whitespace-nowrap">
+                                        {row.region}
+                                    </td>
+                                    {NODE_CATEGORIES.map((cat) => (
+                                        <td
+                                            key={cat}
+                                            className="px-4 py-2.5 text-right tabular-nums text-slate-800"
+                                        >
+                                            {formatCount(row.values[cat])}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                            <tr className="bg-orange-50/60 font-semibold text-slate-900 border-t border-slate-200">
+                                <td className="px-4 py-3">合计</td>
+                                {NODE_CATEGORIES.map((cat) => (
+                                    <td key={cat} className="px-4 py-3 text-right tabular-nums">
+                                        {formatCount(NODE_CATEGORY_TOTALS[cat])}
+                                    </td>
+                                ))}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-4">

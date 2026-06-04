@@ -71,11 +71,19 @@ const EChartPanel: React.FC<EChartPanelProps> = ({ option, className }) => {
     return <div ref={containerRef} className={className ?? "h-72 w-full"} />;
 };
 
-const PAGE_SIZE = 10;
+const DEFAULT_PAGE_SIZE = 10;
+const CHAIN_PAGE_SIZE = 20;
+const KEY_PAGE_SIZE = 50;
 
 function formatCapital(val: number): string {
+    if (!val || val <= 0) return "—";
     if (val >= 10000) return `${(val / 10000).toFixed(2)}亿元`;
-    return `${val.toFixed(0)}万元`;
+    return `${val.toLocaleString("zh-CN", { maximumFractionDigits: 2 })}万元`;
+}
+
+function formatCapitalWan(val: number): string {
+    if (!val || val <= 0) return "—";
+    return val.toLocaleString("zh-CN", { maximumFractionDigits: 2 });
 }
 
 function riskLevelClass(level: string): string {
@@ -97,18 +105,67 @@ function riskLevelClass(level: string): string {
 
 type IndustryCompanyTableProps = {
     data: ChainEnterpriseListResponse;
+    /** 链上企业：与参考表一致的列与分页 */
+    variant?: "full" | "chain";
+    pageSize?: number;
 };
 
-const IndustryCompanyTable: React.FC<IndustryCompanyTableProps> = ({ data }) => {
+const IndustryCompanyTable: React.FC<IndustryCompanyTableProps> = ({
+    data,
+    variant = "full",
+    pageSize: pageSizeProp,
+}) => {
     const navigate = useNavigate();
     const [page, setPage] = useState(1);
     const { rows } = data;
+    const pageSize =
+        pageSizeProp ?? (variant === "chain" ? CHAIN_PAGE_SIZE : DEFAULT_PAGE_SIZE);
+    const totalCount = data.total ?? rows.length;
 
-    const totalPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+    const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
     const pageRows = useMemo(() => {
-        const start = (page - 1) * PAGE_SIZE;
-        return rows.slice(start, start + PAGE_SIZE);
-    }, [page, rows]);
+        const start = (page - 1) * pageSize;
+        return rows.slice(start, start + pageSize);
+    }, [page, pageSize, rows]);
+
+    const rowIndex = (index: number) => (page - 1) * pageSize + index + 1;
+
+    const renderChainRow = (company: ChainEnterprise, index: number) => (
+        <tr
+            key={company.companyId}
+            className="border-t border-slate-200 hover:bg-slate-50 align-top"
+        >
+            <td className="px-4 py-3 text-slate-500 whitespace-nowrap tabular-nums">
+                {rowIndex(index)}
+            </td>
+            <td className="px-4 py-3 min-w-[240px]">
+                <button
+                    type="button"
+                    className="font-medium text-slate-900 hover:text-orange-500 text-left"
+                    onClick={() => navigate("/details")}
+                >
+                    {company.companyName}
+                </button>
+            </td>
+            <td className="px-4 py-3 text-slate-700 whitespace-nowrap">
+                {company.legalPerson}
+            </td>
+            <td className="px-4 py-3 text-slate-700 min-w-[160px] whitespace-nowrap">
+                {company.location}
+            </td>
+            <td className="px-4 py-3 text-slate-700 whitespace-nowrap tabular-nums">
+                {company.establishDate}
+            </td>
+            <td className="px-4 py-3 text-slate-700 whitespace-nowrap tabular-nums text-right">
+                {formatCapitalWan(company.capital)}
+            </td>
+            <td className="px-4 py-3 text-slate-700 max-w-[200px]">
+                <span className="block truncate" title={company.industryL4Name}>
+                    {company.industryL4Name}
+                </span>
+            </td>
+        </tr>
+    );
 
     const renderCompanyRow = (company: ChainEnterprise, index: number) => (
         <tr
@@ -116,7 +173,7 @@ const IndustryCompanyTable: React.FC<IndustryCompanyTableProps> = ({ data }) => 
             className="border-t border-slate-200 hover:bg-slate-50 align-top"
         >
             <td className="px-4 py-3 text-slate-500 whitespace-nowrap">
-                {(page - 1) * PAGE_SIZE + index + 1}
+                {rowIndex(index)}
             </td>
             <td className="px-4 py-3 min-w-[280px]">
                 <div className="flex items-start gap-2">
@@ -230,33 +287,63 @@ const IndustryCompanyTable: React.FC<IndustryCompanyTableProps> = ({ data }) => 
         </tr>
     );
 
+    const colSpan = variant === "chain" ? 7 : 12;
+
     return (
         <div className="space-y-4 min-w-0">
             <div className="w-full max-w-full overflow-x-auto overscroll-x-contain rounded-xl border border-slate-200">
                 <table className="w-max min-w-full text-sm border-collapse">
                     <thead className="bg-slate-100 text-slate-700">
-                        <tr>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap w-14">序号</th>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[280px]">企业名称</th>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[96px]">法定代表人</th>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[88px]">经营状态</th>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[160px]">所属地区</th>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[140px]">行业</th>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[100px]">注册资本</th>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[108px]">成立日期</th>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[96px]">企业层级</th>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[96px]">科创等级</th>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[200px]">产业领域</th>
-                            <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[120px]">标签</th>
-                        </tr>
+                        {variant === "chain" ? (
+                            <tr>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap w-14">
+                                    序号
+                                </th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[240px]">
+                                    企业名称
+                                </th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[96px]">
+                                    法定代表人
+                                </th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[160px]">
+                                    省市
+                                </th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[108px]">
+                                    成立时间
+                                </th>
+                                <th className="px-4 py-3 text-right font-semibold whitespace-nowrap min-w-[100px]">
+                                    注册资本(万元)
+                                </th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[180px]">
+                                    国标行业
+                                </th>
+                            </tr>
+                        ) : (
+                            <tr>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap w-14">序号</th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[280px]">企业名称</th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[96px]">法定代表人</th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[88px]">经营状态</th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[160px]">所属地区</th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[140px]">行业</th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[100px]">注册资本</th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[108px]">成立日期</th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[96px]">企业层级</th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[96px]">科创等级</th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[200px]">产业领域</th>
+                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap min-w-[120px]">标签</th>
+                            </tr>
+                        )}
                     </thead>
                     <tbody>
                         {pageRows.length > 0 ? (
-                            pageRows.map(renderCompanyRow)
+                            pageRows.map(
+                                variant === "chain" ? renderChainRow : renderCompanyRow
+                            )
                         ) : (
                             <tr>
                                 <td
-                                    colSpan={12}
+                                    colSpan={colSpan}
                                     className="px-4 py-12 text-center text-slate-600"
                                 >
                                     暂无数据
@@ -266,30 +353,38 @@ const IndustryCompanyTable: React.FC<IndustryCompanyTableProps> = ({ data }) => 
                     </tbody>
                 </table>
             </div>
-            {totalPages > 1 && (
-                <div className="flex items-center justify-end gap-2">
-                    <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        disabled={page <= 1}
-                        onClick={() => setPage((p) => Math.max(1, p - 1))}
-                    >
-                        <ChevronLeft className="w-4 h-4" />
-                        上一页
-                    </Button>
-                    <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        disabled={page >= totalPages}
-                        onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                    >
-                        下一页
-                        <ChevronRight className="w-4 h-4" />
-                    </Button>
-                </div>
-            )}
+            <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-600">
+                <span>
+                    共 {totalCount.toLocaleString("zh-CN")} 条 · {pageSize} 条/页
+                </span>
+                {totalPages > 1 && (
+                    <div className="flex items-center gap-2">
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            disabled={page <= 1}
+                            onClick={() => setPage((p) => Math.max(1, p - 1))}
+                        >
+                            <ChevronLeft className="w-4 h-4" />
+                            上一页
+                        </Button>
+                        <span className="text-xs tabular-nums px-2">
+                            {page} / {totalPages}
+                        </span>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            disabled={page >= totalPages}
+                            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                        >
+                            下一页
+                            <ChevronRight className="w-4 h-4" />
+                        </Button>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
@@ -313,8 +408,16 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
             },
             yAxis: {
                 type: "value",
+                min: 0,
+                max: 15000,
+                splitNumber: 5,
                 splitLine: { lineStyle: { type: "dashed", color: "#f1f5f9" } },
-                axisLabel: { fontSize: 11, color: "#64748b" },
+                axisLabel: {
+                    fontSize: 11,
+                    color: "#64748b",
+                    formatter: (v: number) =>
+                        v >= 1000 ? `${v / 1000}k` : `${v}`,
+                },
             },
             series: [
                 {
@@ -353,7 +456,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                     const p = Array.isArray(params) ? params[0] : params;
                     if (!p || typeof p.value !== "number") return "";
                     const pct = ((p.value / ENTERPRISE_TOTAL) * 100).toFixed(1);
-                    return `${p.name}<br/>${p.value} 家 (${pct}%)`;
+                    return `${p.name}<br/>${Number(p.value).toLocaleString("zh-CN")} 家 (${pct}%)`;
                 },
             },
             legend: { bottom: 0, itemWidth: 10, itemHeight: 10, textStyle: { fontSize: 11 } },
@@ -363,7 +466,10 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                     type: "pie",
                     radius: ["38%", "68%"],
                     center: ["50%", "44%"],
-                    label: { formatter: "{b}\n{c}家", fontSize: 11 },
+                    label: {
+                        formatter: "{b}\n{c}家",
+                        fontSize: 11,
+                    },
                     data: CAPITAL_DISTRIBUTION.map((d, i) => ({
                         ...d,
                         itemStyle: {
@@ -416,7 +522,10 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                     label: {
                         show: true,
                         position: "top",
-                        formatter: (p) => (p.value ? `${p.value}` : ""),
+                        formatter: (p) =>
+                            p.value
+                                ? Number(p.value).toLocaleString("zh-CN")
+                                : "",
                         fontSize: 11,
                         color: "#64748b",
                     },
@@ -434,7 +543,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                     const p = Array.isArray(params) ? params[0] : params;
                     if (!p || typeof p.value !== "number") return "";
                     const pct = ((p.value / INTELLECTUAL_PROPERTY_TOTAL) * 100).toFixed(1);
-                    return `${p.name}<br/>${p.value} 件 (${pct}%)`;
+                    return `${p.name}<br/>${Number(p.value).toLocaleString("zh-CN")} 件 (${pct}%)`;
                 },
             },
             legend: { orient: "vertical", right: 8, top: "middle", itemWidth: 10, itemHeight: 10 },
@@ -490,7 +599,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                                 </div>
                                 <div className="mt-2 flex items-baseline gap-1">
                                     <span className="text-xl font-bold text-slate-900 tabular-nums">
-                                        {item.value}
+                                        {item.value.toLocaleString("zh-CN")}
                                     </span>
                                     <span className="text-xs text-slate-600">家</span>
                                 </div>
@@ -528,7 +637,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                             </div>
                             <div className="text-right">
                                 <div className="text-2xl font-bold text-slate-900 tabular-nums">
-                                    {ENTERPRISE_TOTAL}
+                                    {ENTERPRISE_TOTAL.toLocaleString("zh-CN")}
                                 </div>
                                 <div className="text-xs text-slate-600">企业总数</div>
                             </div>
@@ -581,7 +690,11 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                         企业列表
                     </Badge>
                 </div>
-                <IndustryCompanyTable data={CHAIN_ENTERPRISES_MOCK} />
+                <IndustryCompanyTable
+                    data={CHAIN_ENTERPRISES_MOCK}
+                    variant="chain"
+                    pageSize={CHAIN_PAGE_SIZE}
+                />
             </Card>}
 
             {show("key-companies") && <Card className="p-5 min-w-0 overflow-hidden">
@@ -594,7 +707,11 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                         企业列表
                     </Badge>
                 </div>
-                <IndustryCompanyTable data={KEY_COMPANIES_MOCK} />
+                <IndustryCompanyTable
+                    data={KEY_COMPANIES_MOCK}
+                    variant="chain"
+                    pageSize={KEY_PAGE_SIZE}
+                />
             </Card>}
 
             {show("chain-map") && <Card className="p-5">
@@ -702,7 +819,7 @@ const INDUSTRY_MODULES: IndustryModule[] = [
                 name: "人工智能",
                 icon: UserSquare2,
                 metricLabel: "产业链企业",
-                metricValue: "212家",
+                metricValue: "18546家",
             },
         ],
     },
