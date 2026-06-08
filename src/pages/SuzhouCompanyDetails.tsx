@@ -131,7 +131,10 @@ function SimpleEquityPenetrationGraph() {
                 <div className="flex flex-wrap justify-center gap-8 sm:gap-16">
                     <div className="flex flex-col items-center gap-2">
                         <div className="w-1.5 h-12 bg-slate-200 -mt-10 sm:-mt-12" />
-                        <RelationNodeCard title="陈羽衡" subtitle="股东 (100%)" />
+                        <RelationNodeCard
+                            title="陈羽衡"
+                            subtitle="股东 (100%)"
+                        />
                     </div>
                     <div className="flex flex-col items-center gap-2">
                         <div className="w-1.5 h-12 bg-slate-200 -mt-10 sm:-mt-12" />
@@ -160,11 +163,17 @@ function DeepPenetrationGraph({
                 <div className="flex flex-wrap justify-center gap-8 sm:gap-12 lg:gap-16 items-start">
                     <div className="flex flex-col items-center gap-2">
                         <div className="w-1.5 h-10 bg-slate-200 -mt-8 sm:-mt-10" />
-                        <RelationNodeCard title="陈羽衡" subtitle="关键自然人" />
+                        <RelationNodeCard
+                            title="陈羽衡"
+                            subtitle="关键自然人"
+                        />
                     </div>
                     <div className="flex flex-col items-center gap-2">
                         <div className="w-1.5 h-10 bg-slate-200 -mt-8 sm:-mt-10" />
-                        <RelationNodeCard title="对外投资" subtitle="关联企业" />
+                        <RelationNodeCard
+                            title="对外投资"
+                            subtitle="关联企业"
+                        />
                         <div className="w-1.5 h-6 bg-slate-200 shrink-0" />
                         <div className="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-[340px]">
                             <RelationNodeCard
@@ -414,22 +423,40 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             >
                                                 序号
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 案件名称
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 案件类型
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 案由
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 案件身份
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 案号
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 法院
                                             </th>
                                             <th
@@ -438,7 +465,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                             >
                                                 案件金额(元)
                                             </th>
-                                            <th scope="col" className="px-4 py-3">
+                                            <th
+                                                scope="col"
+                                                className="px-4 py-3"
+                                            >
                                                 最新案件进程
                                             </th>
                                         </tr>
@@ -450,7 +480,8 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 caseType: "民事案件",
                                                 cause: "劳动合同纠纷",
                                                 identity: "原告[撤诉]",
-                                                docketNo: "（2025）苏0591民初25751号",
+                                                docketNo:
+                                                    "（2025）苏0591民初25751号",
                                                 court: "江苏省苏州市苏州工业园区人民法院",
                                                 amount: "-",
                                                 progress: "民事一审",
@@ -460,7 +491,8 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 caseType: "民事案件",
                                                 cause: "申请撤销仲裁裁决",
                                                 identity: "申请人",
-                                                docketNo: "（2022）苏05民特288号",
+                                                docketNo:
+                                                    "（2022）苏05民特288号",
                                                 court: "江苏省苏州市中级人民法院",
                                                 amount: "-",
                                                 progress: "特别程序",
@@ -470,7 +502,8 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 caseType: "民事案件",
                                                 cause: "申请撤销仲裁裁决",
                                                 identity: "申请人",
-                                                docketNo: "（2022）苏05民特287号",
+                                                docketNo:
+                                                    "（2022）苏05民特287号",
                                                 court: "江苏省苏州市中级人民法院",
                                                 amount: "-",
                                                 progress: "特别程序",
@@ -480,7 +513,8 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 caseType: "民事案件",
                                                 cause: "计算机软件开发合同纠纷",
                                                 identity: "原告",
-                                                docketNo: "（2022）苏05民初275号",
+                                                docketNo:
+                                                    "（2022）苏05民初275号",
                                                 court: "江苏省苏州市中级人民法院",
                                                 amount: "-",
                                                 progress: "民事一审",
@@ -854,8 +888,12 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             </p>
                             <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
                                 <li>综合评分区间：稳健（示意）</li>
-                                <li>履约与负债维度权重已纳入模型，可按监管口径调整</li>
-                                <li>支持对接内部风控策略，输出预警与复核清单</li>
+                                <li>
+                                    履约与负债维度权重已纳入模型，可按监管口径调整
+                                </li>
+                                <li>
+                                    支持对接内部风控策略，输出预警与复核清单
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -881,7 +919,9 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
                                 <li>股权融资与增资扩股事件时间轴</li>
                                 <li>对外投资与参股路径并列展示</li>
-                                <li>可与关联图谱联动，定位共同投资方与一致行动线索</li>
+                                <li>
+                                    可与关联图谱联动，定位共同投资方与一致行动线索
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -1092,7 +1132,8 @@ const SuzhouCompanyDetails: React.FC = () => {
                                 <span className="font-bold text-slate-700">
                                     企业简介：
                                 </span>
-                                智能化科技、生物科技、新材料科技、信息科技领域内的技术开发、技术转让、技术咨询、技术服务；投资咨询；人力资源服务；科技项目中介服务； 企业孵化器管理；企业管理咨询、商务信息咨询；展览展示服务、会务服务；旅游信息咨询；网络信息技术开发、网络营销策划；销售：机械设备、电子材料、电子产品。（依法须经批准的项目，经相关部门批准后方可开展经营活动）许可项目：职业中介活动（依法须经批准的项目，经相关部门批准后方可开展经营活动，具体经营项目以审批结果为准）一般项目：房地产经纪；房地产评估；房地产咨询；非居住房地产租赁（除依法须经批准的项目外，凭营业执照依法自主开展经营活动）
+                                智能化科技、生物科技、新材料科技、信息科技领域内的技术开发、技术转让、技术咨询、技术服务；投资咨询；人力资源服务；科技项目中介服务；
+                                企业孵化器管理；企业管理咨询、商务信息咨询；展览展示服务、会务服务；旅游信息咨询；网络信息技术开发、网络营销策划；销售：机械设备、电子材料、电子产品。（依法须经批准的项目，经相关部门批准后方可开展经营活动）许可项目：职业中介活动（依法须经批准的项目，经相关部门批准后方可开展经营活动，具体经营项目以审批结果为准）一般项目：房地产经纪；房地产评估；房地产咨询；非居住房地产租赁（除依法须经批准的项目外，凭营业执照依法自主开展经营活动）
                             </p>
                         </div>
                         <div className="flex flex-col items-center lg:items-end gap-6">
@@ -1165,7 +1206,14 @@ const SuzhouCompanyDetails: React.FC = () => {
                     </div>
                 </section>
 
-                <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
+                <div className="text-2xl  font-bold text-slate-900">
+                    企业知识管理
+                </div>
+
+                <div
+                    className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8"
+                    style={{ marginTop: "16px" }}
+                >
                     <nav
                         className="mb-8 flex flex-wrap items-center gap-3"
                         aria-label="企业知识子模块"
@@ -1178,9 +1226,7 @@ const SuzhouCompanyDetails: React.FC = () => {
                                     type="button"
                                     role="tab"
                                     aria-selected={isActive}
-                                    onClick={() =>
-                                        setActiveKnowledgeModule(id)
-                                    }
+                                    onClick={() => setActiveKnowledgeModule(id)}
                                     className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
                                         isActive
                                             ? "border-orange-600 bg-orange-500/10 text-orange-800 shadow-sm ring-1 ring-orange-800/80"
@@ -1443,4 +1489,3 @@ const SuzhouCompanyDetails: React.FC = () => {
 };
 
 export default SuzhouCompanyDetails;
-
