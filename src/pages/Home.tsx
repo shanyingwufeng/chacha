@@ -23,7 +23,7 @@ type ServiceItem = {
 /** 服务入口：左图标 + 右标题/描述 */
 const SERVICE_GRID_ITEMS: ServiceItem[] = [
     {
-        title: "全景企业画像",
+        title: "企业标签管理",
         desc: "贯通工商、股权与资质等维度，形成可检索、可对比的企业主体视图。",
         to: "/enterprise-tags",
         icon: LayoutGrid,
@@ -34,7 +34,7 @@ const SERVICE_GRID_ITEMS: ServiceItem[] = [
         icon: Radar,
     },
     {
-        title: "产业拓扑洞察",
+        title: "产业分析",
         desc: "刻画产业链节点与关联强度，辅助识别关键环节与结构性机会。",
         to: "/industry-analysis",
         icon: Share2,

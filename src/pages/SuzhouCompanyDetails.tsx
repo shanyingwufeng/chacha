@@ -41,26 +41,26 @@ const KNOWLEDGE_NAV: {
 }[] = [
     {
         id: "judicial",
-        sidebarLabel: "司法风险全景视图",
-        chipLabel: "司法风险全景视图",
+        sidebarLabel: "司法风险",
+        chipLabel: "司法风险",
         Icon: Gavel,
     },
     {
         id: "relation",
-        sidebarLabel: "关联关系穿透图谱",
-        chipLabel: "关联关系穿透图谱",
+        sidebarLabel: "关联关系穿透",
+        chipLabel: "关联关系穿透",
         Icon: Network,
     },
     {
         id: "monitoring",
-        sidebarLabel: "经营动态监控看板",
-        chipLabel: "经营动态监控看板",
+        sidebarLabel: "经营动态监控",
+        chipLabel: "经营动态监控",
         Icon: Eye,
     },
     {
         id: "bidding",
-        sidebarLabel: "招投标智能追踪",
-        chipLabel: "招投标智能追踪",
+        sidebarLabel: "招投标追踪",
+        chipLabel: "招投标追踪",
         Icon: FileText,
     },
     {
@@ -259,7 +259,7 @@ function BiddingTrackingModule() {
             <div className="p-6 border-b border-slate-100 flex flex-wrap justify-between items-center gap-4">
                 <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
                     <FileText className="w-5 h-5 text-orange-500 shrink-0" />
-                    招投标智能追踪
+                    招投标追踪
                 </h3>
                 <span className="px-2 py-1 bg-red-100 text-red-600 rounded text-[10px] font-bold shrink-0">
                     累计招投标 23 次
@@ -392,7 +392,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                     <div className="px-6 pt-6 pb-4">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
                             <Gavel className="w-5 h-5 text-orange-500 shrink-0" />
-                            司法风险全景视图
+                            司法风险
                         </h3>
                         <div className="mt-4 border-b border-slate-200" />
                     </div>
@@ -675,7 +675,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                     <div className="p-6 border-b border-slate-100 flex justify-between items-center gap-4">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
                             <Network className="w-5 h-5 text-orange-500 shrink-0" />
-                            关联关系穿透图谱
+                            关联关系穿透
                         </h3>
                         <button
                             type="button"
@@ -700,7 +700,7 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                     <div className="p-6 border-b border-slate-100 flex justify-between items-center gap-4">
                         <h3 className="text-lg font-bold flex items-center gap-2 text-slate-900">
                             <Eye className="w-5 h-5 text-orange-500 shrink-0" />
-                            经营动态监控看板
+                            经营动态监控
                         </h3>
                         <span className="text-xs text-slate-600 shrink-0">
                             监控周期：近 12 个月

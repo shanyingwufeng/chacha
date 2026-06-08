@@ -731,7 +731,7 @@ export const IndustryAnalysisContent: React.FC<IndustryAnalysisProps> = ({
                 <div className="flex items-center gap-2 mb-4">
                     <MapPinned className="w-5 h-5 text-emerald-600" />
                     <h2 className="font-semibold text-slate-900">
-                        区域产业热力图
+                        区域产业热力
                     </h2>
                     <Badge variant="secondary" className="ml-2">
                         产业节点分布
@@ -1019,7 +1019,7 @@ function sectionLabel(id: IndustrySectionId): string {
         case "chain-map":
             return "产业链图谱";
         case "heatmap":
-            return "区域产业热力图";
+            return "区域产业热力";
         default:
             return "产业概览";
     }
