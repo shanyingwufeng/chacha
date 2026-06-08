@@ -247,7 +247,8 @@ function BiddingTrackingModule() {
                         科创评级 {XINHEYIJIA_PROFILE.sciTechRating}
                     </span>
                     <span className="px-2 py-1 bg-slate-100 text-slate-700 rounded text-[10px] font-bold shrink-0">
-                        招投标 {XINHEYIJIA_PROFILE.overviewStats.biddingEvents} 条
+                        招投标 {XINHEYIJIA_PROFILE.overviewStats.biddingEvents}{" "}
+                        条
                     </span>
                 </div>
             </div>
@@ -578,20 +579,48 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-6">
                                 {(
                                     [
-                                        ["被执行人", XINHEYIJIA_PROFILE.riskSummary.executed],
-                                        ["失信被执行", XINHEYIJIA_PROFILE.riskSummary.dishonest],
-                                        ["行政处罚", XINHEYIJIA_PROFILE.riskSummary.adminPenalty],
-                                        ["欠税公告", XINHEYIJIA_PROFILE.riskSummary.taxArrears],
-                                        ["税务违法", XINHEYIJIA_PROFILE.riskSummary.taxViolation],
-                                        ["专利诉讼", XINHEYIJIA_PROFILE.riskSummary.patentLitigation],
+                                        [
+                                            "被执行人",
+                                            XINHEYIJIA_PROFILE.riskSummary
+                                                .executed,
+                                        ],
+                                        [
+                                            "失信被执行",
+                                            XINHEYIJIA_PROFILE.riskSummary
+                                                .dishonest,
+                                        ],
+                                        [
+                                            "行政处罚",
+                                            XINHEYIJIA_PROFILE.riskSummary
+                                                .adminPenalty,
+                                        ],
+                                        [
+                                            "欠税公告",
+                                            XINHEYIJIA_PROFILE.riskSummary
+                                                .taxArrears,
+                                        ],
+                                        [
+                                            "税务违法",
+                                            XINHEYIJIA_PROFILE.riskSummary
+                                                .taxViolation,
+                                        ],
+                                        [
+                                            "专利诉讼",
+                                            XINHEYIJIA_PROFILE.riskSummary
+                                                .patentLitigation,
+                                        ],
                                     ] as const
                                 ).map(([label, count]) => (
                                     <div
                                         key={label}
                                         className="rounded-lg border border-emerald-100 bg-emerald-50/50 px-3 py-2 text-center"
                                     >
-                                        <p className="text-[10px] text-slate-500">{label}</p>
-                                        <p className="text-lg font-bold text-emerald-600">{count}</p>
+                                        <p className="text-[10px] text-slate-500">
+                                            {label}
+                                        </p>
+                                        <p className="text-lg font-bold text-emerald-600">
+                                            {count}
+                                        </p>
                                     </div>
                                 ))}
                             </div>
@@ -605,50 +634,103 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                 <table className="w-full min-w-[560px] border-collapse text-sm text-slate-700">
                                     <thead>
                                         <tr className="border-b border-amber-100 bg-amber-50/80 text-left text-xs font-semibold text-slate-600">
-                                            <th className="px-4 py-3 w-16">序号</th>
-                                            <th className="px-4 py-3">关联企业</th>
+                                            <th className="px-4 py-3 w-16">
+                                                序号
+                                            </th>
+                                            <th className="px-4 py-3">
+                                                关联企业
+                                            </th>
                                             <th className="px-4 py-3">关系</th>
-                                            <th className="px-4 py-3">风险类型</th>
-                                            <th className="px-4 py-3 w-16">数量</th>
+                                            <th className="px-4 py-3">
+                                                风险类型
+                                            </th>
+                                            <th className="px-4 py-3 w-16">
+                                                数量
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-amber-50">
-                                        {XINHEYIJIA_PROFILE.associatedRisks.map((row, i) => (
-                                            <tr key={row.company} className="bg-card hover:bg-amber-50/30">
-                                                <td className="px-4 py-3">{i + 1}</td>
-                                                <td className="px-4 py-3 font-medium">{row.company}</td>
-                                                <td className="px-4 py-3 text-slate-600">{row.relation}</td>
-                                                <td className="px-4 py-3 text-amber-800">{row.riskType}</td>
-                                                <td className="px-4 py-3 font-bold text-amber-600">{row.count}</td>
-                                            </tr>
-                                        ))}
+                                        {XINHEYIJIA_PROFILE.associatedRisks.map(
+                                            (row, i) => (
+                                                <tr
+                                                    key={row.company}
+                                                    className="bg-card hover:bg-amber-50/30"
+                                                >
+                                                    <td className="px-4 py-3">
+                                                        {i + 1}
+                                                    </td>
+                                                    <td className="px-4 py-3 font-medium">
+                                                        {row.company}
+                                                    </td>
+                                                    <td className="px-4 py-3 text-slate-600">
+                                                        {row.relation}
+                                                    </td>
+                                                    <td className="px-4 py-3 text-amber-800">
+                                                        {row.riskType}
+                                                    </td>
+                                                    <td className="px-4 py-3 font-bold text-amber-600">
+                                                        {row.count}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
                             <h4 className="text-sm font-bold text-slate-800 mb-2">
-                                工商变更记录（{XINHEYIJIA_PROFILE.overviewStats.changeRecords} 条）
+                                工商变更记录（
+                                {
+                                    XINHEYIJIA_PROFILE.overviewStats
+                                        .changeRecords
+                                }{" "}
+                                条）
                             </h4>
                             <div className="overflow-x-auto rounded-xl border border-slate-200">
                                 <table className="w-full min-w-[640px] border-collapse text-sm text-slate-700">
                                     <thead>
                                         <tr className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold text-slate-600">
-                                            <th className="px-4 py-3 w-16">序号</th>
-                                            <th className="px-4 py-3">变更日期</th>
-                                            <th className="px-4 py-3">变更事项</th>
-                                            <th className="px-4 py-3">变更前</th>
-                                            <th className="px-4 py-3">变更后</th>
+                                            <th className="px-4 py-3 w-16">
+                                                序号
+                                            </th>
+                                            <th className="px-4 py-3">
+                                                变更日期
+                                            </th>
+                                            <th className="px-4 py-3">
+                                                变更事项
+                                            </th>
+                                            <th className="px-4 py-3">
+                                                变更前
+                                            </th>
+                                            <th className="px-4 py-3">
+                                                变更后
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-slate-100">
-                                        {XINHEYIJIA_PROFILE.changeRecords.map((row, i) => (
-                                            <tr key={row.date + row.item} className="bg-card hover:bg-slate-50/80">
-                                                <td className="px-4 py-3">{i + 1}</td>
-                                                <td className="px-4 py-3 whitespace-nowrap">{row.date}</td>
-                                                <td className="px-4 py-3">{row.item}</td>
-                                                <td className="px-4 py-3 text-slate-600">{row.before}</td>
-                                                <td className="px-4 py-3">{row.after}</td>
-                                            </tr>
-                                        ))}
+                                        {XINHEYIJIA_PROFILE.changeRecords.map(
+                                            (row, i) => (
+                                                <tr
+                                                    key={row.date + row.item}
+                                                    className="bg-card hover:bg-slate-50/80"
+                                                >
+                                                    <td className="px-4 py-3">
+                                                        {i + 1}
+                                                    </td>
+                                                    <td className="px-4 py-3 whitespace-nowrap">
+                                                        {row.date}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {row.item}
+                                                    </td>
+                                                    <td className="px-4 py-3 text-slate-600">
+                                                        {row.before}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {row.after}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
@@ -758,18 +840,38 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                                 {(
                                     [
-                                        ["销售收入", XINHEYIJIA_PROFILE.finance.salesRange],
-                                        ["利润规模", XINHEYIJIA_PROFILE.finance.profitRange],
-                                        ["资产总额", XINHEYIJIA_PROFILE.finance.assetsRange],
-                                        ["资产负债率", XINHEYIJIA_PROFILE.finance.debtRatioRange],
+                                        [
+                                            "销售收入",
+                                            XINHEYIJIA_PROFILE.finance
+                                                .salesRange,
+                                        ],
+                                        [
+                                            "利润规模",
+                                            XINHEYIJIA_PROFILE.finance
+                                                .profitRange,
+                                        ],
+                                        [
+                                            "资产总额",
+                                            XINHEYIJIA_PROFILE.finance
+                                                .assetsRange,
+                                        ],
+                                        [
+                                            "资产负债率",
+                                            XINHEYIJIA_PROFILE.finance
+                                                .debtRatioRange,
+                                        ],
                                     ] as const
                                 ).map(([k, v]) => (
                                     <div
                                         key={k}
                                         className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"
                                     >
-                                        <p className="text-[10px] text-slate-500">{k}</p>
-                                        <p className="text-sm font-bold text-slate-800">{v}</p>
+                                        <p className="text-[10px] text-slate-500">
+                                            {k}
+                                        </p>
+                                        <p className="text-sm font-bold text-slate-800">
+                                            {v}
+                                        </p>
                                     </div>
                                 ))}
                             </div>
@@ -778,22 +880,45 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                     <thead>
                                         <tr className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold text-slate-600">
                                             <th className="px-4 py-3">年度</th>
-                                            <th className="px-4 py-3">销售收入增长率</th>
-                                            <th className="px-4 py-3">利润增长率</th>
-                                            <th className="px-4 py-3">资产增长率</th>
-                                            <th className="px-4 py-3">资产负债率变化</th>
+                                            <th className="px-4 py-3">
+                                                销售收入增长率
+                                            </th>
+                                            <th className="px-4 py-3">
+                                                利润增长率
+                                            </th>
+                                            <th className="px-4 py-3">
+                                                资产增长率
+                                            </th>
+                                            <th className="px-4 py-3">
+                                                资产负债率变化
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-slate-100">
-                                        {XINHEYIJIA_PROFILE.finance.growthHistory.map((row) => (
-                                            <tr key={row.year} className="bg-card">
-                                                <td className="px-4 py-3 font-medium">{row.year}</td>
-                                                <td className="px-4 py-3">{row.sales}</td>
-                                                <td className="px-4 py-3">{row.profit}</td>
-                                                <td className="px-4 py-3">{row.assets}</td>
-                                                <td className="px-4 py-3">{row.debtRatio}</td>
-                                            </tr>
-                                        ))}
+                                        {XINHEYIJIA_PROFILE.finance.growthHistory.map(
+                                            (row) => (
+                                                <tr
+                                                    key={row.year}
+                                                    className="bg-card"
+                                                >
+                                                    <td className="px-4 py-3 font-medium">
+                                                        {row.year}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {row.sales}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {row.profit}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {row.assets}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {row.debtRatio}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
@@ -865,7 +990,9 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 实缴资本
                                             </td>
                                             <td className="px-4 py-3">
-                                                {XINHEYIJIA_PROFILE.paidInCapital}
+                                                {
+                                                    XINHEYIJIA_PROFILE.paidInCapital
+                                                }
                                             </td>
                                             <td className="px-4 py-3">
                                                 工商信息
@@ -884,9 +1011,18 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                                 {(
                                     [
-                                        ["招投标", `${XINHEYIJIA_PROFILE.overviewStats.biddingEvents} 条`],
-                                        ["主要客户", `${XINHEYIJIA_PROFILE.overviewStats.keyCustomers} 家`],
-                                        ["招聘信息", `${XINHEYIJIA_PROFILE.overviewStats.recruitmentPosts} 条`],
+                                        [
+                                            "招投标",
+                                            `${XINHEYIJIA_PROFILE.overviewStats.biddingEvents} 条`,
+                                        ],
+                                        [
+                                            "主要客户",
+                                            `${XINHEYIJIA_PROFILE.overviewStats.keyCustomers} 家`,
+                                        ],
+                                        [
+                                            "招聘信息",
+                                            `${XINHEYIJIA_PROFILE.overviewStats.recruitmentPosts} 条`,
+                                        ],
                                         [
                                             "社保参保",
                                             `${XINHEYIJIA_PROFILE.operations.socialInsuranceEmployees} 人`,
@@ -897,15 +1033,27 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                         key={k}
                                         className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"
                                     >
-                                        <p className="text-[10px] text-slate-500">{k}</p>
-                                        <p className="text-sm font-bold text-slate-800">{v}</p>
+                                        <p className="text-[10px] text-slate-500">
+                                            {k}
+                                        </p>
+                                        <p className="text-sm font-bold text-slate-800">
+                                            {v}
+                                        </p>
                                     </div>
                                 ))}
                             </div>
                             <p className="text-xs text-slate-500 mb-3">
-                                社保人数为{XINHEYIJIA_PROFILE.operations.socialInsuranceYear}
+                                社保人数为
+                                {
+                                    XINHEYIJIA_PROFILE.operations
+                                        .socialInsuranceYear
+                                }
                                 年度报告城镇职工基本养老保险参保人数；控制企业{" "}
-                                {XINHEYIJIA_PROFILE.overviewStats.controlledCompanies} 家。
+                                {
+                                    XINHEYIJIA_PROFILE.overviewStats
+                                        .controlledCompanies
+                                }{" "}
+                                家。
                             </p>
                             <h4 className="text-sm font-bold text-slate-800 mb-2">
                                 重点客户（摘录）
@@ -915,23 +1063,37 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                     <thead>
                                         <tr className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold text-slate-600">
                                             <th className="px-4 py-3">客户</th>
-                                            <th className="px-4 py-3">公开日期</th>
+                                            <th className="px-4 py-3">
+                                                公开日期
+                                            </th>
                                             <th className="px-4 py-3">来源</th>
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-slate-100">
-                                        {XINHEYIJIA_PROFILE.operations.keyCustomers.map((c) => (
-                                            <tr key={c.name} className="bg-card">
-                                                <td className="px-4 py-3 font-medium">{c.name}</td>
-                                                <td className="px-4 py-3 whitespace-nowrap">{c.date}</td>
-                                                <td className="px-4 py-3">
-                                                    {"source" in c ? c.source : "招投标"}
-                                                    {"amountWan" in c && c.amountWan != null
-                                                        ? ` · ${c.amountWan} 万元`
-                                                        : ""}
-                                                </td>
-                                            </tr>
-                                        ))}
+                                        {XINHEYIJIA_PROFILE.operations.keyCustomers.map(
+                                            (c) => (
+                                                <tr
+                                                    key={c.name}
+                                                    className="bg-card"
+                                                >
+                                                    <td className="px-4 py-3 font-medium">
+                                                        {c.name}
+                                                    </td>
+                                                    <td className="px-4 py-3 whitespace-nowrap">
+                                                        {c.date}
+                                                    </td>
+                                                    <td className="px-4 py-3">
+                                                        {"source" in c
+                                                            ? c.source
+                                                            : "招投标"}
+                                                        {"amountWan" in c &&
+                                                        c.amountWan != null
+                                                            ? ` · ${c.amountWan} 万元`
+                                                            : ""}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
@@ -980,8 +1142,16 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 专利 / 软著
                                             </td>
                                             <td className="px-4 py-3">
-                                                {XINHEYIJIA_PROFILE.ip.patentTotal} 件 /{" "}
-                                                {XINHEYIJIA_PROFILE.ip.softwareCopyright} 项
+                                                {
+                                                    XINHEYIJIA_PROFILE.ip
+                                                        .patentTotal
+                                                }{" "}
+                                                件 /{" "}
+                                                {
+                                                    XINHEYIJIA_PROFILE.ip
+                                                        .softwareCopyright
+                                                }{" "}
+                                                项
                                             </td>
                                         </tr>
                                         <tr className="bg-card hover:bg-slate-50/80">
@@ -995,7 +1165,11 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 对外投资企业数
                                             </td>
                                             <td className="px-4 py-3">
-                                                {XINHEYIJIA_PROFILE.investments.length} 家
+                                                {
+                                                    XINHEYIJIA_PROFILE
+                                                        .investments.length
+                                                }{" "}
+                                                家
                                             </td>
                                         </tr>
                                         <tr className="bg-card hover:bg-slate-50/80">
@@ -1009,7 +1183,12 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                                 股东数量
                                             </td>
                                             <td className="px-4 py-3">
-                                                {XINHEYIJIA_PROFILE.overviewStats.shareholders} 位
+                                                {
+                                                    XINHEYIJIA_PROFILE
+                                                        .overviewStats
+                                                        .shareholders
+                                                }{" "}
+                                                位
                                             </td>
                                         </tr>
                                     </tbody>
@@ -1034,8 +1213,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                     <div className="px-6 pb-6 pt-2 space-y-4">
                         <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-5 text-sm text-slate-700">
                             <p className="font-semibold text-blue-800 mb-2">
-                                企查分：{XINHEYIJIA_PROFILE.qichachaCredit.level}（
-                                {XINHEYIJIA_PROFILE.qichachaCredit.scoreRange} 分）
+                                企查分：
+                                {XINHEYIJIA_PROFILE.qichachaCredit.level}（
+                                {XINHEYIJIA_PROFILE.qichachaCredit.scoreRange}{" "}
+                                分）
                             </p>
                             <p className="text-slate-600">
                                 {XINHEYIJIA_PROFILE.qichachaCredit.description}
@@ -1049,39 +1230,80 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                 科创信用：{XINHEYIJIA_PROFILE.sciTechRating}
                             </p>
                             <ul className="list-disc pl-5 space-y-1 text-slate-600">
-                                <li>同行业排名 {XINHEYIJIA_PROFILE.sciTechRankIndustry}</li>
-                                <li>江苏省同行业排名 {XINHEYIJIA_PROFILE.sciTechRankRegion}</li>
+                                <li>
+                                    同行业排名{" "}
+                                    {XINHEYIJIA_PROFILE.sciTechRankIndustry}
+                                </li>
+                                <li>
+                                    江苏省同行业排名{" "}
+                                    {XINHEYIJIA_PROFILE.sciTechRankRegion}
+                                </li>
                                 <li>{XINHEYIJIA_PROFILE.scaleRankNote}</li>
                             </ul>
                         </div>
                         <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-5 text-sm text-slate-700">
-                            <p className="font-semibold text-slate-800 mb-2">财务与纳税</p>
+                            <p className="font-semibold text-slate-800 mb-2">
+                                财务与纳税
+                            </p>
                             <ul className="list-disc pl-5 space-y-1 text-slate-600">
                                 <li>
-                                    纳税等级 {XINHEYIJIA_PROFILE.finance.taxGrade}（
+                                    纳税等级{" "}
+                                    {XINHEYIJIA_PROFILE.finance.taxGrade}（
                                     {XINHEYIJIA_PROFILE.finance.taxpayerType}）
                                 </li>
-                                <li>{XINHEYIJIA_PROFILE.finance.taxGradeNote}</li>
-                                <li>销售收入 {XINHEYIJIA_PROFILE.finance.salesRange}，利润 {XINHEYIJIA_PROFILE.finance.profitRange}</li>
-                                <li>资产 {XINHEYIJIA_PROFILE.finance.assetsRange}，资产负债率 {XINHEYIJIA_PROFILE.finance.debtRatioRange}</li>
-                                <li>融资记录 {XINHEYIJIA_PROFILE.overviewStats.financingEvents} 次</li>
+                                <li>
+                                    {XINHEYIJIA_PROFILE.finance.taxGradeNote}
+                                </li>
+                                <li>
+                                    销售收入{" "}
+                                    {XINHEYIJIA_PROFILE.finance.salesRange}
+                                    ，利润{" "}
+                                    {XINHEYIJIA_PROFILE.finance.profitRange}
+                                </li>
+                                <li>
+                                    资产{" "}
+                                    {XINHEYIJIA_PROFILE.finance.assetsRange}
+                                    ，资产负债率{" "}
+                                    {XINHEYIJIA_PROFILE.finance.debtRatioRange}
+                                </li>
+                                <li>
+                                    融资记录{" "}
+                                    {
+                                        XINHEYIJIA_PROFILE.overviewStats
+                                            .financingEvents
+                                    }{" "}
+                                    次
+                                </li>
                             </ul>
                         </div>
                         <div className="rounded-xl border border-emerald-200 bg-emerald-50/40 p-5 text-sm text-slate-700">
-                            <p className="font-semibold text-emerald-800 mb-2">主体风险（均为 0）</p>
-                            <p className="text-slate-600">{XINHEYIJIA_PROFILE.riskSummary.subjectNote}</p>
+                            <p className="font-semibold text-emerald-800 mb-2">
+                                主体风险（均为 0）
+                            </p>
+                            <p className="text-slate-600">
+                                {XINHEYIJIA_PROFILE.riskSummary.subjectNote}
+                            </p>
                         </div>
                         <div className="rounded-xl border border-amber-200 bg-amber-50/40 p-5 text-sm text-slate-700">
-                            <p className="font-semibold text-amber-800 mb-2">关联风险</p>
-                            <p className="text-slate-600 mb-3">{XINHEYIJIA_PROFILE.riskSummary.associatedNote}</p>
+                            <p className="font-semibold text-amber-800 mb-2">
+                                关联风险
+                            </p>
+                            <p className="text-slate-600 mb-3">
+                                {XINHEYIJIA_PROFILE.riskSummary.associatedNote}
+                            </p>
                             <ul className="space-y-2">
                                 {XINHEYIJIA_PROFILE.associatedRisks.map((r) => (
                                     <li
                                         key={r.company}
                                         className="rounded-lg border border-amber-100 bg-card px-3 py-2 text-slate-700"
                                     >
-                                        <span className="font-medium">{r.company}</span>
-                                        <span className="text-slate-500"> · {r.riskType} ×{r.count}</span>
+                                        <span className="font-medium">
+                                            {r.company}
+                                        </span>
+                                        <span className="text-slate-500">
+                                            {" "}
+                                            · {r.riskType} ×{r.count}
+                                        </span>
                                     </li>
                                 ))}
                             </ul>
@@ -1098,7 +1320,10 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             投融资关系溯源
                         </h3>
                         <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                            融资历史 {XINHEYIJIA_PROFILE.overviewStats.financingEvents} 次；对外投资 {XINHEYIJIA_PROFILE.investments.length} 家。
+                            融资历史{" "}
+                            {XINHEYIJIA_PROFILE.overviewStats.financingEvents}{" "}
+                            次；对外投资 {XINHEYIJIA_PROFILE.investments.length}{" "}
+                            家。
                         </p>
                     </div>
                     <div className="px-6 pb-6 pt-2 overflow-x-auto">
@@ -1116,11 +1341,21 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             <tbody className="divide-y divide-slate-100">
                                 {XINHEYIJIA_PROFILE.investments.map((inv) => (
                                     <tr key={inv.name} className="bg-card">
-                                        <td className="px-4 py-3 font-medium">{inv.name}</td>
-                                        <td className="px-4 py-3">{inv.status}</td>
-                                        <td className="px-4 py-3">{inv.ratio}</td>
-                                        <td className="px-4 py-3">{inv.amountWan} 万元</td>
-                                        <td className="px-4 py-3 whitespace-nowrap">{inv.investDate}</td>
+                                        <td className="px-4 py-3 font-medium">
+                                            {inv.name}
+                                        </td>
+                                        <td className="px-4 py-3">
+                                            {inv.status}
+                                        </td>
+                                        <td className="px-4 py-3">
+                                            {inv.ratio}
+                                        </td>
+                                        <td className="px-4 py-3">
+                                            {inv.amountWan} 万元
+                                        </td>
+                                        <td className="px-4 py-3 whitespace-nowrap">
+                                            {inv.investDate}
+                                        </td>
                                         <td className="px-4 py-3 text-amber-700 text-xs">
                                             {inv.associatedRisk ?? "—"}
                                         </td>
@@ -1130,7 +1365,8 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                         </table>
                         <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50/80 p-4 text-sm text-slate-600">
                             <p className="font-semibold text-slate-800 mb-2">
-                                资质证书（{XINHEYIJIA_PROFILE.qualifications.length} 项）
+                                资质证书（
+                                {XINHEYIJIA_PROFILE.qualifications.length} 项）
                             </p>
                             <ul className="space-y-2 max-h-64 overflow-y-auto">
                                 {XINHEYIJIA_PROFILE.qualifications.map((q) => (
@@ -1140,7 +1376,8 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                                     >
                                         <span>
                                             {q.name}
-                                            {q.productName !== "—" && q.productName !== q.name
+                                            {q.productName !== "—" &&
+                                            q.productName !== q.name
                                                 ? ` · ${q.productName}`
                                                 : ""}
                                             {q.no !== "—" ? `（${q.no}）` : ""}
@@ -1185,14 +1422,18 @@ function KnowledgeModuleContent({ module }: { module: KnowledgeModuleId }) {
                             </p>
                             <div className="flex flex-wrap gap-2">
                                 {[
-                                    ...XINHEYIJIA_PROFILE.techCertifications.map((label) => ({
-                                        label,
-                                        weight: "高" as const,
-                                    })),
-                                    ...XINHEYIJIA_PROFILE.emergingIndustries.map((label) => ({
-                                        label,
-                                        weight: "中" as const,
-                                    })),
+                                    ...XINHEYIJIA_PROFILE.techCertifications.map(
+                                        (label) => ({
+                                            label,
+                                            weight: "高" as const,
+                                        })
+                                    ),
+                                    ...XINHEYIJIA_PROFILE.emergingIndustries.map(
+                                        (label) => ({
+                                            label,
+                                            weight: "中" as const,
+                                        })
+                                    ),
                                 ].map((t) => (
                                     <span
                                         key={t.label}
@@ -1280,14 +1521,22 @@ const CompanyDetails: React.FC = () => {
                         },
                         {
                             value: [
-                                XINHEYIJIA_PROFILE.sciTechScoresRegionAvg.market,
+                                XINHEYIJIA_PROFILE.sciTechScoresRegionAvg
+                                    .market,
                                 XINHEYIJIA_PROFILE.sciTechScoresRegionAvg.rnd,
-                                XINHEYIJIA_PROFILE.sciTechScoresRegionAvg.transform,
-                                XINHEYIJIA_PROFILE.sciTechScoresRegionAvg.advanced,
-                                XINHEYIJIA_PROFILE.sciTechScoresRegionAvg.industry,
+                                XINHEYIJIA_PROFILE.sciTechScoresRegionAvg
+                                    .transform,
+                                XINHEYIJIA_PROFILE.sciTechScoresRegionAvg
+                                    .advanced,
+                                XINHEYIJIA_PROFILE.sciTechScoresRegionAvg
+                                    .industry,
                             ],
                             name: "江苏省同行业均值",
-                            lineStyle: { color: "#22c55e", width: 2, type: "dashed" },
+                            lineStyle: {
+                                color: "#22c55e",
+                                width: 2,
+                                type: "dashed",
+                            },
                             symbolSize: 0,
                         },
                     ],
@@ -1323,10 +1572,15 @@ const CompanyDetails: React.FC = () => {
                                             {XINHEYIJIA_PROFILE.statusLabel}
                                         </span>
                                         <span className="px-2.5 py-1 bg-orange-100 text-orange-700 rounded-md text-xs font-bold">
-                                            科创 {XINHEYIJIA_PROFILE.sciTechRating}
+                                            科创{" "}
+                                            {XINHEYIJIA_PROFILE.sciTechRating}
                                         </span>
                                         <span className="px-2.5 py-1 bg-blue-100 text-blue-700 rounded-md text-xs font-bold">
-                                            企查分 {XINHEYIJIA_PROFILE.qichachaCredit.level}
+                                            企查分{" "}
+                                            {
+                                                XINHEYIJIA_PROFILE
+                                                    .qichachaCredit.level
+                                            }
                                         </span>
                                     </div>
                                     <div className="flex flex-wrap gap-2">
@@ -1387,7 +1641,12 @@ const CompanyDetails: React.FC = () => {
                                         纳税信用
                                     </p>
                                     <p className="text-sm font-semibold text-emerald-600">
-                                        {XINHEYIJIA_PROFILE.finance.taxGrade}（{XINHEYIJIA_PROFILE.finance.taxpayerType}）
+                                        {XINHEYIJIA_PROFILE.finance.taxGrade}（
+                                        {
+                                            XINHEYIJIA_PROFILE.finance
+                                                .taxpayerType
+                                        }
+                                        ）
                                     </p>
                                 </div>
                                 <div>
@@ -1432,11 +1691,16 @@ const CompanyDetails: React.FC = () => {
                                 </a>
                             </p>
                             <p className="mt-2 text-xs text-slate-500 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
-                                实际控制人：{XINHEYIJIA_PROFILE.actualController.name}（{XINHEYIJIA_PROFILE.actualController.totalRatio}）
+                                实际控制人：
+                                {XINHEYIJIA_PROFILE.actualController.name}（
+                                {XINHEYIJIA_PROFILE.actualController.totalRatio}
+                                ）
                             </p>
                             <p className="mt-2 text-xs text-slate-500 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
                                 科技认定：
-                                {XINHEYIJIA_PROFILE.techCertifications.join("、")}
+                                {XINHEYIJIA_PROFILE.techCertifications.join(
+                                    "、"
+                                )}
                             </p>
                             <p className="mt-6 text-sm text-slate-500 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
                                 <span className="font-bold text-slate-700">
@@ -1477,7 +1741,9 @@ const CompanyDetails: React.FC = () => {
                                     <p className="text-3xl font-black text-orange-500">
                                         {XINHEYIJIA_PROFILE.ip.patentTotal}
                                     </p>
-                                    <p className="text-[10px] text-orange-400 mt-1">件</p>
+                                    <p className="text-[10px] text-orange-400 mt-1">
+                                        件
+                                    </p>
                                 </div>
                                 <div className="bg-orange-500/10 border border-orange-900/40 p-4 rounded-2xl text-center w-32">
                                     <p className="text-[10px] text-orange-500 font-bold mb-1">
@@ -1494,7 +1760,8 @@ const CompanyDetails: React.FC = () => {
                         <div className="flex flex-wrap gap-6 items-center">
                             <span className="flex items-center gap-2 text-xs font-bold text-red-500">
                                 <Flame className="w-3.5 h-3.5" />
-                                核准日期：{XINHEYIJIA_PROFILE.approvalDate}（{XINHEYIJIA_PROFILE.regAuthority}）
+                                核准日期：{XINHEYIJIA_PROFILE.approvalDate}（
+                                {XINHEYIJIA_PROFILE.regAuthority}）
                             </span>
                             <Link
                                 to="/deep-data"
@@ -1506,40 +1773,48 @@ const CompanyDetails: React.FC = () => {
                     </div>
                 </section>
 
-                <div className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8">
+                <div
+                    className="text-2xl  font-bold text-slate-900"
+                    style={{ marginTop: "20px", marginBottom: "0" }}
+                >
+                    企业知识管理
+                </div>
+
+                <div
+                    className="rounded-3xl border border-slate-200/80 bg-slate-50/50 p-6 lg:p-8"
+                    style={{ marginTop: "16px" }}
+                >
                     <nav
                         className="mb-8 flex flex-wrap items-center gap-3"
                         aria-label="企业知识子模块"
                     >
-                            {KNOWLEDGE_NAV.map(({ id, chipLabel, Icon }) => {
-                                const isActive = activeKnowledgeModule === id;
-                                return (
-                                    <button
-                                        key={id}
-                                        type="button"
-                                        role="tab"
-                                        aria-selected={isActive}
-                                        onClick={() =>
-                                            setActiveKnowledgeModule(id)
-                                        }
-                                        className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+                        {KNOWLEDGE_NAV.map(({ id, chipLabel, Icon }) => {
+                            const isActive = activeKnowledgeModule === id;
+                            return (
+                                <button
+                                    key={id}
+                                    type="button"
+                                    role="tab"
+                                    aria-selected={isActive}
+                                    onClick={() => setActiveKnowledgeModule(id)}
+                                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+                                        isActive
+                                            ? "border-orange-600 bg-orange-500/10 text-orange-800 shadow-sm ring-1 ring-orange-800/80"
+                                            : "border-slate-200 bg-slate-100 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
+                                    }`}
+                                >
+                                    <Icon
+                                        className={`h-4 w-4 shrink-0 ${
                                             isActive
-                                                ? "border-orange-600 bg-orange-500/10 text-orange-800 shadow-sm ring-1 ring-orange-800/80"
-                                                : "border-slate-200 bg-slate-100 text-slate-700 hover:border-slate-300 hover:bg-slate-100"
+                                                ? "text-orange-500"
+                                                : "text-slate-600"
                                         }`}
-                                    >
-                                        <Icon
-                                            className={`h-4 w-4 shrink-0 ${
-                                                isActive
-                                                    ? "text-orange-500"
-                                                    : "text-slate-600"
-                                            }`}
-                                            aria-hidden
-                                        />
-                                        {chipLabel}
-                                    </button>
-                                );
-                            })}
+                                        aria-hidden
+                                    />
+                                    {chipLabel}
+                                </button>
+                            );
+                        })}
                     </nav>
                     <div
                         id="knowledge-module-panel"
@@ -1632,7 +1907,9 @@ const CompanyDetails: React.FC = () => {
                                     </span>
                                 </p>
                                 <p className="text-[10px] text-red-500 font-bold mt-1">
-                                    科创评级 {XINHEYIJIA_PROFILE.sciTechRating}，同行业排名前 {XINHEYIJIA_PROFILE.sciTechRankIndustry}
+                                    科创评级 {XINHEYIJIA_PROFILE.sciTechRating}
+                                    ，同行业排名前{" "}
+                                    {XINHEYIJIA_PROFILE.sciTechRankIndustry}
                                 </p>
                             </div>
                             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
@@ -1643,14 +1920,16 @@ const CompanyDetails: React.FC = () => {
                                     <Bookmark className="w-5 h-5 text-orange-400" />
                                 </div>
                                 <div className="flex flex-wrap gap-1 mt-1">
-                                    {XINHEYIJIA_PROFILE.techCertifications.map((tag) => (
-                                        <span
-                                            key={tag}
-                                            className="text-[9px] px-1.5 py-0.5 bg-orange-900/40 text-orange-500 rounded"
-                                        >
-                                            {tag}
-                                        </span>
-                                    ))}
+                                    {XINHEYIJIA_PROFILE.techCertifications.map(
+                                        (tag) => (
+                                            <span
+                                                key={tag}
+                                                className="text-[9px] px-1.5 py-0.5 bg-orange-900/40 text-orange-500 rounded"
+                                            >
+                                                {tag}
+                                            </span>
+                                        )
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -1693,7 +1972,10 @@ const CompanyDetails: React.FC = () => {
                                     <div className="bg-emerald-500 h-full w-[55%] rounded-full shadow-[0_0_10px_rgba(16,185,129,0.3)]" />
                                 </div>
                                 <p className="text-[10px] text-slate-600 mt-2">
-                                    专利 {XINHEYIJIA_PROFILE.ip.patentTotal} 件，有效专利 {XINHEYIJIA_PROFILE.ip.validPatent} 件，软著 {XINHEYIJIA_PROFILE.ip.softwareCopyright} 项
+                                    专利 {XINHEYIJIA_PROFILE.ip.patentTotal}{" "}
+                                    件，有效专利{" "}
+                                    {XINHEYIJIA_PROFILE.ip.validPatent} 件，软著{" "}
+                                    {XINHEYIJIA_PROFILE.ip.softwareCopyright} 项
                                 </p>
                             </div>
                             <div className="p-4 border border-emerald-50 bg-emerald-50/20 rounded-2xl">
@@ -1704,8 +1986,10 @@ const CompanyDetails: React.FC = () => {
                                     注册资本与治理结构
                                 </p>
                                 <p className="text-[10px] text-slate-600 mt-1">
-                                    注册资本 {XINHEYIJIA_PROFILE.regCapital}，股东为
-                                    {XINHEYIJIA_PROFILE.shareholder.name}（{XINHEYIJIA_PROFILE.shareholder.ratio}）
+                                    注册资本 {XINHEYIJIA_PROFILE.regCapital}
+                                    ，股东为
+                                    {XINHEYIJIA_PROFILE.shareholder.name}（
+                                    {XINHEYIJIA_PROFILE.shareholder.ratio}）
                                 </p>
                             </div>
                         </div>
@@ -1798,8 +2082,15 @@ const CompanyDetails: React.FC = () => {
                                             股东结构 (1位股东)
                                         </p>
                                         <p className="text-xs text-slate-600">
-                                            {XINHEYIJIA_PROFILE.shareholder.name}，持股比例
-                                            {XINHEYIJIA_PROFILE.shareholder.ratio}
+                                            {
+                                                XINHEYIJIA_PROFILE.shareholder
+                                                    .name
+                                            }
+                                            ，持股比例
+                                            {
+                                                XINHEYIJIA_PROFILE.shareholder
+                                                    .ratio
+                                            }
                                         </p>
                                     </div>
                                 </div>
@@ -1807,10 +2098,23 @@ const CompanyDetails: React.FC = () => {
                                     <div className="mt-1 w-2 h-2 rounded-full bg-orange-500 shrink-0" />
                                     <div>
                                         <p className="text-sm font-bold">
-                                            知识产权 ({XINHEYIJIA_PROFILE.ip.patentTotal}件专利)
+                                            知识产权 (
+                                            {XINHEYIJIA_PROFILE.ip.patentTotal}
+                                            件专利)
                                         </p>
                                         <p className="text-xs text-slate-600">
-                                            发明申请 {XINHEYIJIA_PROFILE.ip.inventionApply} · 发明授权 {XINHEYIJIA_PROFILE.ip.inventionGrant} · 外观设计 {XINHEYIJIA_PROFILE.ip.designPatent}
+                                            发明申请{" "}
+                                            {
+                                                XINHEYIJIA_PROFILE.ip
+                                                    .inventionApply
+                                            }{" "}
+                                            · 发明授权{" "}
+                                            {
+                                                XINHEYIJIA_PROFILE.ip
+                                                    .inventionGrant
+                                            }{" "}
+                                            · 外观设计{" "}
+                                            {XINHEYIJIA_PROFILE.ip.designPatent}
                                         </p>
                                     </div>
                                 </div>
@@ -1821,7 +2125,16 @@ const CompanyDetails: React.FC = () => {
                                             资本结构
                                         </p>
                                         <p className="text-xs text-slate-600">
-                                            注册资本{XINHEYIJIA_PROFILE.regCapital}，实缴{XINHEYIJIA_PROFILE.paidInCapital}，对外投资{XINHEYIJIA_PROFILE.investments.length}家
+                                            注册资本
+                                            {XINHEYIJIA_PROFILE.regCapital}
+                                            ，实缴
+                                            {XINHEYIJIA_PROFILE.paidInCapital}
+                                            ，对外投资
+                                            {
+                                                XINHEYIJIA_PROFILE.investments
+                                                    .length
+                                            }
+                                            家
                                         </p>
                                     </div>
                                 </div>
